@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
+    Route::get('/', "HomeController@index")->name('home');
+
     Route::group(['namespace' => 'Auth' ], function() {
 
         Route::get('login', "LoginController@login")->name('login');

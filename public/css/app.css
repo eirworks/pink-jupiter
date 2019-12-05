@@ -11356,3 +11356,25 @@ a.text-dark:focus {
   }
 }
 
+a.panel-icon {
+  text-align: center;
+}
+
+a.panel-icon .panel-icon-image-block {
+  text-align: center;
+}
+
+a.panel-icon .panel-icon-image-block .panel-icon-image {
+  width: 50px;
+  height: 50px;
+}
+
+a.panel-icon .panel-icon-text {
+  margin-top: 20px;
+  color: black;
+}
+
+a.panel-icon .panel-icon-text:hover {
+  text-decoration: none;
+}
+

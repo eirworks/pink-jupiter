@@ -1,0 +1,22 @@
+$icon-size:50px;
+$icon-text-color: black;
+
+a.panel-icon {
+    text-align: center;
+
+    .panel-icon-image-block {
+        text-align: center;
+        .panel-icon-image {
+            width: $icon-size;
+            height: $icon-size;
+        }
+    }
+
+    .panel-icon-text {
+        margin-top: 20px;
+        color: $icon-text-color;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}

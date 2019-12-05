@@ -6,4 +6,5 @@ return [
     'username' => "Nama Pengguna",
     'password' => 'Kata Sandi',
     'login' => 'Masuk',
+    'no_admin_authorization' => 'Halaman ini khusus admin!',
 ];
