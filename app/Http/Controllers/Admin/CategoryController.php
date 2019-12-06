@@ -15,21 +15,40 @@ class CategoryController extends Controller
         $this->middleware(AuthIsAdmin::class);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::orderBy('id', 'desc')->paginate();
+        $categories = Category::orderBy('id', 'desc')
+            ->when($request->filled('parent_id'), function($query) use($request) {
+                $query->where('parent_id', $request->input('parent_id'));
+            })
+            ->with(['parent'])
+            ->withCount(['children'])
+            ->paginate();
+
+        $parent = null;
+        if ($request->filled('parent_id'))
+        {
+            $parent = Category::findOrFail($request->input('parent_id'));
+        }
 
         return view('admin.categories.index', [
             'categories' => $categories,
+            'parent' => $parent,
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $category = new Category();
+        $parent = null;
+        if ($request->filled('parent_id'))
+        {
+            $parent = Category::findOrFail($request->input('parent_id'));
+        }
 
         return view('admin.categories.form', [
             'category' => $category,
+            'parent' => $parent,
         ]);
     }
 
@@ -39,7 +58,7 @@ class CategoryController extends Controller
 
         $category->name = $request->input('name');
         $category->description = $request->input('description');
-        $category->parent_id = 0;
+        $category->parent_id = $request->input('parent_id', 0);
         if ($request->filled('slug'))
         {
             $category->slug = $request->input('slug');

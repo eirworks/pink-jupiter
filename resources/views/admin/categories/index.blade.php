@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('title')
-    Kelola Kategori Layanan
+    {{ $parent ? 'Kelola Sub-Kategori '.$parent->name : 'Kelola Kategori Layanan' }}
 @endsection
 
 @section('content')
     <div class="container">
         <div class="my-2">
-            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Tambah Kategori</a>
+            <a href="{{ route('admin.categories.create', ['parent_id' => $parent ? $parent->id : null]) }}" class="btn btn-primary">Tambah Kategori</a>
         </div>
 
         <div class="card">
@@ -22,6 +22,7 @@
                         <thead>
                         <tr>
                             <th>Nama Kategori</th>
+                            <th>Subkategori</th>
                             <th>Deskripsi</th>
                             <th>&nbsp;</th>
                         </tr>
@@ -32,7 +33,23 @@
                                 <td>
                                     {{ $category->name }}
                                 </td>
-                                <td>{{ $category->description }}</td>
+                                <td>
+                                    @if($category->parent_id > 0)
+                                        -
+                                    @else
+                                        @if($category->children_count > 0)
+                                        <a href="{{ route('admin.categories.index', ['parent_id' => $category->id]) }}">{{ $category->children_count }}</a>
+                                        @else
+                                            {{ $category->children_count }}
+                                        @endif
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($category->parent_id > 0)
+                                    <div class="text-muted font-italic">Sub layanan <a href="{{ route('admin.categories.index', ['parent_id' => $category->parent_id]) }}"><strong>{{ $category->parent->name }}</strong></a></div>
+                                    @endif
+                                    {{ $category->description }}
+                                </td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,6 +57,9 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="{{ route('admin.categories.edit', [$category]) }}">Edit</a>
+                                            @if($category->parent_id == 0)
+                                            <a class="dropdown-item" href="{{ route('admin.categories.index', ['parent_id' => $category->id]) }}">Subkategori</a>
+                                            @endif
                                             <a class="dropdown-item" href="javascript:" onclick="$('#delete-cat-{{ $category->id }}').submit()">Hapus</a>
                                         </div>
                                     </div>

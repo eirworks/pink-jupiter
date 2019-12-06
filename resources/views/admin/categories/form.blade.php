@@ -2,6 +2,7 @@
 
 @section('title')
     {{ $category->id ? 'Edit Kategori '.$category->name : 'Buat Kategori' }}
+    {{ $parent ? 'untuk Kategori '.$parent->name : '' }}
 @endsection
 
 @section('content')
@@ -13,6 +14,10 @@
                     <div class="card-body">
                         <form action="{{ route('admin.categories.store') }}" method="post">
                             @csrf
+
+                            @if(request()->has('parent_id'))
+                                <input type="hidden" name="parent_id" value="{{ request()->input('parent_id') }}">
+                            @endif
 
                             <div class="form-group">
                                 <input type="text" placeholder="Nama Kategori" name="name" class="form-control" value="{{ $category->name }}">
