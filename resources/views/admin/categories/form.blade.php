@@ -7,6 +7,9 @@
 
 @section('content')
     <div class="container">
+
+        @include('includes.breadcrumb')
+
         <h2>@yield('title')</h2>
         <div class="row justify-content-center">
             <div class="col-md-6">

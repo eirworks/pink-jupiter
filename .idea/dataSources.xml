@@ -7,5 +7,14 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$USER_HOME$/mm3000.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="okejack1@localhost" uuid="125b5f27-25e0-42e3-bae3-e3fc7f9e613c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/okejack1</jdbc-url>
+      <driver-properties>
+        <property name="serverTimezone" value="Asia/Jakarta" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>

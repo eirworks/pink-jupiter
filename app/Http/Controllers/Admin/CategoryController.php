@@ -34,6 +34,7 @@ class CategoryController extends Controller
         return view('admin.categories.index', [
             'categories' => $categories,
             'parent' => $parent,
+            'bcItems' => $this->bcItems(),
         ]);
     }
 
@@ -49,6 +50,7 @@ class CategoryController extends Controller
         return view('admin.categories.form', [
             'category' => $category,
             'parent' => $parent,
+            'bcItems' => $this->bcItems(),
         ]);
     }
 
@@ -75,8 +77,12 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
+        $category->load('parent');
+
         return view('admin.categories.form', [
             'category' => $category,
+            'parent' => $category->parent,
+            'bcItems' => $this->bcItems(),
         ]);
     }
 
@@ -105,5 +111,26 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index')
             ->with('success', "Kategori telah dihapus");
+    }
+
+    private function bcItems($additions = [])
+    {
+        $items = [
+            [
+                'name' => __('admin.admin_home'),
+                'url' => route('admin.home'),
+            ],
+            [
+                'name' => "Kategori",
+                'url' => route('admin.categories.index'),
+            ],
+        ];
+
+        if ($additions)
+        {
+            $items = array_merge($items, $additions);
+        }
+
+        return $items;
     }
 }
