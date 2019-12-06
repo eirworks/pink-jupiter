@@ -27,4 +27,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     });
 
+    Route::resource('categories', "CategoryController");
+
 });

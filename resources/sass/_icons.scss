@@ -3,6 +3,7 @@ $icon-text-color: black;
 
 a.panel-icon {
     text-align: center;
+    color: $icon-text-color;
 
     .panel-icon-image-block {
         text-align: center;
@@ -15,8 +16,9 @@ a.panel-icon {
     .panel-icon-text {
         margin-top: 20px;
         color: $icon-text-color;
-        &:hover {
-            text-decoration: none;
-        }
+    }
+
+    &:hover {
+        text-decoration: none;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-$states = ['error' => 'danger', 'warning' => 'warning', 'info' => 'info'];
+$states = ['error' => 'danger', 'success' => 'success', 'warning' => 'warning', 'info' => 'info'];
 ?>
 @foreach($states as $state => $color)
     @if(session($state))

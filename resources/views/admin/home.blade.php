@@ -53,7 +53,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="#" class="panel-icon">
+                <a href="{{ route('admin.categories.index') }}" class="panel-icon">
                     <div class="panel-icon-image-block">
                         <img class="panel-icon-image" src="{{ asset('images/icons/tools.png') }}" alt="Kelola Layanan">
                     </div>
