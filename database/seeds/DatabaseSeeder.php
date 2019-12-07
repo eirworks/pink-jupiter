@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
+
+        \Illuminate\Support\Facades\Artisan::call("cities:setup");
     }
 }

@@ -69,11 +69,11 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="#" class="panel-icon">
+                <a href="{{ route('admin.provinces.all') }}" class="panel-icon">
                     <div class="panel-icon-image-block">
-                        <img class="panel-icon-image" src="{{ asset('images/icons/database.png') }}" alt="Kelola Database">
+                        <img class="panel-icon-image" src="{{ asset('images/icons/city.png') }}" alt="Kelola Kota dan Provinsi">
                     </div>
-                    <div class="panel-icon-text">Database</div>
+                    <div class="panel-icon-text">Kota &amp; Provinsi</div>
                 </a>
             </div>
         </div>
