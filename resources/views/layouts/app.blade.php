@@ -87,8 +87,6 @@
             <div>
                 <a href="{{ route('admin.login') }}">Admin</a>
             </div>
-            @elseguest
-                I am logged in
             @endguest
         </footer>
     </div>
