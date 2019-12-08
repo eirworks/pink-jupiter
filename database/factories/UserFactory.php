@@ -18,7 +18,6 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'username' => $faker->userName,
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
@@ -41,5 +40,13 @@ $factory->state(User::class, 'partner', function(Faker $faker) {
     return [
         'type' => User::TYPE_PARTNER,
         'balance' => 10000,
+    ];
+});
+
+$factory->state(User::class, 'pending', function(Faker $faker) {
+    return [
+        'type' => User::TYPE_PARTNER,
+        'balance' => 0,
+        'activated' => false,
     ];
 });

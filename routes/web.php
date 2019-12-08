@@ -15,6 +15,11 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::group(['namespace' => 'Partner', 'prefix' => 'partner', 'as' => 'partner.'], function() {
+    Route::get('register', "RegisterController@register")->name('register');
+    Route::post('register', "RegisterController@store")->name('register.submit');
+});
+
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
@@ -43,5 +48,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::get('/{city}/edit', "CityController@edit")->name('edit');
         Route::put('/{city}/edit', "CityController@update")->name('update');
         Route::delete('/{city}/delete', "CityController@delete")->name('delete');
+    });
+
+    Route::group(['prefix' => 'partners', 'as' => 'partners.'], function() {
+        Route::get('/', "PartnerController@index")->name('index');
+        Route::get('/new', "PartnerController@create")->name('create');
+        Route::post('/new', "PartnerController@store")->name('store');
+        Route::get('/{user}/edit', "PartnerController@edit")->name('edit');
+        Route::post('/{user}/edit', "PartnerController@update")->name('update');
+        Route::put('/{user}/activate', "PartnerController@activate")->name('activate');
+        Route::delete('/{user}/delete', "PartnerController@destroy")->name('delete');
     });
 });

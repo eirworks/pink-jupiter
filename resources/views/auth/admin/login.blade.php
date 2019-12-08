@@ -14,7 +14,7 @@
                         <form action="{{ route('admin.login.submit') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control" name="username" placeholder="{{ __('auth.username') }}">
+                                <input type="text" class="form-control" name="email" placeholder="{{ __('auth.email') }}">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="password" placeholder="{{ __('auth.password') }}">

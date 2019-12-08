@@ -41,4 +41,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'data' => 'array',
     ];
+
+    public function scopePartner($query)
+    {
+        return $query->where('type', User::TYPE_PARTNER)
+            ->where('activated', true);
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('type', User::TYPE_PARTNER)
+            ->where('activated', false);
+    }
 }

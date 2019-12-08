@@ -43,40 +43,20 @@
             </div>
         </div>
 
-        <div class="my-5 row">
+        @foreach(collect($menus)->chunk(4) as $menuChunk)
+        <div class="my-4 row">
+            @foreach($menuChunk as $menu)
             <div class="col-md-3">
-                <a href="#" class="panel-icon">
+                <a href="{{ $menu['url'] }}" class="panel-icon" title="{{ $menu['hint'] }}">
                     <div class="panel-icon-image-block">
-                        <img class="panel-icon-image" src="{{ asset('images/icons/account-group.png') }}" alt="Kelola Mitra">
+                        <img class="panel-icon-image" src="{{ $menu['icon'] }}" alt="{{ $menu['name'] }}">
                     </div>
-                    <div class="panel-icon-text">Mitra</div>
+                    <div class="panel-icon-text">{{ $menu['name'] }}</div>
                 </a>
             </div>
-            <div class="col-md-3">
-                <a href="{{ route('admin.categories.index') }}" class="panel-icon">
-                    <div class="panel-icon-image-block">
-                        <img class="panel-icon-image" src="{{ asset('images/icons/tools.png') }}" alt="Kelola Layanan">
-                    </div>
-                    <div class="panel-icon-text">Layanan</div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="#" class="panel-icon">
-                    <div class="panel-icon-image-block">
-                        <img class="panel-icon-image" src="{{ asset('images/icons/shield-account.png') }}" alt="Kelola Layanan">
-                    </div>
-                    <div class="panel-icon-text">Admin</div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="{{ route('admin.provinces.all') }}" class="panel-icon">
-                    <div class="panel-icon-image-block">
-                        <img class="panel-icon-image" src="{{ asset('images/icons/city.png') }}" alt="Kelola Kota dan Provinsi">
-                    </div>
-                    <div class="panel-icon-text">Kota &amp; Provinsi</div>
-                </a>
-            </div>
+            @endforeach
         </div>
+        @endforeach
     </div>
 @endsection
 

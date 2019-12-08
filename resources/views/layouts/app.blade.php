@@ -40,10 +40,10 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item"><a href="#" class="nav-link">Jadi Mitra</a></li>
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-{{--                            </li>--}}
+                            <li class="nav-item"><a href="{{ route('partner.register') }}" class="nav-link">Jadi Mitra</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
 {{--                            @if (Route::has('register'))--}}
 {{--                                <li class="nav-item">--}}
 {{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
@@ -83,11 +83,6 @@
 
         <footer class="text-center my-5">
             <div class="mb-3">&copy; {{ env('APP_NAME') }}</div>
-            @guest
-            <div>
-                <a href="{{ route('admin.login') }}">Admin</a>
-            </div>
-            @endguest
         </footer>
     </div>
 </body>

@@ -14,9 +14,9 @@ class LoginController extends Controller
 
     public function submitLogin(Request $request)
     {
-        $request->validate(['username' => 'required', 'password' => 'required']);
+        $request->validate(['email' => 'required', 'password' => 'required']);
 
-        $loginAttempt = auth()->attempt($request->only(['username', 'password']));
+        $loginAttempt = auth()->attempt($request->only(['email', 'password']));
 
         if (!$loginAttempt)
         {
