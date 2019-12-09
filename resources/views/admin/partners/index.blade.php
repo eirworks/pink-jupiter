@@ -22,6 +22,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nama</th>
+                        <th>Kota</th>
                         <th>Email</th>
                         @if(!$pending)
                         <th>Saldo</th>
@@ -33,7 +34,16 @@
                         @foreach($users as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>
+                                    {{ $user->name }}
+                                    @if($user->activated) <span class="badge badge-success">Aktif</span> @endif
+                                    @if($user->verified)
+                                        <span class="badge badge-primary">Verified</span>
+                                    @else
+                                        <span class="badge badge-secondary">Unverified</span>
+                                    @endif
+                                </td>
+                                <td>{{ $user->city->name }}, {{ $user->city->province->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 @if(!$pending)
                                 <td>{{ $user->balance }}</td>
@@ -62,6 +72,13 @@
                 </table>
 
                 {{ $users->links() }}
+
+                <p>Keterangan:</p>
+                <ul>
+                    <li><span class="badge badge-secondary">Unverified</span>: Akun mitra belum diverifikasi, tidak muncul dalam hasil pencarian.</li>
+                    <li><span class="badge badge-primary">Verified</span>: Akun mitra sudah diverifikasi.</li>
+                    <li><span class="badge badge-success">Aktif</span>: Akun mitra telah aktif dan mitra dapat login ke dalam akunnya.</li>
+                </ul>
             </div>
         </div>
     </div>

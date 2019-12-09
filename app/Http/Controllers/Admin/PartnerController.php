@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\City;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\AuthIsAdmin;
 use App\Province;
 use App\User;
 use Illuminate\Http\Request;
@@ -11,6 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class PartnerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(AuthIsAdmin::class);
+    }
+
     public function index(Request $request)
     {
         $users = User::orderBy('id', 'desc')
@@ -19,6 +25,7 @@ class PartnerController extends Controller
             }, function($query) use($request) {
                 $query->pending();
             })
+            ->with(['city:id,name,province_id', 'city.province:id,name'])
             ->paginate();
 
         return view('admin.partners.index', [
@@ -71,13 +78,12 @@ class PartnerController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'contact' => 'required',
-            'password' => 'required',
             'city_id' => 'min:1',
         ]);
 
         $this->save($user, $request);
 
-        return redirect()->route('admin.partners.index')
+        return redirect()->route('admin.partners.edit', [$user])
             ->with('success', 'Mitra telah disimpan');
     }
 
@@ -90,18 +96,77 @@ class PartnerController extends Controller
             ->with('success', 'Mitra telah diaktifkan');
     }
 
-    private function save($user, $request)
+    private function save($user, Request $request)
     {
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
+
         $user->city_id = $request->input('city_id');
         $user->contact = $request->input('contact');
-        $user->activated = true;
-        $user->type = User::TYPE_PARTNER;
-        $user->balance = 0;
-        $user->data = [];
+        $user->contact_whatsapp = $request->input('contact_whatsapp');
+        $user->contact_telegram = $request->input('contact_telegram');
+        $user->description = $request->input('description');
+        $user->address = $request->input('address');
+        if (!$user->id)
+        {
+            if ($request->filled('password'))
+            {
+                $user->password = Hash::make($request->input('password'));
+            }
+            $user->activated = true;
+            $user->verified = false;
+            $user->type = User::TYPE_PARTNER;
+            $user->balance = 0;
+            $user->data = [];
+        }
+        else {
+            $user->password = Hash::make($request->input('password'));
+        }
+
         $user->save();
+
+        $imageKeys = ['image', 'id_card_image'];
+        $addImage = false;
+
+        foreach($imageKeys as $imageKey)
+        {
+            if ($request->hasFile($imageKey))
+            {
+                \Log::debug('Has file',['image key' => $imageKey]);
+                $file = $request->file($imageKey);
+
+                if ($file->isValid())
+                {
+                    $imageFilename = $file->store('services/'.($imageKey == 'id_card_image' ? 'id_card/' : '').$user->id, [
+                        'disk' => 'public',
+                    ]);
+
+                    $user->$imageKey = $imageFilename;
+                    \Log::debug('Image saved',['name' => $imageFilename]);
+                    $addImage = true;
+
+                    $path = config('filesystems.disks.public.root').'/'.$user->$imageKey;
+                    \Log::debug('Resize Image',['source' => $path]);
+                    if ($imageKey == 'id_card_image')
+                    {
+                        \Log::debug('Resizing id card',[]);
+                        \Image::make( $path )->resize(400, null, function($constraint) {
+                            $constraint->aspectRatio();
+                        })
+                            ->save($path);
+                    }
+                    else {
+                        \Image::make( $path )->fit(400, 400)
+                            ->save($path);
+                    }
+                }
+            }
+        }
+
+        if ($addImage) // save user if there are any image uploads
+        {
+            $user->save();
+        }
 
         return $user;
     }

@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'category_user');
+    }
 }

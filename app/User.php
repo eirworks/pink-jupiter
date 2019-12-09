@@ -40,6 +40,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'data' => 'array',
+        'open_hours' => 'array',
     ];
 
     public function scopePartner($query)
@@ -52,5 +53,15 @@ class User extends Authenticatable
     {
         return $query->where('type', User::TYPE_PARTNER)
             ->where('activated', false);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_user');
     }
 }

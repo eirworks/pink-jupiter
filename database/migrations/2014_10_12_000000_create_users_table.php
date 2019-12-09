@@ -19,12 +19,20 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('activated')->default(true);
+            $table->boolean('verified')->default(true);
             $table->string('password');
             $table->integer('city_id')->default(0);
             $table->integer('type')->default(\App\User::TYPE_USER);
             $table->decimal('balance');
             $table->string('contact');
+            $table->string('contact_whatsapp');
+            $table->string('contact_telegram');
+            $table->text('description');
+            $table->text('address');
+            $table->string('image');
+            $table->string('id_card_image');
             $table->json('data');
+            $table->json('open_hours');
             $table->rememberToken();
             $table->timestamps();
 
