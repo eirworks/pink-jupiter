@@ -6,6 +6,11 @@
 
 @section('content')
     <div class="container">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">{{ __('admin.admin_home') }}</a></li>
+        </ul>
+
         <h2>@yield('title')</h2>
         <div class="card">
             <div class="card-body">
