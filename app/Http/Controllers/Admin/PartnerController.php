@@ -100,7 +100,6 @@ class PartnerController extends Controller
     {
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-
         $user->city_id = $request->input('city_id');
         $user->contact = $request->input('contact');
         $user->contact_whatsapp = $request->input('contact_whatsapp');

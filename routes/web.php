@@ -20,6 +20,13 @@ Route::group(['namespace' => 'Partner', 'prefix' => 'partner', 'as' => 'partner.
     Route::post('register', "RegisterController@store")->name('register.submit');
 });
 
+Route::group(['prefix' => 'profile', 'as' => 'profile.'], function() {
+
+    Route::get('/edit', "ProfileController@edit")->name('edit');
+    Route::put('/edit', "ProfileController@update")->name('update');
+
+});
+
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 

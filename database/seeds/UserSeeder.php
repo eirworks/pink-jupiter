@@ -18,6 +18,11 @@ class UserSeeder extends Seeder
             'email' => 'dev@cc.cc',
             'password' => \Illuminate\Support\Facades\Hash::make('dev'),
         ]);
+        factory(\App\User::class)->state('partner')->create([
+            'name' => "Developer (Partner)",
+            'email' => 'user1@cc.cc',
+            'password' => \Illuminate\Support\Facades\Hash::make('dev'),
+        ]);
         factory(\App\User::class, 10)->create();
         factory(\App\User::class, 10)->state('partner')->create();
         factory(\App\User::class, 3)->state('admin')->create();

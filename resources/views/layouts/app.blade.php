@@ -59,6 +59,7 @@
                                     @if(auth()->user()->type == \App\User::TYPE_ADMIN)
                                         <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('admin.admin_home') }}</a>
                                     @endif
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('auth.edit_profile') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
