@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @stack('headers')
 </head>
 <body>
     <div id="app">
@@ -85,6 +87,8 @@
         <footer class="text-center my-5">
             <div class="mb-3">&copy; {{ env('APP_NAME') }}</div>
         </footer>
+
     </div>
+    @stack('bottom_script')
 </body>
 </html>

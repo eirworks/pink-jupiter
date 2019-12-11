@@ -24,7 +24,11 @@ class UserSeeder extends Seeder
             'password' => \Illuminate\Support\Facades\Hash::make('dev'),
         ]);
         factory(\App\User::class, 10)->create();
-        factory(\App\User::class, 10)->state('partner')->create();
+        factory(\App\User::class, 5)->state('partner')->create();
+        factory(\App\User::class, 5)->state('partner')->create([
+            'activated' => true,
+            'verified' => true,
+        ]);
         factory(\App\User::class, 3)->state('admin')->create();
         factory(\App\User::class, 3)->state('pending')->create();
     }

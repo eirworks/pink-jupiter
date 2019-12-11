@@ -12,7 +12,29 @@ class CategorySeeder extends Seeder
     public function run()
     {
         \App\Category::truncate();
+        \Illuminate\Support\Facades\DB::table('category_user')->truncate();
 
-        factory(\App\Category::class, 20)->create();
+        $cats = factory(\App\Category::class, 20)->create()->each(function($cat) {
+            factory(\App\Category::class, 3)->create([
+                'parent_id' => $cat->id,
+            ]);
+        });
+
+        $users = \App\User::get();
+        if ($users)
+        {
+            $users->each(function($user) use($cats) {
+                $user->categories()->sync([
+                    1 => [
+                        'price' => 50000,
+                        'description' => "My Service",
+                    ],
+                    2 => [
+                        'price' => 10000,
+                        'description' => "My Service",
+                    ]
+                ]);
+            });
+        }
     }
 }

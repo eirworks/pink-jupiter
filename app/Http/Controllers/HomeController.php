@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\City;
+use App\Province;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +24,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $provinces = Province::get();
+
+        if ($request->filled('province_id'))
+        {
+            $cities = City::where('province_id', $request->input('province_id'))
+                ->get();
+        }
+        else {
+            $cities = [];
+        }
+
+        $categories = Category::where('parent_id', 0)->with(['children'])->get();
+
+        return view('home', [
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'categories' => $categories,
+        ]);
     }
 }
