@@ -19,7 +19,7 @@
                 <div class="mb-2">Lokasi: {{ $user->city->name }}, {{ $user->city->province->name }}</div>
 
                 <div class="btn-group mb-2">
-                    <button class="btn btn-outline-primary">Whatsapp</button>
+                    <button class="btn btn-outline-primary" onclick="wa({{ $user->id }})">Whatsapp</button>
                     <button class="btn btn-outline-primary">Telegram</button>
                 </div>
 
@@ -43,4 +43,12 @@
         </div>
     </div>
 @endsection
+
+@push('bottom_script')
+    <script type="text/javascript">
+        function wa(id){
+            window.location = "{{ route('listing.contact.wa', [$user]) }}"
+        }
+    </script>
+@endpush
 

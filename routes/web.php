@@ -30,6 +30,7 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.'], function() {
 Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
     Route::get('/', "ListingController@index")->name('index');
     Route::get('/{user}', "ListingController@show")->name('show');
+    Route::get('/{user}/wa', "ListingController@contactWhatsapp")->name('contact.wa');
 });
 
 

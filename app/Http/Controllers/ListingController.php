@@ -32,4 +32,9 @@ class ListingController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function contactWhatsapp(User $user)
+    {
+        return redirect("https://wa.me/".$user->contact_whatsapp);
+    }
 }
