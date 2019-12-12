@@ -128,6 +128,36 @@
                                     <label for="id_card_image">Foto KTP</label>
                                     <input id="id_card_image" type="file" name="id_card_image" class="form-control-file">
                                 </div>
+
+                                <p>
+                                    Pilih Kategori:
+                                </p>
+                                @foreach($categories as $category)
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input id="category-{{ $category->id }}" type="checkbox" class="form-check-input" name="categories[]" {{ in_array($category->id, $user->category_ids) ? 'checked' : '' }} value="{{ $category->id }}">
+                                                <label for="category-{{ $category->id }}" class="form-check-label">{{ $category->name }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if($category->children->count() > 0)
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    @foreach($category->children as $child)
+                                                        <div class="form-check">
+                                                            <input id="category-{{ $child->id }}" type="checkbox" class="form-check-input" name="categories[]" {{ in_array($child->id, $user->category_ids) ? 'checked' : '' }} value="{{ $child->id }}">
+                                                            <label for="category-{{ $child->id }}" class="form-check-label">{{ $child->name }}</label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                @endforeach
                             @endif
 
                             <div class=" text-center">

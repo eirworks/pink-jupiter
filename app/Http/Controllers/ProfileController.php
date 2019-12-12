@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Province;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,11 +19,18 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
+        $user->load('categories');
+
+        $user->append('category_ids');
+
         $cities = Province::with(['cities'])->get();
+
+        $categories = Category::parents()->with(['children'])->get();
 
         return view('profile.form', [
             'user' => $user,
             'cities' => $cities,
+            'categories' => $categories,
         ]);
     }
 
@@ -60,6 +68,7 @@ class ProfileController extends Controller
             $user->contact_telegram = $request->input('contact_telegram');
             $user->description = $request->input('description');
             $user->address = $request->input('address');
+
         }
 
         $user->save();
@@ -67,6 +76,12 @@ class ProfileController extends Controller
         if ($user->type != User::TYPE_PARTNER)
         {
             $this->storeImage($user, $request);
+        }
+
+        // sync categories
+        if ($user->type == User::TYPE_PARTNER)
+        {
+            $user->categories()->sync($this->syncData($request));
         }
 
         return $user;
@@ -120,5 +135,18 @@ class ProfileController extends Controller
         }
 
         return $user;
+    }
+
+    private function syncData(Request $request)
+    {
+        $data = [];
+
+        foreach($request->input('categories') as $cat)
+        $data[$cat] = [
+            'price' => 0,
+            'description' => '',
+        ];
+
+        return $data;
     }
 }

@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Category::class, 'category_user')->withPivot(['price', 'description']);
     }
+
+    public function getCategoryIdsAttribute()
+    {
+        return $this->categories->pluck('id')->toArray();
+    }
 }

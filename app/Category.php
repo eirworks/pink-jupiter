@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    // scope
+    public function scopeParents($query)
+    {
+        return $query->where('parent_id', 0);
+    }
+
+    // relationships
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
