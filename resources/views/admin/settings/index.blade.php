@@ -17,7 +17,13 @@
                             @foreach($settings as $setting)
                                 <div class="form-group">
                                     <label>{{ $setting['name'] }}</label>
-                                    <input type="text" class="form-control" name="settings[{{ $setting['key'] }}]" value="{{ $setting['value'] }}">
+                                    @if($setting['type'] == 'number')
+                                        <input type="number" class="form-control" name="settings[{{ $setting['key'] }}]" value="{{ $setting['value'] }}">
+                                    @elseif($setting['type'] == 'text')
+                                        <textarea name="settings[{{ $setting['key'] }}]" id="settings-{{ $setting['key'] }}" cols="30" rows="10" class="form-control">{{ $setting['value'] }}</textarea>
+                                    @else
+                                        <input type="text" class="form-control" name="settings[{{ $setting['key'] }}]" value="{{ $setting['value'] }}">
+                                    @endif
                                 </div>
                             @endforeach
                             <div class="my-2">
