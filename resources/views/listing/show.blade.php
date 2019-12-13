@@ -8,9 +8,11 @@
     <div class="container">
         <div class="card mt-5">
             <div class="card-body">
+                @if($user->image)
                 <div class="text-center">
                     <img src="{{ \Storage::disk('public')->url($user->image) }}" alt="{{ $user->name }}" class="profile-image profile-main-image">
                 </div>
+                @endif
 
                 <h3 class="text-center">{{ $user->name }}</h3>
 

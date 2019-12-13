@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\AuthIsAdmin;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,8 +16,14 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+        $stats = [
+            'visitors' => User::sum('visitors'),
+            'users' => User::partner()->count(),
+        ];
+
         return view('admin.home', [
             'menus' => $this->menus(),
+            'stats' => $stats,
         ]);
     }
 

@@ -18,6 +18,8 @@
         <h2>@yield('title')</h2>
         <div class="row justify-content-center">
             <div class="col-md-8">
+
+
                 <div class="card">
                     <div class="card-body">
 
@@ -113,12 +115,84 @@
                                 <input id="id_card_image" type="file" name="id_card_image" class="form-control-file">
                             </div>
 
+                            <p>
+                                Pilih layanan yang anda sediakan:
+                            </p>
+                            <div class="alert alert-warning my-2">
+                                Peringatan: Merubah layanan kemungkinan akan merubah atau menghilangkan harga dan deskripsi yang sebelumnya telah
+                                ditentukan.
+                            </div>
+                            @error('categories')
+                            <div class="alert alert-danger">Mohon pilih paling tidak satu layanan</div>
+                            @enderror
+
+                            @foreach($categories as $category)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input id="category-{{ $category->id }}" type="checkbox" class="form-check-input" name="categories[]" {{ in_array($category->id, $user->category_ids) ? 'checked' : '' }} value="{{ $category->id }}">
+                                            <label for="category-{{ $category->id }}" class="form-check-label">{{ $category->name }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if($category->children->count() > 0)
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @foreach($category->children as $child)
+                                                    <div class="form-check">
+                                                        <input id="category-{{ $child->id }}" type="checkbox" class="form-check-input" name="categories[]" {{ in_array($child->id, $user->category_ids) ? 'checked' : '' }} value="{{ $child->id }}">
+                                                        <label for="category-{{ $child->id }}" class="form-check-label">{{ $child->name }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                            @endforeach
+
                             <div class=" text-center">
                                 <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
                             </div>
                         </form>
                     </div>
                 </div>
+
+                @if($user->type == \App\User::TYPE_PARTNER)
+                    <div class="card my-2">
+                        <div class="card-header">
+                            Tentukan Harga Layanan
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('profile.update.services') }}" method="post">
+                                @csrf
+                                @method('put')
+                                @foreach($user->categories as $category)
+                                    <div class="mb-5">
+                                        <div class="form-group">
+                                            <label for="category-{{ $category->id }}">Harga Layanan {{ $category->name }}</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Rp</div>
+                                                </div>
+                                                <input type="text" class="form-control" name="category_prices[{{ $category->id }}]" value="{{ $category->pivot->price }}" placeholder="Harga layanan {{ $category->name }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Info Layanan {{ $category->name }}</label>
+                                            <input type="text" class="form-control" name="category_descriptions[{{ $category->id }}]" value="{{ $category->pivot->description }}" placeholder="Deskripsikan apa yang dapat anda lakukan untuk layanan ini">
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <div class="text-center">
+                                    <button class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

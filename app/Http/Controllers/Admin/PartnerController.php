@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\City;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\AuthIsAdmin;
@@ -66,9 +67,12 @@ class PartnerController extends Controller
     {
         $cities = Province::with(['cities'])->get();
 
+        $categories = Category::parents()->with(['children'])->get();
+
         return view('admin.partners.form', [
             'user' => $user,
             'cities' => $cities,
+            'categories' => $categories,
         ]);
     }
 
@@ -124,6 +128,19 @@ class PartnerController extends Controller
 
         $user->save();
 
+        $this->saveImage($user, $request);
+
+        // sync categories
+        if ($user->type == User::TYPE_PARTNER)
+        {
+            $user->categories()->sync($this->syncData($request));
+        }
+
+        return $user;
+    }
+
+    public function saveImage(User $user, Request $request)
+    {
         $imageKeys = ['image', 'id_card_image'];
         $addImage = false;
 

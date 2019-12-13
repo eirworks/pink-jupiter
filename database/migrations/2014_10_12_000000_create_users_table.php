@@ -33,7 +33,8 @@ class CreateUsersTable extends Migration
             $table->string('id_card_image');
             $table->json('data');
             $table->json('open_hours');
-            $table->boolean('admin_manager');
+            $table->boolean('admin_manager')->default(false);
+            $table->bigInteger('visitors')->default(0);
             $table->rememberToken();
             $table->timestamps();
 

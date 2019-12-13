@@ -28,6 +28,10 @@ class ListingController extends Controller
         $user->load('city:id,name,province_id');
         $user->load('city.province:id,name');
         $user->load('categories');
+
+        $user->visitors = $user->visitors+1;
+        $user->save();
+
         return view('listing.show', [
             'user' => $user,
         ]);

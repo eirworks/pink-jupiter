@@ -34,6 +34,8 @@ $factory->define(User::class, function (Faker $faker) {
         'id_card_image' => '',
         'data' => [],
         'open_hours' => [],
+        'admin_manager' => false,
+        'visitors' => 0,
     ];
 });
 

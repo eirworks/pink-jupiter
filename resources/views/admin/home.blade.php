@@ -17,18 +17,8 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div><span class="text-muted">Visitor Harian</span></div>
-                        <div style="font-size: 2rem">{{ rand(10,99) }}</div>
-                        <div class="mt-1">&uarr; {{ rand(1,5) }}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div><span class="text-muted">Visitor Bulanan</span></div>
-                        <div style="font-size: 2rem">{{ rand(1000,5999) }}</div>
-                        <div class="mt-1">&uarr; {{ rand(100,599) }}</div>
+                        <div><span class="text-muted">Visitor</span></div>
+                        <div style="font-size: 2rem">{{ $stats['visitors'] }}</div>
                     </div>
                 </div>
             </div>
@@ -36,8 +26,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div><span class="text-muted">Mitra Aktif</span></div>
-                        <div style="font-size: 2rem">{{ rand(50,99) }}</div>
-                        <div class="mt-1">&uarr; {{ rand(10,29) }}</div>
+                        <div style="font-size: 2rem">{{ $stats['users'] }}</div>
                     </div>
                 </div>
             </div>
