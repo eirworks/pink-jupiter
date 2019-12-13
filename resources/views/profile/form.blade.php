@@ -174,6 +174,7 @@
                     </div>
                 </div>
 
+                @if($user->type == \App\User::TYPE_PARTNER)
                 <div class="card my-2">
                     <div class="card-header">
                         Tentukan Harga Layanan
@@ -205,6 +206,7 @@
                         </form>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
