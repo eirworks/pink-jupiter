@@ -54,6 +54,12 @@ class HomeController extends Controller
                 'url' => route('admin.admin.index'),
                 'icon' => asset('images/icons/shield-account.png'),
             ],
+            [
+                'name' => "Pengaturan",
+                'hint' => "Pengaturan situs",
+                'url' => route('admin.settings.edit'),
+                'icon' => asset('images/icons/settings.png'),
+            ],
         ];
     }
 }

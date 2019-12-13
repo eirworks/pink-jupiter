@@ -82,4 +82,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::post('/{user}/edit', "AdminController@update")->name('update');
         Route::delete('/{user}/delete', "AdminController@destroy")->name('delete');
     });
+
+
+    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function() {
+        Route::get('/', "SettingsController@index")->name('edit');
+        Route::post('/', "SettingsController@update")->name('update');
+    });
 });
