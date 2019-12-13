@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
+    const SETTING_CONTACT_FEE = "contact_fee";
+    const SETTING_MIN_DEPOSIT = "minimum_deposit";
+
     public function index(Request $request)
     {
         return view('admin.settings.index', [
@@ -54,12 +57,12 @@ class SettingsController extends Controller
         return [
             [
                 'name' => 'Fee per kontak',
-                'key' => 'contact_fee',
+                'key' => self::SETTING_CONTACT_FEE,
                 'default' => 0,
             ],
             [
                 'name' => 'Minimum Top Up',
-                'key' => 'minimum_top_up',
+                'key' => self::SETTING_MIN_DEPOSIT,
                 'default' => 0,
             ],
         ];

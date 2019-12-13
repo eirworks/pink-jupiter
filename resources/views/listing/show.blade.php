@@ -19,6 +19,7 @@
                 <div class="mb-3">Tentang Kami: {{ $user->description }}</div>
 
                 <div class="mb-2">Lokasi: {{ $user->city->name }}, {{ $user->city->province->name }}</div>
+                <div class="mb-2">Views: {{ $user->visitors }}</div>
 
                 <div class="btn-group mb-2">
                     <button class="btn btn-outline-primary" onclick="wa({{ $user->id }})">Whatsapp</button>
