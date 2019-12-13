@@ -41,6 +41,12 @@ class HomeController extends Controller
                 'url' => route('admin.provinces.all'),
                 'icon' => asset('images/icons/city.png'),
             ],
+            [
+                'name' => "Admin",
+                'hint' => "Kelola admin",
+                'url' => route('admin.admin.index'),
+                'icon' => asset('images/icons/shield-account.png'),
+            ],
         ];
     }
 }

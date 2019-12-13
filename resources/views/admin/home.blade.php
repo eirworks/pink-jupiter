@@ -10,7 +10,7 @@
             Hai,
             {{ auth()->user()->name }} <span class="badge badge-primary">Admin</span>
             &nbsp;
-            <a href="#">edit profil</a>
+            <a href="{{ route('profile.edit') }}">edit profil</a>
         </div>
 
         <div class="row">

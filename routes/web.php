@@ -73,4 +73,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{user}/activate', "PartnerController@activate")->name('activate');
         Route::delete('/{user}/delete', "PartnerController@destroy")->name('delete');
     });
+
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+        Route::get('/', "AdminController@index")->name('index');
+        Route::get('/new', "AdminController@create")->name('create');
+        Route::post('/new', "AdminController@store")->name('store');
+        Route::get('/{user}/edit', "AdminController@edit")->name('edit');
+        Route::post('/{user}/edit', "AdminController@update")->name('update');
+        Route::delete('/{user}/delete', "AdminController@destroy")->name('delete');
+    });
 });
