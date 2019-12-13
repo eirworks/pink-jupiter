@@ -43,12 +43,35 @@ class ProfileController extends Controller
             'email' => 'required|email',
             'contact' => 'required',
             'city_id' => 'min:1',
+            'categories' => 'required',
         ]);
 
         $this->save($user, $request);
 
         return redirect()->route('profile.edit')
             ->with('success', "Profil telah disimpan!");
+    }
+
+    public function updateServices(Request $request)
+    {
+        $user = auth()->user();
+        $user->load('categories');
+
+        foreach($user->categories as $category)
+        {
+            foreach($request->input('category_prices') as $id => $price)
+            {
+                $user->categories()->sync([
+                    $id => [
+                        'price' => $price,
+                        'description' => $request->input('category_description')[$id],
+                    ],
+                ]);
+            }
+        }
+
+        return redirect()->route('profile.edit')
+            ->with('success', "Info Layanan telah disimpan!");
     }
 
     private function save(User $user, Request $request)
@@ -141,11 +164,16 @@ class ProfileController extends Controller
     {
         $data = [];
 
-        foreach($request->input('categories') as $cat)
-        $data[$cat] = [
-            'price' => 0,
-            'description' => '',
-        ];
+        if ($request->input('categories'))
+        {
+            foreach($request->input('categories') as $cat)
+            {
+                $data[$cat] = [
+                    'price' => 0,
+                    'description' => '',
+                ];
+            }
+        }
 
         return $data;
     }

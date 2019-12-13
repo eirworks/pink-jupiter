@@ -130,8 +130,15 @@
                                 </div>
 
                                 <p>
-                                    Pilih Kategori:
+                                    Pilih layanan yang anda sediakan:
                                 </p>
+                                <div class="alert alert-warning my-2">
+                                    Peringatan: Merubah layanan kemungkinan akan merubah atau menghilangkan harga dan deskripsi yang sebelumnya telah
+                                    ditentukan.
+                                </div>
+                                @error('categories')
+                                    <div class="alert alert-danger">Mohon pilih paling tidak satu layanan</div>
+                                @enderror
                                 @foreach($categories as $category)
                                     <div class="row">
                                         <div class="col-md-6">
@@ -162,6 +169,38 @@
 
                             <div class=" text-center">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card my-2">
+                    <div class="card-header">
+                        Tentukan Harga Layanan
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('profile.update.services') }}" method="post">
+                            @csrf
+                            @method('put')
+                            @foreach($user->categories as $category)
+                                <div class="mb-5">
+                                    <div class="form-group">
+                                        <label for="category-{{ $category->id }}">Harga Layanan {{ $category->name }}</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">Rp</div>
+                                            </div>
+                                            <input type="text" class="form-control" name="category_prices[{{ $category->id }}]" value="{{ $category->pivot->price }}" placeholder="Harga layanan {{ $category->name }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Info Layanan {{ $category->name }}</label>
+                                        <input type="text" class="form-control" name="category_descriptions[{{ $category->id }}]" value="{{ $category->pivot->description }}" placeholder="Deskripsikan apa yang dapat anda lakukan untuk layanan ini">
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="text-center">
+                                <button class="btn btn-primary">Simpan</button>
                             </div>
                         </form>
                     </div>

@@ -24,6 +24,7 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.'], function() {
 
     Route::get('/edit', "ProfileController@edit")->name('edit');
     Route::put('/edit', "ProfileController@update")->name('update');
+    Route::put('/edit/service', "ProfileController@updateServices")->name('update.services');
 
 });
 
