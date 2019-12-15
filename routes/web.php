@@ -102,4 +102,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{request}', "DepositRequestController@update")->name('update');
         Route::delete('/{request}', "DepositRequestController@destroy")->name('delete');
     });
+
+    Route::group(['prefix' => 'transactions', 'as' => 'transactions.'], function() {
+        Route::get('/', "UserTransactionController@index")->name('index');
+        Route::post('/', "UserTransactionController@show")->name('show');
+    });
 });

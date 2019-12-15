@@ -65,6 +65,13 @@ class HomeController extends Controller
                 'auth' => auth()->user()->admin_manager ? true : false,
             ],
             [
+                'name' => "Transaksi",
+                'hint' => "Lihat riwayat transaksi",
+                'url' => route('admin.transactions.index'),
+                'icon' => asset('images/icons/account-cash.png'),
+                'auth' => true,
+            ],
+            [
                 'name' => "Deposit",
                 'hint' => "Kelola permintaan konfirmasi deposit",
                 'url' => route('admin.deposits.index'),
