@@ -62,6 +62,7 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
                                             <a class="dropdown-item" href="{{ route('admin.partners.edit', [$user]) }}">Edit</a>
+                                            <a class="dropdown-item" href="{{ route('admin.transactions.create', [$user]) }}">Top Up</a>
                                             @if($pending)
                                             <a href="#" class="dropdown-item" onclick="$('#activate-{{ $user->id }}').submit()">Aktifkan</a>
                                             @endif

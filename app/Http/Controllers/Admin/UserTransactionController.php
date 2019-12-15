@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use App\UserTransaction;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,13 @@ class UserTransactionController extends Controller
 
         return view('admin.user_transactions.index', [
             'transactions' => $transactions,
+        ]);
+    }
+
+    public function create(Request $request, User $user)
+    {
+        return view('admin.user_transactions.create', [
+            'user' => $user,
         ]);
     }
 

@@ -105,6 +105,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::group(['prefix' => 'transactions', 'as' => 'transactions.'], function() {
         Route::get('/', "UserTransactionController@index")->name('index');
-        Route::post('/', "UserTransactionController@show")->name('show');
+        Route::post('/', "UserTransactionController@store")->name('store');
+        Route::get('/{user}', "UserTransactionController@create")->name('create');
     });
 });
