@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->json('data');
             $table->json('open_hours');
             $table->boolean('admin_manager')->default(false);
+            $table->boolean('superadmin')->default(false);
             $table->bigInteger('visitors')->default(0);
             $table->rememberToken();
             $table->timestamps();

@@ -18,16 +18,35 @@
                             </div>
                         @endif
 
-                        <ul class="list-unstyled">
-                            <li>
-                                Tipe Akun: @include('includes.user_type', ['user_type' => $user->type])
-                            </li>
+                        <dl>
+                            <dt>Tipe Akun</dt>
+                            <dd>
+                                @include('includes.user_type', ['user_type' => $user->type])
+                            </dd>
                             @if($user->type == \App\User::TYPE_PARTNER)
-                                <li class="my-1">
-                                    Saldo: @include('includes.user_balance')
-                                </li>
+                                <dt>Saldo</dt>
+                                <dd class="my-1">
+                                    @include('includes.user_balance')
+                                    <a href="{{ route('deposit.create') }}" class="px-2">Top Up</a>
+                                </dd>
+                                <dt>Status</dt>
+                                <dd class="my-1">
+                                    @if($user->activated)
+                                        <span class="badge badge-success">Aktif</span>
+                                    @endif
+                                </dd>
+                                <dt>Verifikasi:</dt>
+                                <dd class="my-1">
+                                    @if($user->verified)
+                                        <span class="text-success">Akun telah diverifikasi!</span>
+                                    @else
+                                        Akun belum diverifikasi, mohon lengkapi data diri anda.
+                                    @endif
+                                </dd>
                             @endif
-                        </ul>
+                        </dl>
+
+                        <hr>
 
                         <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
                             @csrf

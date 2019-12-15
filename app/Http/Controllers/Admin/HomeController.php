@@ -35,30 +35,35 @@ class HomeController extends Controller
                 'hint' => "Kelola Mitra termasuk Mitra yang masih pending",
                 'url' => route('admin.partners.index'),
                 'icon' => asset('images/icons/account-group.png'),
+                'auth' => true,
             ],
             [
                 'name' => "Layanan",
                 'hint' => "Kelola layanan dan sub layanan",
                 'url' => route('admin.categories.index'),
                 'icon' => asset('images/icons/tools.png'),
+                'auth' => true,
             ],
             [
                 'name' => "Kota dan Provinsi",
                 'hint' => "Kelola provinsi dan kota-kotanya",
                 'url' => route('admin.provinces.all'),
                 'icon' => asset('images/icons/city.png'),
+                'auth' => true,
             ],
             [
                 'name' => "Admin",
                 'hint' => "Kelola admin",
                 'url' => route('admin.admin.index'),
                 'icon' => asset('images/icons/shield-account.png'),
+                'auth' => auth()->user()->admin_manager ? true : false,
             ],
             [
                 'name' => "Pengaturan",
                 'hint' => "Pengaturan situs",
                 'url' => route('admin.settings.edit'),
                 'icon' => asset('images/icons/settings.png'),
+                'auth' => true,
             ],
         ];
     }

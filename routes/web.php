@@ -34,6 +34,11 @@ Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
     Route::get('/{user}/wa', "ListingController@contactWhatsapp")->name('contact.wa');
 });
 
+Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function() {
+    Route::get('/', "DepositController@create")->name('create');
+    Route::post('/', "DepositController@store")->name('store');
+});
+
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 

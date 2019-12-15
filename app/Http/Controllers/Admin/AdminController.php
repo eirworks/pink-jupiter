@@ -19,6 +19,9 @@ class AdminController extends Controller
     {
         $users = User::orderBy('id', 'desc')
             ->where('type', User::TYPE_ADMIN)
+            ->when(!auth()->user()->superadmin, function($query) {
+                $query->where('superadmin', false); // hide superadmin
+            })
             ->paginate();
 
         return view('admin.admins.index', [

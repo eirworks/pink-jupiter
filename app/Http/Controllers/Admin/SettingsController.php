@@ -11,6 +11,9 @@ class SettingsController extends Controller
     const SETTING_MIN_DEPOSIT = "minimum_deposit";
     const SETTING_LISTING_SEO = "seo_listing";
     const SETTING_PROFILE_SEO = "seo_profile";
+    const SETTING_DEPOSIT_ACCOUNT = "deposit_account";
+    const SETTING_DEPOSIT_ACCOUNT_NAME = "deposit_account_name";
+    const SETTING_DEPOSIT_ACCOUNT_BANK = "deposit_account_bank";
 
     public function index(Request $request)
     {
@@ -80,6 +83,24 @@ class SettingsController extends Controller
                 'name' => 'Tag SEO untuk halaman profil',
                 'key' => self::SETTING_PROFILE_SEO,
                 'type' => 'text',
+                'default' => "",
+            ],
+            [
+                'name' => 'Rekening Top Up',
+                'key' => self::SETTING_DEPOSIT_ACCOUNT,
+                'type' => 'string',
+                'default' => "",
+            ],
+            [
+                'name' => 'Nama Pemilik Rekening Top Up',
+                'key' => self::SETTING_DEPOSIT_ACCOUNT_NAME,
+                'type' => 'string',
+                'default' => "",
+            ],
+            [
+                'name' => 'Nama Bank Rekening Top Up',
+                'key' => self::SETTING_DEPOSIT_ACCOUNT_BANK,
+                'type' => 'string',
                 'default' => "",
             ],
         ];
