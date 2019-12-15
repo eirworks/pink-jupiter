@@ -21,7 +21,7 @@ class CreateDepositRequestsTable extends Migration
             $table->string('bank_account');
             $table->string('bank_account_name');
             $table->string('destination');
-            $table->boolean('confirmed')->default(false);
+            $table->dateTimeTz('confirmed')->nullable();
             $table->timestamps();
         });
     }

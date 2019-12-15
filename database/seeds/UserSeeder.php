@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'Developer (Admin)',
             'email' => 'dev@cc.cc',
             'superadmin' => true,
+            'admin_manager' => true,
             'password' => \Illuminate\Support\Facades\Hash::make('dev'),
         ]);
         factory(\App\User::class)->state('partner')->create([

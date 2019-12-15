@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(DepositSeeder::class);
 
-        \Illuminate\Support\Facades\Artisan::call("cities:setup");
+        Artisan::call("cities:setup");
     }
 }

@@ -9,4 +9,9 @@ class DepositRequest extends Model
     protected $casts = [
         'confirmed' => 'boolean',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

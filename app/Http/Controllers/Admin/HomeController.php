@@ -22,7 +22,13 @@ class HomeController extends Controller
         ];
 
         return view('admin.home', [
-            'menus' => $this->menus(),
+            'menus' => collect($this->menus())->filter(function($value) {
+                $menuValue = collect($value);
+                if ($menuValue->get('superadmin', false)) {
+                    return true;
+                }
+                return $menuValue->get('auth', true);
+            }),
             'stats' => $stats,
         ]);
     }
@@ -57,6 +63,13 @@ class HomeController extends Controller
                 'url' => route('admin.admin.index'),
                 'icon' => asset('images/icons/shield-account.png'),
                 'auth' => auth()->user()->admin_manager ? true : false,
+            ],
+            [
+                'name' => "Deposit",
+                'hint' => "Kelola permintaan konfirmasi deposit",
+                'url' => route('admin.deposits.index'),
+                'icon' => asset('images/icons/wallet.png'),
+                'auth' => true,
             ],
             [
                 'name' => "Pengaturan",
