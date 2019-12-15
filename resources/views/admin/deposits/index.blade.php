@@ -6,6 +6,12 @@
 
 @section('content')
     <div class="container">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Beranda Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.deposits.index') }}">Konfirmasi Top Up</a></li>
+        </ul>
+
         <h2>@yield('title')</h2>
 
         <div class="card">
