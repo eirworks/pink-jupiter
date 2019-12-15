@@ -13,4 +13,6 @@ return [
 
     'validation_fail' => ":key harus diisi!",
     'email_validation_fail' => "Email harus diisi dan alamat email harus benar!",
+
+    'balance' => 'Saldo',
 ];

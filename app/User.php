@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->categories->pluck('id')->toArray();
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(UserTransaction::class);
+    }
 }

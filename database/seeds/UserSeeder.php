@@ -20,11 +20,21 @@ class UserSeeder extends Seeder
             'admin_manager' => true,
             'password' => \Illuminate\Support\Facades\Hash::make('dev'),
         ]);
-        factory(\App\User::class)->state('partner')->create([
+        $partner = factory(\App\User::class)->state('partner')->create([
             'name' => "Developer (Partner)",
             'email' => 'user1@cc.cc',
             'password' => \Illuminate\Support\Facades\Hash::make('dev'),
         ]);
+        $partner->transactions()->createMany(
+            array_merge(
+                factory(\App\UserTransaction::class, 5)->make([
+                    'amount' => 50000
+                ])->toArray(),
+                factory(\App\UserTransaction::class, 5)->make([
+                    'amount' => -50000
+                ])->toArray()
+            )
+        );
         factory(\App\User::class, 10)->create();
         factory(\App\User::class, 5)->state('partner')->create();
         factory(\App\User::class, 5)->state('partner')->create([

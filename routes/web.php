@@ -39,6 +39,8 @@ Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function() {
     Route::post('/', "DepositController@store")->name('store');
 });
 
+Route::get('/transactions', "BalanceController@index")->name('transactions.index');
+
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
