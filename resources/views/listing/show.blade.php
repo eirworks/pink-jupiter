@@ -22,8 +22,10 @@
                 <div class="mb-2">Views: {{ $user->visitors }}</div>
 
                 <div class="btn-group mb-2">
-                    <button class="btn btn-outline-primary" onclick="wa({{ $user->id }})">Whatsapp</button>
-                    <button class="btn btn-outline-primary">Telegram</button>
+                    <a class="btn btn-outline-primary" href="{{ route('listing.contact.wa', [$user]) }}" target="_blank">Whatsapp</a>
+                    @if($user->contact_telegram)
+                        <a class="btn btn-outline-primary" href="{{ route('listing.contact.tg', [$user]) }}" target="_blank">Telegram</a>
+                    @endif
                 </div>
 
                 <div>

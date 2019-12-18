@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'city_id' => 1,
         'balance' => 0,
         'contact' => $faker->e164PhoneNumber,
-        'contact_telegram' => $faker->e164PhoneNumber,
+        'contact_telegram' => $faker->userName,
         'contact_whatsapp' => $faker->e164PhoneNumber,
         'description' => $faker->paragraph,
         'address' => $faker->address,

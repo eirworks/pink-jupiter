@@ -112,17 +112,13 @@
                                 </div>
 
                                 @error('contact_whatsapp')
-                                    <div class="text-danger my-2">Kontak harus diisi!</div>
+                                    <div class="text-danger my-2">Nomor telepon Whatsapp harus diisi!</div>
                                 @enderror
 
                                 <div class="form-group">
-                                    <label for="">{{ __('profile.contact_telegram') }}</label>
-                                    <input type="tel" class="form-control" name="contact_telegram" value="{{ $user->contact_telegram }}" placeholder="Telegram">
+                                    <label for="">{{ __('profile.contact_telegram') }} (Opsional)</label>
+                                    <input type="text" class="form-control" name="contact_telegram" value="{{ $user->contact_telegram }}" placeholder="Telegram">
                                 </div>
-
-                                @error('contact_telegram')
-                                    <div class="text-danger my-2">Kontak harus diisi!</div>
-                                @enderror
 
                                 <div class="form-group">
                                     <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Bio, Keterangan, atau deskripsi layanan">{{ $user->description }}</textarea>

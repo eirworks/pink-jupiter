@@ -42,6 +42,7 @@ class ProfileController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'contact' => 'required',
+            'contact_whatsapp' => 'required',
             'city_id' => 'min:1',
             'categories' => 'required',
         ]);

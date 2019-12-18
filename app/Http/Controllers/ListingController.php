@@ -54,4 +54,18 @@ class ListingController extends Controller
                 ->with('danger', "Tidak dapat menghubungi mitra saat ini");
         }
     }
+
+    public function contactTelegram(User $user)
+    {
+        $fee = intval(setting(SettingsController::SETTING_CONTACT_FEE, 0));
+        if ($user->balance >= $fee)
+        {
+            $user->balance = $user->balance - $fee;
+            return redirect("https://t.me/".$user->contact_telegram);
+        }
+        else {
+            return redirect()->route('listing.show', [$user])
+                ->with('danger', "Tidak dapat menghubungi mitra saat ini");
+        }
+    }
 }
