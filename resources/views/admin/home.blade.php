@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <div class="mb-4">
+        <div class="my-4">
             Hai,
             {{ auth()->user()->name }} <span class="badge badge-primary">Admin</span>
             &nbsp;

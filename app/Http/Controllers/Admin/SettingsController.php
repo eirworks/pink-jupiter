@@ -103,6 +103,24 @@ class SettingsController extends Controller
                 'type' => 'string',
                 'default' => "",
             ],
+            [
+                'name' => 'Judul Homepage',
+                'key' => 'homepage_title',
+                'type' => 'string',
+                'default' => env('APP_NAME'),
+            ],
+            [
+                'name' => 'Sub-Judul Homepage',
+                'key' => 'homepage_subtitle',
+                'type' => 'string',
+                'default' => "",
+            ],
+            [
+                'name' => 'Sub-Judul Homepage',
+                'key' => 'homepage_subtitle',
+                'type' => 'string',
+                'default' => "",
+            ],
         ];
     }
 }

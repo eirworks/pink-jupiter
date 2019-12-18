@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card my-3">
                     <div class="card-header text-center">@yield('title')</div>
                     <div class="card-body">
 
@@ -152,7 +152,7 @@
                                     Pilih layanan yang anda sediakan:
                                 </p>
                                 <div class="alert alert-warning my-2">
-                                    Peringatan: Merubah layanan kemungkinan akan merubah atau menghilangkan harga dan deskripsi yang sebelumnya telah
+                                    <b>Peringatan</b>: Merubah layanan akan merubah atau menghilangkan harga dan deskripsi yang sebelumnya telah
                                     ditentukan.
                                 </div>
                                 @error('categories')

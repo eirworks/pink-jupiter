@@ -1,0 +1,43 @@
+.header-container {
+    background-image: url('/images/bg.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 400px;
+    //padding: 20px 0;
+    @extend .d-flex;
+    @extend .align-items-center;
+}
+.hp-title,.hp-subtitle {
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px #000;
+}
+
+.hp-title {
+    font-size: 3rem;
+}
+
+.hp-subtitle {
+    font-size: 1.8rem;
+}
+
+.hp-guide-title {
+    color: lighten($body-color, 10);
+    font-weight: normal;
+    margin-bottom: 40px;
+}
+.hp-guide-image {
+    width: 200px;
+    height: 200px;
+}
+.hp-guide-text {
+    color: lighten($body-color, 30);
+    font-size: 1.4rem;
+}
+
+.hp-feedback {
+    padding: 30px 0;
+    background-color: #eafef5;
+}
