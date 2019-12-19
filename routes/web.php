@@ -109,4 +109,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::post('/', "UserTransactionController@store")->name('store');
         Route::get('/{user}', "UserTransactionController@create")->name('create');
     });
+
+    Route::group(['prefix' => 'posts', 'as' => 'posts.'], function() {
+        Route::get('/', "PostController@index")->name('index');
+        Route::get('/new', "PostController@create")->name('create');
+        Route::post('/new', "PostController@store")->name('store');
+        Route::get('/{post}', "PostController@edit")->name('edit');
+        Route::put('/{post}', "PostController@update")->name('update');
+        Route::put('/{post}/toggle-publish', "PostController@togglePublish")->name('publish');
+        Route::delete('/{post}', "PostController@destroy")->name('delete');
+    });
 });

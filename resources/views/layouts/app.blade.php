@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    @stack('external-script-src')
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -82,7 +84,7 @@
             </div>
         </nav>
 
-        <main class="">
+        <main>
             @include('includes.error_message')
             @yield('content')
         </main>
