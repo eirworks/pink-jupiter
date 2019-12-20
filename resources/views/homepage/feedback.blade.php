@@ -1,37 +1,23 @@
-<div class="hp-feedback my-5">
-    <div class="container">
-        <h3 class="hp-feedback-title font-weight-normal text-center">Jutaan orang tidak menyadari bahwa mereka dapat menemukan jasa reparasi dengan mudah di {{ env('APP_NAME') }}</h3>
-        <div class="row my-5">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <blockquote class="hp-feedback-quote">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequatur culpa ea eveniet harum nostrum numquam odit optio quasi, quidem sint soluta voluptatum. Corporis dignissimos molestias nihil tempora. Id, impedit?
-                        </blockquote>
-                        <div class="hp-feedback-name">&mdash; John Smith</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <blockquote class="hp-feedback-quote">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequatur culpa ea eveniet harum nostrum numquam odit optio quasi, quidem sint soluta voluptatum. Corporis dignissimos molestias nihil tempora. Id, impedit?
-                        </blockquote>
-                        <div class="hp-feedback-name">&mdash; John Smith</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <blockquote class="hp-feedback-quote">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequatur culpa ea eveniet harum nostrum numquam odit optio quasi, quidem sint soluta voluptatum. Corporis dignissimos molestias nihil tempora. Id, impedit?
-                        </blockquote>
-                        <div class="hp-feedback-name">&mdash; John Smith</div>
-                    </div>
-                </div>
+@if(setting('fp_enable_testimony', true))
+    <div class="hp-feedback my-5">
+        <div class="container">
+            <h3 class="hp-feedback-title font-weight-normal text-center">{{ setting('fp_testimony_title') }}</h3>
+            <div class="row my-5">
+                @for($i=1; $i<=3; $i++)
+                    @if(setting('fp_testimony_'.$i))
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <blockquote class="hp-feedback-quote">
+                                        {{ setting('fp_testimony_'.$i) }}
+                                    </blockquote>
+                                    <div class="hp-feedback-name">&mdash; {{ setting('fp_testimony_'.$i.'_name') }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endfor
             </div>
         </div>
     </div>
-</div>
+@endif
