@@ -13,7 +13,15 @@ window.$ = window.jQuery = require('jquery');
 require('summernote');
 
 $(document).ready(() => {
-    $("#summernote-editor").summernote();
+    $("#summernote-editor").summernote({
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+        ],
+    });
 });
 
 /**

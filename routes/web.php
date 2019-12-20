@@ -28,6 +28,11 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.'], function() {
 
 });
 
+Route::group(['prefix' => 'articles', 'as' => 'articles.'], function() {
+    Route::get('/', 'ArticleController@index')->name('index');
+    Route::get('/{slug}/{post}', 'ArticleController@show')->name('show');
+});
+
 Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
     Route::get('/', "ListingController@index")->name('index');
     Route::get('/{user}', "ListingController@show")->name('show');

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10696,34 +10696,29 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./resources/js/hpsearch.js":
-/*!**********************************!*\
-  !*** ./resources/js/hpsearch.js ***!
-  \**********************************/
+/***/ "./resources/js/summernote.js":
+/*!************************************!*\
+  !*** ./resources/js/summernote.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
-$(document).ready(function () {
-  $("#province").change(function () {
-    console.log($(this).val());
-    var u = $("meta[name=hp_search_province_url]").attr("content").replace("X", $(this).val());
-    console.log("URL", u);
-    window.location = u;
-  });
+window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+window.jQuery(document).ready(function () {
+  console.log("Hello");
+  window.jQuery('#summernote').summernote();
 });
 
 /***/ }),
 
-/***/ 1:
-/*!****************************************!*\
-  !*** multi ./resources/js/hpsearch.js ***!
-  \****************************************/
+/***/ 2:
+/*!******************************************!*\
+  !*** multi ./resources/js/summernote.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/rully/PhpstormProjects/mm3000/resources/js/hpsearch.js */"./resources/js/hpsearch.js");
+module.exports = __webpack_require__(/*! /home/rully/PhpstormProjects/mm3000/resources/js/summernote.js */"./resources/js/summernote.js");
 
 
 /***/ })
