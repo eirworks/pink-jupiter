@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\AuthIsAdmin;
 use App\Post;
+use App\PostCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -18,10 +19,11 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::orderBy('id', 'desc')
+            ->with(['category:id,name'])
             ->paginate();
 
         return view('admin.posts.index', [
-            'posts' => $posts
+            'posts' => $posts,
         ]);
     }
 
@@ -29,8 +31,11 @@ class PostController extends Controller
     {
         $post = new Post();
 
+        $categories = PostCategory::get();
+
         return view('admin.posts.form', [
             'post' => $post,
+            'categories' => $categories,
         ]);
     }
 
@@ -39,6 +44,7 @@ class PostController extends Controller
         $post = new Post();
 
         $post->user_id = auth()->id();
+        $post->post_category_id = $this->setupCategory($request);
         $post->title = $request->input('title');
         if ($request->filled('slug'))
         {
@@ -61,14 +67,17 @@ class PostController extends Controller
 
     public function edit(Request $request, Post $post)
     {
+        $categories = PostCategory::get();
         return view('admin.posts.form', [
             'post' => $post,
+            'categories' => $categories,
         ]);
     }
 
     public function update(Request $request, Post $post)
     {
         $post->user_id = auth()->id();
+        $post->post_category_id = $this->setupCategory($request);
         $post->title = $request->input('title');
         if ($request->filled('slug'))
         {
@@ -110,5 +119,37 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('success', "Posting telah dihapus");
+    }
+
+    /**
+     * Setup category automatically
+     * @param Request $request
+     * @return int|mixed
+     */
+    private function setupCategory(Request $request)
+    {
+        $id = intval($request->input('post_category_id'));
+
+        if ($id == -1)
+        {
+            // if new category is empty, just return zero
+            if (!$request->filled('category_name'))
+            {
+                return 0;
+            }
+
+            // create new category
+            $category = new PostCategory();
+            $category->name = $request->input('category_name');
+            $category->slug = Str::slug($category->name);
+
+            $category->save();
+
+            return $category->id;
+        }
+        else {
+            // return selected id
+            return $id;
+        }
     }
 }

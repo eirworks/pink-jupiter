@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(DepositSeeder::class);
+        $this->call(PostCategorySeeder::class);
         $this->call(PostSeeder::class);
 
         Artisan::call("cities:setup");

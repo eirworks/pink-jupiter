@@ -15,12 +15,14 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->index();
+            $table->bigInteger('post_category_id')->index();
             $table->string('title');
             $table->string('slug');
             $table->text('content');
-            $table->dateTimeTz('published_at')->nullable()->default(null);
+            $table->dateTimeTz('published_at')->nullable()->default(null)->index();
             $table->timestamps();
+            $table->index(['post_category_id', 'published_at'], 'cat_published_index');
         });
     }
 

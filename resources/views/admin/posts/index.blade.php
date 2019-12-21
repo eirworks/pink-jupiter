@@ -5,7 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container my-3">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Beranda Admin</a></li>
+            <li class="breadcrumb-item">@yield('title')</li>
+        </ul>
         <h2>@yield('title')</h2>
         <div class="card">
             <div class="card-body">
@@ -15,6 +19,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Judul</th>
+                        <th>Kategori</th>
                         <th>Dipublikasikan</th>
                         <th></th>
                     </tr>
@@ -24,6 +29,7 @@
                         <tr>
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
+                            <td>@include('admin.posts._category')</td>
                             <td>
                                 @include('admin.posts._published')
                             </td>

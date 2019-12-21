@@ -6,6 +6,11 @@
 
 @section('content')
     <div class="container my-3">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Beranda Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">Kelola Postingan</a></li>
+            <li class="breadcrumb-item">@yield('title')</li>
+        </ul>
         <h2>@yield('title')</h2>
         <form action="{{ $post->id ? route('admin.posts.update', [$post]) : route('admin.posts.store') }}" method="post" id="form">
             @csrf
@@ -27,6 +32,23 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">
+
+                            <div class="form-group">
+                                <label for="category_id">Pilih kategori</label>
+                                <select name="post_category_id" id="category_id" class="form-control">
+                                    <option value="0">Tanpa Kategori</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                    <option value="-1">Kategori Baru</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" id="new-category">
+                                <label for="new-category">Atau buat kategori baru</label>
+                                <input type="text" name="category_name" class="form-control" placeholder="Nama kategori baru">
+                            </div>
+
                             <button type="submit" id="submit" class="btn btn-primary btn-block mb-3">Simpan</button>
 
                             <div class="form-check">
