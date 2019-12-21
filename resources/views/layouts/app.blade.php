@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -84,7 +84,7 @@
             </div>
         </nav>
 
-        <main>
+        <main style="margin-top: 4.5rem">
             @include('includes.error_message')
             @yield('content')
         </main>
