@@ -6,22 +6,26 @@
 
 @section('content')
     <div class="container my-3">
-        <h2 class="text-center">@yield('title')</h2>
+        <h2 class="text-center mb-5">@yield('title')</h2>
 
         <div class="row">
             <div class="col-md-9">
                 @if(isset($posts))
-                    @foreach($posts as $post)
-                        <div class="post">
-                            <div class="post-title">
-                                @include('includes.article_link')
+                    @if($posts->count() > 0)
+                        @foreach($posts as $post)
+                            <div class="post">
+                                <div class="post-title">
+                                    @include('includes.article_link')
+                                </div>
+                                <div class="post-excerpt">
+                                    {!! $post->content !!}
+                                </div>
                             </div>
-                            <div class="post-excerpt">
-                                {!! $post->content !!}
-                            </div>
-                        </div>
-                    @endforeach
-                    {!! $posts->links() !!}
+                        @endforeach
+                        {!! $posts->links() !!}
+                    @else
+                        <div class="text-muted text-center">Tidak ada artikel</div>
+                    @endif
                 @else
                     <div class="post">
                         <div class="post-title">
@@ -29,6 +33,9 @@
                         </div>
                         <div class="post-meta">
                             Diposting pada {{ $post->created_at }}
+                            @if($post->post_category_id > 0)
+                                dalam {{ $post->category->name }}
+                            @endif
                         </div>
                         <div class="post-content">
                             {{ $post->content }}
@@ -36,7 +43,22 @@
                     </div>
                 @endif
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <form action="{{ route('articles.index') }}" method="get" id="change_category">
+                    <select name="category_id" id="category_id" class="form-control" onchange="catChanged()">
+                        <option value="">Pilih Kategori</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ request()->input('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </form>
+                <script>
+                    function catChanged()
+                    {
+                        document.getElementById('change_category').submit();
+                    }
+                </script>
+            </div>
         </div>
     </div>
 @endsection

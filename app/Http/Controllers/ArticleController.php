@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\PostCategory;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -11,17 +12,28 @@ class ArticleController extends Controller
     {
         $posts = Post::orderBy('id', 'desc')
             ->whereNotNull('published_at')
+            ->when($request->filled('category_id'), function($query) {
+                $query->where('post_category_id', \request()->input('category_id'));
+            })
             ->paginate();
 
+        $categories = PostCategory::get();
+
         return view('articles.index', [
-            'posts' => $posts
+            'posts' => $posts,
+            'categories' => $categories,
         ]);
     }
 
     public function show($slug, Post $post)
     {
+        $post->load('category');
+
+        $categories = PostCategory::get();
+
         return view('articles.index', [
             'post' => $post,
+            'categories' => $categories,
         ]);
     }
 }
