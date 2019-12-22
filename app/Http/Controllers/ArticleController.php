@@ -31,9 +31,12 @@ class ArticleController extends Controller
 
         $categories = PostCategory::get();
 
+        $url = route('articles.show', ['slug' => $post->slug, $post]);
+
         return view('articles.index', [
             'post' => $post,
             'categories' => $categories,
+            'url' => $url,
         ]);
     }
 }

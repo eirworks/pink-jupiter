@@ -40,6 +40,7 @@
                         <div class="post-content">
                             {{ $post->content }}
                         </div>
+                        @include('articles._sharing')
                     </div>
                 @endif
             </div>
