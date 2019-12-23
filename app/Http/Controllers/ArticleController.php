@@ -39,4 +39,19 @@ class ArticleController extends Controller
             'url' => $url,
         ]);
     }
+
+    public function showPage($slug)
+    {
+        $post = Post::where('slug', $slug)
+            ->where('page', true)
+            ->firstOrFail();
+
+        $url = route('articles.show', ['slug' => $post->slug, $post]);
+
+        return view('articles.index', [
+            'post' => $post,
+            'categories' => [],
+            'url' => $url,
+        ]);
+    }
 }

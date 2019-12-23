@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-    Artikel {{ env('APP_NAME') }}
+    @if($post->page)
+        {{ $post->title }}
+    @else
+        Artikel {{ env('APP_NAME') }}
+    @endif
 @endsection
 
 @section('content')
@@ -45,20 +49,22 @@
                 @endif
             </div>
             <div class="col-md-3">
-                <form action="{{ route('articles.index') }}" method="get" id="change_category">
-                    <select name="category_id" id="category_id" class="form-control" onchange="catChanged()">
-                        <option value="">Pilih Kategori</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ request()->input('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                </form>
-                <script>
-                    function catChanged()
-                    {
-                        document.getElementById('change_category').submit();
-                    }
-                </script>
+                @if(!$post->page)
+                    <form action="{{ route('articles.index') }}" method="get" id="change_category">
+                        <select name="category_id" id="category_id" class="form-control" onchange="catChanged()">
+                            <option value="">Pilih Kategori</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ request()->input('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </form>
+                    <script>
+                        function catChanged()
+                        {
+                            document.getElementById('change_category').submit();
+                        }
+                    </script>
+                @endif
             </div>
         </div>
     </div>

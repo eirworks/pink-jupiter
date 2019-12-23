@@ -125,3 +125,5 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::delete('/{post}', "PostController@destroy")->name('delete');
     });
 });
+
+Route::get('/p/{slug}', "ArticleController@showPage")->name('page');
