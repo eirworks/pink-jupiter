@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->dateTimeTz('published_at')->nullable()->default(null)->index();
             $table->timestamps();
+            $table->boolean('page')->default(false)->index();
             $table->index(['post_category_id', 'published_at'], 'cat_published_index');
         });
     }

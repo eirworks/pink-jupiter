@@ -80,9 +80,16 @@ class HomeController extends Controller
             ],
             [
                 'name' => "Artikel",
-                'hint' => "Kelola artikel untuk berita atau halaman",
+                'hint' => "Kelola artikel untuk berita",
                 'url' => route('admin.posts.index'),
                 'icon' => asset('images/icons/newspaper.png'),
+                'auth' => true,
+            ],
+            [
+                'name' => "Halaman",
+                'hint' => "Kelola halaman",
+                'url' => route('admin.posts.index', ['page' => 1]),
+                'icon' => asset('images/icons/file.png'),
                 'auth' => true,
             ],
             [

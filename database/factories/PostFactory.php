@@ -21,3 +21,9 @@ $factory->state(Post::class, 'draft', function(Faker $faker) {
         'published_at' => null,
     ];
 });
+
+$factory->state(Post::class, 'page', function(Faker $faker) {
+    return [
+        'page' => true,
+    ];
+});

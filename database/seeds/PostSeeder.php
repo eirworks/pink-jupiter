@@ -13,6 +13,8 @@ class PostSeeder extends Seeder
     {
         \App\Post::truncate();
 
-        factory(\App\Post::class, 10)->create();
+        factory(\App\Post::class, 5)->state('page')->create();
+        factory(\App\Post::class, 5)->create();
+        factory(\App\Post::class, 2)->state('draft')->create();
     }
 }

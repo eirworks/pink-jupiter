@@ -20,6 +20,11 @@ class PostController extends Controller
     {
         $posts = Post::orderBy('id', 'desc')
             ->with(['category:id,name'])
+            ->when($request->has('page'), function($query) {
+                $query->where('page', true);
+            }, function($query) {
+                $query->where('page', false);
+            })
             ->paginate();
 
         return view('admin.posts.index', [
@@ -30,6 +35,10 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $post = new Post();
+        if ($request->has('page'))
+        {
+            $post->page = true;
+        }
 
         $categories = PostCategory::get();
 
@@ -44,6 +53,7 @@ class PostController extends Controller
         $post = new Post();
 
         $post->user_id = auth()->id();
+        $post->page = $request->input('page', false);
         $post->post_category_id = $this->setupCategory($request);
         $post->title = $request->input('title');
         if ($request->filled('slug'))
@@ -77,7 +87,10 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $post->user_id = auth()->id();
-        $post->post_category_id = $this->setupCategory($request);
+        if (!$post->page)
+        {
+            $post->post_category_id = $this->setupCategory($request);
+        }
         $post->title = $request->input('title');
         if ($request->filled('slug'))
         {

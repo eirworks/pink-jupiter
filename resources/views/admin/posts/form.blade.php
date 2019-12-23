@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $post->id ? 'Edit '.$post->title : 'Tulis Artikel' }}
+    {{ $post->id ? 'Edit '.$post->title : 'Tulis '.(request()->has('page') ? 'Halaman' : 'Posting') }}
 @endsection
 
 @section('content')
@@ -14,17 +14,24 @@
         <h2>@yield('title')</h2>
         <form action="{{ $post->id ? route('admin.posts.update', [$post]) : route('admin.posts.store') }}" method="post" id="form">
             @csrf
+            @if(request()->has('page'))
+                <input type="hidden" name="page" value="1">
+            @endif
             @if($post->id) @method('put') @endif
             <div class="row">
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <input type="text" name="title" placeholder="Judul Posting"
+                                <input type="text" name="title" placeholder="Judul"
                                        value="{{ $post->title }}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <textarea name="content" rows="15" class="form-control"  id="summernote-editor">{{ $post->content }}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" value="{{ $post->slug }}" name="slug" class="form-control" placeholder="URL">
                             </div>
                         </div>
                     </div>
@@ -33,21 +40,23 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <div class="form-group">
-                                <label for="category_id">Pilih kategori</label>
-                                <select name="post_category_id" id="category_id" class="form-control">
-                                    <option value="0">Tanpa Kategori</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                    <option value="-1">Kategori Baru</option>
-                                </select>
-                            </div>
+                            @if((!$post->id && !request()->has('page')))
+                                <div class="form-group">
+                                    <label for="category_id">Pilih kategori</label>
+                                    <select name="post_category_id" id="category_id" class="form-control">
+                                        <option value="0">Tanpa Kategori</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                        <option value="-1">Kategori Baru</option>
+                                    </select>
+                                </div>
 
-                            <div class="form-group" id="new-category">
-                                <label for="new-category">Atau buat kategori baru</label>
-                                <input type="text" name="category_name" class="form-control" placeholder="Nama kategori baru">
-                            </div>
+                                <div class="form-group" id="new-category">
+                                    <label for="new-category">Atau buat kategori baru</label>
+                                    <input type="text" name="category_name" class="form-control" placeholder="Nama kategori baru">
+                                </div>
+                            @endif
 
                             <button type="submit" id="submit" class="btn btn-primary btn-block mb-3">Simpan</button>
 
