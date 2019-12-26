@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('title')
-    @if($post->page)
-        {{ $post->title }}
-    @else
-        Artikel {{ env('APP_NAME') }}
-    @endif
+    @isset($post)
+        @if($post->page)
+            {{ $post->title }}
+        @else
+            Artikel {{ env('APP_NAME') }}
+        @endif
+    @endisset
 @endsection
 
 @section('content')
