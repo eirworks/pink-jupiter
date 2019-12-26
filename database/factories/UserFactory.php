@@ -30,6 +30,8 @@ $factory->define(User::class, function (Faker $faker) {
         'contact_whatsapp' => $faker->e164PhoneNumber,
         'description' => $faker->paragraph,
         'address' => $faker->address,
+        'district' => $faker->city,
+        'village' => $faker->city,
         'image' => '',
         'id_card_image' => '',
         'data' => [],

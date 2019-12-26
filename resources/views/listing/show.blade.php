@@ -18,7 +18,14 @@
 
                 <div class="mb-3">Tentang Kami: {{ $user->description }}</div>
 
-                <div class="mb-2">Lokasi: {{ $user->city->name }}, {{ $user->city->province->name }}</div>
+                <div class="mb-2">
+                    <b>Lokasi</b>: {{ $user->city->name }}, {{ $user->city->province->name }}
+                </div>
+                <div class="mb-2">
+                    <b>Kecamatan</b>: {{ $user->district }}
+                    <br>
+                    <b>Kelurahan</b>: {{ $user->village }}
+                </div>
                 <div class="mb-2">Views: {{ $user->visitors }}</div>
 
                 <div class="btn-group mb-2">

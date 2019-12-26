@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('contact_telegram');
             $table->text('description');
             $table->text('address');
+            $table->string('district');
+            $table->string('village');
             $table->string('image');
             $table->string('id_card_image');
             $table->json('data');

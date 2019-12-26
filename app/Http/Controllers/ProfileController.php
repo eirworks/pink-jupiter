@@ -38,14 +38,27 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        $request->validate([
+        $rules = [
             'name' => 'required',
             'email' => 'required|email',
             'contact' => 'required',
             'contact_whatsapp' => 'required',
             'city_id' => 'min:1',
             'categories' => 'required',
-        ]);
+        ];
+
+        if ($user->type == User::TYPE_PARTNER)
+        {
+            $partnerOnlyRules = [
+                'address' => 'required',
+                'district' => 'required',
+                'village' => 'required',
+            ];
+
+            $rules = array_merge($rules, $partnerOnlyRules);
+        }
+
+        $request->validate($rules);
 
         $this->save($user, $request);
 
@@ -92,6 +105,8 @@ class ProfileController extends Controller
             $user->contact_telegram = $request->input('contact_telegram');
             $user->description = $request->input('description');
             $user->address = $request->input('address');
+            $user->district = $request->input('district');
+            $user->village = $request->input('village');
 
         }
 

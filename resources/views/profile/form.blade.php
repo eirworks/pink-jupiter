@@ -129,6 +129,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Kecamatan</label>
+                                    <input type="text" class="form-control" name="district" value="{{ $user->district }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kelurahan</label>
+                                    <input type="text" class="form-control" name="village" value="{{ $user->village }}">
+                                </div>
+
+                                <div class="form-group">
                                     @if($user->image)
                                         <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->image) }}" alt="Logo/Foto {{ $user->name }}"></div>
                                     @endif
