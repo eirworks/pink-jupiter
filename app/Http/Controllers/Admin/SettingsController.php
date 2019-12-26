@@ -154,78 +154,78 @@ class SettingsController extends Controller
                 ],
             ],
 
-            [
-                'name' => "Halaman Depan",
-                'id' => 'frontend',
-                'settings' => [
-                    [
-                        'name' => 'Aktifkan Testimoni',
-                        'key' => 'fp_enable_testimony',
-                        'type' => 'boolean',
-                        'default' => true,
-                    ],
-                    [
-                        'name' => 'Judul testimoni',
-                        'key' => 'fp_testimony_title',
-                        'type' => 'string',
-                        'default' => "Testimoni Customer Kami",
-                    ],
-                    [
-                        'name' => 'Testimoni 1',
-                        'key' => 'fp_testimony_1',
-                        'type' => 'text',
-                        'default' => "",
-                    ],
-                    [
-                        'name' => 'Nama Testimoni 1',
-                        'key' => 'fp_testimony_1_name',
-                        'type' => 'string',
-                        'default' => "",
-                    ],
-                    [
-                        'name' => 'Testimoni 2',
-                        'key' => 'fp_testimony_2',
-                        'type' => 'text',
-                        'default' => "",
-                    ],
-                    [
-                        'name' => 'Nama Testimoni 2',
-                        'key' => 'fp_testimony_2_name',
-                        'type' => 'string',
-                        'default' => "",
-                    ],
-                    [
-                        'name' => 'Testimoni 3',
-                        'key' => 'fp_testimony_3',
-                        'type' => 'text',
-                        'default' => "",
-                    ],
-                    [
-                        'name' => 'Nama Testimoni 3',
-                        'key' => 'fp_testimony_3_name',
-                        'type' => 'string',
-                        'default' => "",
-                    ],
-                    [
-                        'name' => 'Judul untuk Ajakan Mitra',
-                        'key' => 'fp_partner_invitation_title',
-                        'type' => 'string',
-                        'default' => "Bergabung dengan %s",
-                    ],
-                    [
-                        'name' => 'Sub Judul untuk Ajakan Mitra',
-                        'key' => 'fp_partner_invitation_subtitle',
-                        'type' => 'string',
-                        'default' => "Segera bergabung dengan kami",
-                    ],
-                    [
-                        'name' => 'Teks Tombol Ajakan Mitra',
-                        'key' => 'fp_partner_invitation_button',
-                        'type' => 'string',
-                        'default' => "Gabung Sekarang",
-                    ],
-                ],
-            ],
+//            [
+//                'name' => "Halaman Depan",
+//                'id' => 'frontend',
+//                'settings' => [
+//                    [
+//                        'name' => 'Aktifkan Testimoni',
+//                        'key' => 'fp_enable_testimony',
+//                        'type' => 'boolean',
+//                        'default' => true,
+//                    ],
+//                    [
+//                        'name' => 'Judul testimoni',
+//                        'key' => 'fp_testimony_title',
+//                        'type' => 'string',
+//                        'default' => "Testimoni Customer Kami",
+//                    ],
+//                    [
+//                        'name' => 'Testimoni 1',
+//                        'key' => 'fp_testimony_1',
+//                        'type' => 'text',
+//                        'default' => "",
+//                    ],
+//                    [
+//                        'name' => 'Nama Testimoni 1',
+//                        'key' => 'fp_testimony_1_name',
+//                        'type' => 'string',
+//                        'default' => "",
+//                    ],
+//                    [
+//                        'name' => 'Testimoni 2',
+//                        'key' => 'fp_testimony_2',
+//                        'type' => 'text',
+//                        'default' => "",
+//                    ],
+//                    [
+//                        'name' => 'Nama Testimoni 2',
+//                        'key' => 'fp_testimony_2_name',
+//                        'type' => 'string',
+//                        'default' => "",
+//                    ],
+//                    [
+//                        'name' => 'Testimoni 3',
+//                        'key' => 'fp_testimony_3',
+//                        'type' => 'text',
+//                        'default' => "",
+//                    ],
+//                    [
+//                        'name' => 'Nama Testimoni 3',
+//                        'key' => 'fp_testimony_3_name',
+//                        'type' => 'string',
+//                        'default' => "",
+//                    ],
+//                    [
+//                        'name' => 'Judul untuk Ajakan Mitra',
+//                        'key' => 'fp_partner_invitation_title',
+//                        'type' => 'string',
+//                        'default' => "Bergabung dengan %s",
+//                    ],
+//                    [
+//                        'name' => 'Sub Judul untuk Ajakan Mitra',
+//                        'key' => 'fp_partner_invitation_subtitle',
+//                        'type' => 'string',
+//                        'default' => "Segera bergabung dengan kami",
+//                    ],
+//                    [
+//                        'name' => 'Teks Tombol Ajakan Mitra',
+//                        'key' => 'fp_partner_invitation_button',
+//                        'type' => 'string',
+//                        'default' => "Gabung Sekarang",
+//                    ],
+//                ],
+//            ],
         ];
     }
 }
