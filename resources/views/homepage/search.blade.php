@@ -8,27 +8,7 @@
                     <div class="row">
                         <div class="col-md-10">
                             <div class="row">
-                                <div class="col-md-4 mx-0">
-                                    <select class="form-control" id="province">
-                                        <option value="0">Pilih Provinsi</option>
-                                        @foreach($provinces as $province)
-                                            <option value="{{ $province->id }}" {{ request()->input('province_id') == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4 mx-0">
-                                    <select class="form-control" name="city_id">
-                                        @if(!$cities)
-                                            <option value="">Silakan Pilih Provinsi</option>
-                                        @else
-                                            <option value="">Pilih kota:</option>
-                                            @foreach($cities as $city)
-                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="col-md-4 mx-0">
+                                <div class="col-md-12 mx-0">
                                     <select class="form-control" name="category_id">
                                         <option value="">Pilih Layanan</option>
                                         @foreach($categories as $category)
