@@ -54,7 +54,7 @@ class SetupCities extends Command
             foreach($provinceItem['cities'] as $city)
             {
                 $city = City::create([
-                    'name' => ($city['type'] == 1 ? 'Kab.' : '').' '.$city['name'],
+                    'name' => $city['name'].' '.($city['type'] == 1 ? 'Kab.' : 'Kota'),
                     'id' => $city['id'],
                     'province_id' => $provinceItem['id'],
                 ]);
