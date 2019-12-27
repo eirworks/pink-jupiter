@@ -12,5 +12,6 @@ $factory->define(Category::class, function (Faker $faker) {
         'image' => '',
         'parent_id' => 0,
         'description' => $faker->paragraph,
+        'price' => 1000,
     ];
 });

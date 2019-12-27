@@ -24,35 +24,45 @@
                     <table class="table mb-3">
                         <thead>
                         <tr>
+                            <th>ID</th>
+                            @if($parent)
+                                <th>Urutan</th>
+                            @endif
                             <th>Nama Kategori</th>
+                            @if(!request()->filled('parent_id'))
                             <th>Subkategori</th>
-                            <th>Deskripsi</th>
+                            @endif
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($categories as $category)
                             <tr>
+                                <td>{{ $category->id }}</td>
+                                @if($parent)
+                                <td>{{ $category->ordering }}</td>
+                                @endif
                                 <td>
                                     {{ $category->name }}
+                                    @if($parent)
+                                    <div class="text-muted my-2">
+                                        {{ $category->description }}
+                                    </div>
+                                    @endif
                                 </td>
-                                <td>
-                                    @if($category->parent_id > 0)
-                                        -
-                                    @else
-                                        @if($category->children_count > 0)
-                                        <a href="{{ route('admin.categories.index', ['parent_id' => $category->id]) }}">{{ $category->children_count }}</a>
+                                @if(!request()->filled('parent_id'))
+                                    <td>
+                                        @if($category->parent_id > 0)
+                                            -
                                         @else
-                                            {{ $category->children_count }}
+                                            @if($category->children_count > 0)
+                                            <a href="{{ route('admin.categories.index', ['parent_id' => $category->id]) }}">{{ $category->children_count }}</a>
+                                            @else
+                                                {{ $category->children_count }}
+                                            @endif
                                         @endif
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($category->parent_id > 0)
-                                    <div class="text-muted font-italic">Sub layanan <a href="{{ route('admin.categories.index', ['parent_id' => $category->parent_id]) }}"><strong>{{ $category->parent->name }}</strong></a></div>
-                                    @endif
-                                    {{ $category->description }}
-                                </td>
+                                    </td>
+                                @endif
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

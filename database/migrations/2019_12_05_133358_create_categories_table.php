@@ -19,6 +19,9 @@ class CreateCategoriesTable extends Migration
             $table->string('slug');
             $table->bigInteger('parent_id')->index();
             $table->string('image');
+            $table->decimal('price', 14, 2);
+            $table->integer('ordering')->default(0);
+            $table->integer('group_order')->default(0);
             $table->text('description');
             $table->timestamps();
         });

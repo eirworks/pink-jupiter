@@ -20,6 +20,8 @@ class CategoryController extends Controller
         $categories = Category::orderBy('id', 'desc')
             ->when($request->filled('parent_id'), function($query) use($request) {
                 $query->where('parent_id', $request->input('parent_id'));
+            }, function($query) {
+                $query->where('parent_id', 0);
             })
             ->with(['parent'])
             ->withCount(['children'])
@@ -69,6 +71,9 @@ class CategoryController extends Controller
             $category->slug = Str::slug($request->input('slug'));
         }
         $category->image = "";
+        $category->price = $request->input('price');
+        $category->ordering = $request->input('ordering');
+        $category->group_ordering = $request->input('group_ordering');
         $category->save();
 
         return redirect()->route('admin.categories.index')
