@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     {{ $province->id ? 'Edit Provinsi '.$province->name : "Tambah Provinsi" }}

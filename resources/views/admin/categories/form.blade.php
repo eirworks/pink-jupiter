@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     {{ $category->id ? 'Edit Kategori '.$category->name : 'Buat Kategori' }}

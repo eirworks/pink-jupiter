@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('type')
     {{ request()->has('page') ? 'Halaman' : 'Artikel' }}

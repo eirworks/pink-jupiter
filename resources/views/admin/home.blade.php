@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     Admin Panel
@@ -7,6 +7,8 @@
 @section('content')
     <div class="container">
         <div class="my-4">
+            {{ now()->day }} {{ now()->getTranslatedMonthName() }} {{ now()->year }}
+            |
             Hai,
             {{ auth()->user()->name }} <span class="badge badge-primary">Admin</span>
             &nbsp;

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     {{ $post->id ? 'Edit '.$post->title : 'Tulis '.(request()->has('page') ? 'Halaman' : 'Posting') }}

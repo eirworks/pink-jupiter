@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     {{ $city->id ? 'Edit Kota '.$city->name : "Tambah Kota" }}

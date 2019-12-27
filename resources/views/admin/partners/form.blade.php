@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     {{ $user->id ? 'Edit Mitra '.$user->name : 'Tambah Mitra' }}

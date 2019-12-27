@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title')
     {{ $parent ? 'Kelola Sub-Kategori '.$parent->name : 'Kelola Kategori Layanan' }}
