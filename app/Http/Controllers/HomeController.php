@@ -41,7 +41,10 @@ class HomeController extends Controller
         $categories = Category::where('parent_id', 0)->with(['children'])->get();
 
         $users = User::orderBy('id', 'desc')
+            ->where('type', User::TYPE_PARTNER)
             ->where('activated', true)
+            ->where('verified', true)
+            ->where('balance', '>', 0)
             ->paginate();
 
         return view('home', [

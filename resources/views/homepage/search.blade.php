@@ -4,12 +4,12 @@
             <div class="col-md-8">
                 <div class="card my-2">
                     <div class="card-body">
-                        <form action="{{ route('listing.index') }}" method="get" class="my-0">
+                        <form action="{{ route('listing.index') }}" method="get" class="my-0" id="search-form">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-12 mx-0">
-                                            <select class="form-control" name="category_id">
+                                            <select class="form-control" name="category_id" onchange="document.getElementById('search-form').submit()">
                                                 <option value="">Pilih Layanan</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>

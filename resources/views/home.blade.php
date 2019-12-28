@@ -6,6 +6,9 @@
     <div class="container">
         @if($users->count())
             @foreach($users as $user)
+                @if($loop->index > 3)
+                    @break
+                @endif
                 <div class="card my-3">
                     <div class="card-body">
                         <div class="row">
@@ -44,9 +47,9 @@
             @foreach($users->chunk(4) as $userChunk)
                 <div class="row">
                     @foreach($userChunk as $user)
-                        <div class="col-md-3">
-                            <div class="card my-3 p-2">
-                                <div class="card-body">
+                        <div class="col-md-3 col-6 px-1 px-md-2">
+                            <div class="card my-3 p-2" style="max-height: 288px;">
+                                <div class="card-body" style="text-overflow: ellipsis; overflow: hidden">
                                     <div class="text-center">
                                         @if($user->image)
                                             <img src="{{ \Storage::disk('public')->url($user->image) }}" alt="{{ $user->name }}" class="img-thumbnail img-fluid">

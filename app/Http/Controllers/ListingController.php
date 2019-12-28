@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Province;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -19,11 +21,17 @@ class ListingController extends Controller
             })
             ->where('activated', true)
             ->where('verified', true)
-            ->where('balance', '>=', $fee)
+//            ->where('balance', '>=', 0)
             ->paginate();
+
+        $categories = Category::where('parent_id', 0)->with(['children'])->get();
+
+        $provinces = Province::with(['cities'])->get();
 
         return view('listing.index', [
             'users' => $users,
+            'categories' => $categories,
+            'provinces' => $provinces,
         ]);
     }
 

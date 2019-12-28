@@ -36,8 +36,8 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.'], function() {
 Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
     Route::get('/', "ListingController@index")->name('index');
     Route::get('/{user}', "ListingController@show")->name('show');
-    Route::get('/{user}/wa', "ListingController@contactWhatsapp")->name('contact.wa');
-    Route::get('/{user}/tg', "ListingController@contactTelegram")->name('contact.tg');
+    Route::get('/{user}/wa/{category_id?}', "ListingController@contactWhatsapp")->name('contact.wa');
+    Route::get('/{user}/tg/{category_id?}', "ListingController@contactTelegram")->name('contact.tg');
 });
 
 Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function() {
