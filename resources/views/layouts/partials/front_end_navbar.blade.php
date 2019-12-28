@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a href="{{ route('articles.index') }}">Artikel</a></li>
+                    <li class="nav-item"><a href="{{ route('articles.index') }}" class="nav-link">Artikel</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -57,7 +57,7 @@
             </div>
         </div>
     </nav>
-    <div class="bg-danger bg-white px-3 pb-2 d-block d-md-none">
-        <input type="text" class="form-control" name="search" placeholder="Cari layanan">
-    </div>
+{{--    <div class="bg-danger bg-white px-3 pb-2 d-block d-md-none">--}}
+{{--        <input type="text" class="form-control" name="search" placeholder="Cari layanan">--}}
+{{--    </div>--}}
 </div>
