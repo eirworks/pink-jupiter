@@ -47,23 +47,20 @@
                         <div class="col-md-3">
                             <div class="card my-3 p-2">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="text-center">
-                                            @if($user->image)
-                                                <img src="{{ \Storage::disk('public')->url($user->image) }}" alt="{{ $user->name }}" class="img-thumbnail img-fluid">
-                                            @endif
+                                    <div class="text-center">
+                                        @if($user->image)
+                                            <img src="{{ \Storage::disk('public')->url($user->image) }}" alt="{{ $user->name }}" class="img-thumbnail img-fluid">
+                                        @endif
+                                    </div>
+                                    <div class="d-block">
+                                        <div class="mb-1 text-center">
+                                            <a href="{{ route('listing.show', [$user]) }}" class="btn btn-link mx-0 px-0">
+                                                <strong>{{ $user->name }}</strong>
+                                            </a>
                                         </div>
-                                        <div class="d-block">
-                                            <div class="mb-1 text-center">
-                                                <a href="{{ route('listing.show', [$user]) }}" class="btn btn-link mx-0 px-0">
-                                                    <strong>{{ $user->name }}</strong>
-                                                </a>
-                                            </div>
-                                            <div class="text-muted text-sm-center my-1">
-                                                {{ $user->city->name }}, {{ $user->city->province->name }}
-                                            </div>
+                                        <div class="text-muted text-sm-center my-1">
+                                            {{ $user->city->name }}, {{ $user->city->province->name }}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
