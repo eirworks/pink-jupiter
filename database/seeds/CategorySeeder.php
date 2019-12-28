@@ -27,12 +27,20 @@ class CategorySeeder extends Seeder
                 $user->categories()->sync([
                     1 => [
                         'price' => 50000,
-                        'description' => "My Service",
+                        'description' => "My Service 1",
                     ],
                     2 => [
                         'price' => 10000,
-                        'description' => "My Service",
-                    ]
+                        'description' => "My Service 2",
+                    ],
+                    3 => [
+                        'price' => 10000,
+                        'description' => "My Service 3",
+                    ],
+                    4 => [
+                        'price' => 10000,
+                        'description' => "My Service 4",
+                    ],
                 ]);
             });
         }

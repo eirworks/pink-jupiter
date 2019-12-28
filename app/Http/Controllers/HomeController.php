@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\City;
 use App\Province;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -39,10 +40,14 @@ class HomeController extends Controller
 
         $categories = Category::where('parent_id', 0)->with(['children'])->get();
 
+        $users = User::orderBy('id', 'desc')
+            ->paginate();
+
         return view('home', [
             'provinces' => $provinces,
             'cities' => $cities,
             'categories' => $categories,
+            'users' => $users,
         ]);
     }
 }

@@ -71,9 +71,9 @@ class CategoryController extends Controller
             $category->slug = Str::slug($request->input('slug'));
         }
         $category->image = "";
-        $category->price = $request->input('price');
-        $category->ordering = $request->input('ordering');
-        $category->group_ordering = $request->input('group_ordering');
+        $category->price = $request->input('price', 0);
+        $category->ordering = $request->input('ordering', 0);
+        $category->group_order = $request->input('group_ordering', 0);
         $category->save();
 
         return redirect()->route('admin.categories.index')
@@ -104,6 +104,9 @@ class CategoryController extends Controller
             $category->slug = Str::slug($request->input('slug'));
         }
         $category->image = "";
+        $category->price = $request->input('price', 0);
+        $category->ordering = $request->input('ordering', 0);
+        $category->group_order = $request->input('group_ordering', 0);
         $category->save();
 
         return redirect()->route('admin.categories.index')
