@@ -10,9 +10,9 @@ $factory->define(Category::class, function (Faker $faker) {
         'Servis', 'Reparasi', "Sewa", "Tutoring", "Perbaikan", "Pembuatan",
     ];
     $serviceObjects = [
-        'TV', 'Radio', 'Kulkas', 'AC', 'Mobil', 'Motor', 'Mesin Pabrik', 'Senjata', 'Wanita',
+        'TV', 'Radio', 'Kulkas', 'AC', 'Mobil', 'Motor', 'Mesin Pabrik', 'Senjata',
         'LCD', 'Buku', "Perangko", "Koleksi", "Majalah", "Matahari", "Kartu Kredit", "Kereta Api",
-        "Pesawat Terbang", "Marble", 'Jembatan', 'Jalan Raya', 'Rel',
+        "Pesawat Terbang", 'Jembatan', 'Jalan Raya', 'Rel',
     ];
     return [
         'name' => $faker->randomElement($serviceNames)." ".$faker->randomElement($serviceObjects),
