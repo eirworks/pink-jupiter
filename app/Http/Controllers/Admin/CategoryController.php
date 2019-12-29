@@ -73,7 +73,7 @@ class CategoryController extends Controller
         $category->image = "";
         $category->price = $request->input('price', 0);
         $category->ordering = $request->input('ordering', 0);
-        $category->group_order = $request->input('group_ordering', 0);
+        $category->group_order = $request->input('group_order', 0);
         $category->save();
 
         return redirect()->route('admin.categories.index')
@@ -106,7 +106,7 @@ class CategoryController extends Controller
         $category->image = "";
         $category->price = $request->input('price', 0);
         $category->ordering = $request->input('ordering', 0);
-        $category->group_order = $request->input('group_ordering', 0);
+        $category->group_order = $request->input('group_order', 0);
         $category->save();
 
         return redirect()->route('admin.categories.index')
