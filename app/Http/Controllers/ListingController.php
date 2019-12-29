@@ -49,27 +49,24 @@ class ListingController extends Controller
         ]);
     }
 
-    public function contactWhatsapp(User $user)
+    public function contact(User $user, $type, Category $category)
     {
-        $fee = intval(setting(SettingsController::SETTING_CONTACT_FEE, 0));
-        if ($user->balance >= $fee)
-        {
-            $user->balance = $user->balance - $fee;
-            return redirect("https://wa.me/".$user->contact_whatsapp);
-        }
-        else {
-            return redirect()->route('listing.show', [$user])
-                ->with('danger', "Tidak dapat menghubungi mitra saat ini");
-        }
-    }
+        $validTypes = [
+            'wa' => "https://wa.me/",
+            'tg' => "https://t.me/",
+        ];
 
-    public function contactTelegram(User $user)
-    {
-        $fee = intval(setting(SettingsController::SETTING_CONTACT_FEE, 0));
+        if (!in_array($type, array_keys($validTypes)))
+        {
+            return route('home', ['error' => 11])->with('danger', "Informasi kontak tidak diketahui");
+        }
+
+        $fee = $category->price;
+
         if ($user->balance >= $fee)
         {
             $user->balance = $user->balance - $fee;
-            return redirect("https://t.me/".$user->contact_telegram);
+            return redirect($validTypes[$type].$user->contact_whatsapp);
         }
         else {
             return redirect()->route('listing.show', [$user])

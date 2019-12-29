@@ -66,9 +66,9 @@
 
                                 @if(request()->filled('category_id'))
                                     <div class="btn-group mt-3">
-                                        <a class="btn btn-outline-primary" href="{{ route('listing.contact.wa', [$user, request()->input('category_id') ]) }}" target="_blank">Whatsapp</a>
+                                        <a class="btn btn-outline-primary" href="{{ route('listing.contact', [$user, 'type' => 'wa', request()->input('category_id') ]) }}" target="_blank">Whatsapp</a>
                                         @if($user->contact_telegram)
-                                            <a class="btn btn-outline-primary" href="{{ route('listing.contact.tg', [$user, request()->input('category_id') ]) }}" target="_blank">Telegram</a>
+                                            <a class="btn btn-outline-primary" href="{{ route('listing.contact', [$user, 'type' => 'tg', request()->input('category_id') ]) }}" target="_blank">Telegram</a>
                                         @endif
                                     </div>
                                 @endif
