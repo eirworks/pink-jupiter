@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Province;
 use App\User;
+use App\UserTransaction;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -66,6 +67,7 @@ class ListingController extends Controller
         if ($user->balance >= $fee)
         {
             $user->balance = $user->balance - $fee;
+            UserTransaction::executeTransaction($user->id, $fee * -1, "Pembayaran", UserTransaction::TYPE_FEE);
             return redirect($validTypes[$type].$user->contact_whatsapp);
         }
         else {
