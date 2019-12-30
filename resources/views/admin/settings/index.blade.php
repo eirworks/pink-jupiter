@@ -37,6 +37,14 @@
                                         </div>
                                     @elseif($setting['type'] == 'text')
                                         <textarea name="settings[{{ $setting['key'] }}]" id="settings-{{ $setting['key'] }}" cols="30" rows="10" class="form-control">{{ $setting['value'] }}</textarea>
+                                    @elseif($setting['type'] == 'options')
+                                        <select name="settings[{{ $setting['key'] }}]" class="form-control">
+                                            @isset($setting['options'])
+                                                @foreach($setting['options'] as $optionKey => $optionValue)
+                                                    <option value="{{ $optionKey }}" {{ $optionKey == $setting['value'] ? 'selected' : '' }}>{{ $optionValue }}</option>
+                                                @endforeach
+                                            @endisset
+                                        </select>
                                     @else
                                         <input type="text" class="form-control" name="settings[{{ $setting['key'] }}]" value="{{ $setting['value'] }}">
                                     @endif

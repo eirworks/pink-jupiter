@@ -64,6 +64,7 @@ class SettingsController extends Controller
                 'key' => $defaultSetting['key'],
                 'type' => $defaultSetting['type'],
                 'value' => setting($defaultSetting['key'], $defaultSetting['default']),
+                'options' => isset($defaultSetting['options']) ? $defaultSetting['options'] : [],
             ];
         }
 
@@ -150,6 +151,16 @@ class SettingsController extends Controller
                         'key' => 'homepage_subtitle',
                         'type' => 'string',
                         'default' => "",
+                    ],
+                    [
+                        'name' => 'Tampilan Default Listing',
+                        'key' => 'default_listing_ui',
+                        'type' => 'options',
+                        'options' => [
+                            'grid' => 'Kolom/Grid',
+                            'row' => 'Mendatar/Baris',
+                        ],
+                        'default' => 'row',
                     ],
                 ],
             ],
