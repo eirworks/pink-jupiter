@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
         \Illuminate\Support\Facades\DB::table('category_user')->truncate();
 
         $cats = factory(\App\Category::class, 10)->create()->each(function($cat) {
-            factory(\App\Category::class, 15)->create([
+            factory(\App\Category::class, 60)->create([
                 'parent_id' => $cat->id,
             ]);
         });
@@ -25,19 +25,19 @@ class CategorySeeder extends Seeder
         {
             $users->each(function($user) use($cats) {
                 $user->categories()->sync([
-                    1 => [
+                    11 => [
                         'price' => 50000,
                         'description' => "My Service 1",
                     ],
-                    2 => [
+                    12 => [
                         'price' => 10000,
                         'description' => "My Service 2",
                     ],
-                    3 => [
+                    13 => [
                         'price' => 10000,
                         'description' => "My Service 3",
                     ],
-                    4 => [
+                    14 => [
                         'price' => 10000,
                         'description' => "My Service 4",
                     ],

@@ -14,12 +14,16 @@ $factory->define(Category::class, function (Faker $faker) {
         'LCD', 'Buku', "Perangko", "Koleksi", "Majalah", "Matahari", "Kartu Kredit", "Kereta Api",
         "Pesawat Terbang", 'Jembatan', 'Jalan Raya', 'Rel',
     ];
+
+    $ordering = $faker->randomNumber(2);
+
     return [
-        'name' => $faker->randomElement($serviceNames)." ".$faker->randomElement($serviceObjects),
+        'name' => $faker->randomElement($serviceNames)." ".$faker->randomElement($serviceObjects)." ".$faker->randomNumber(4).' ('.$ordering.')',
         'slug' => \Illuminate\Support\Str::slug(implode(" ",$faker->words)),
         'image' => '',
         'parent_id' => 0,
         'description' => $faker->paragraph,
         'price' => 1000,
+        'ordering' => $ordering,
     ];
 });
