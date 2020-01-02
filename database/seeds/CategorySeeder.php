@@ -14,8 +14,8 @@ class CategorySeeder extends Seeder
         \App\Category::truncate();
         \Illuminate\Support\Facades\DB::table('category_user')->truncate();
 
-        $cats = factory(\App\Category::class, 3)->create()->each(function($cat) {
-            factory(\App\Category::class, 2)->create([
+        $cats = factory(\App\Category::class, 10)->create()->each(function($cat) {
+            factory(\App\Category::class, 15)->create([
                 'parent_id' => $cat->id,
             ]);
         });

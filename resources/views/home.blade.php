@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('homepage.search')
+    <search-form url="{{ route('listing.index') }}"></search-form>
 
     <div class="container">
         @if($users->count())

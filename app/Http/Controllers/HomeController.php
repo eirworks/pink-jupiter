@@ -40,6 +40,13 @@ class HomeController extends Controller
 
         $categories = Category::where('parent_id', 0)->with(['children'])->get();
 
+        $subCategories = Category::where('parent_id', '>', 0)->get()->map(function($subCat) {
+            return [
+                'name' => $subCat->name,
+                'url' => route('listing.index', ['category_id' => $subCat->id]),
+            ];
+        });
+
         $users = User::orderBy('id', 'desc')
             ->where('type', User::TYPE_PARTNER)
             ->where('activated', true)
@@ -47,11 +54,20 @@ class HomeController extends Controller
             ->where('balance', '>', 0)
             ->paginate();
 
+        $cities = City::get();
+
         return view('home', [
             'provinces' => $provinces,
             'cities' => $cities,
             'categories' => $categories,
+            'subCategoriesJson' => json_encode($subCategories),
             'users' => $users,
+            'citiesJson' => json_encode($cities->map(function($city) {
+                return [
+                    'id' => $city->id,
+                    'name' => $city->name,
+                ];
+            }))
         ]);
     }
 }

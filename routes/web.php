@@ -46,6 +46,15 @@ Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function() {
 
 Route::get('/transactions', "BalanceController@index")->name('transactions.index');
 
+Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api.'], function() {
+
+    Route::get('cities', 'CityController@cities')->name('cities');
+    Route::get('provinces', 'CityController@provinces')->name('provinces');
+
+    Route::get('categories', 'CategoryController@index')->name('categories');
+    Route::get('subcategories', 'CategoryController@subcategories')->name('subcategories');
+});
+
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 

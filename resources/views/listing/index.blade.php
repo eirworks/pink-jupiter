@@ -5,41 +5,8 @@
 @endsection
 
 @section('content')
+    <search-form url="{{ route('listing.index') }}" :cityid="{{ request()->input('city_id') }}" :catid="{{ request()->input('category_id') }}"></search-form>
     <div class="container">
-
-        <div class="card mb-5">
-            <div class="card-body">
-                <form action="{{ route('listing.index') }}">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <select name="category_id" id="category_id" class="form-control">
-                                @foreach($categories as $category)
-                                    <optgroup label="{{ $category->name }}">
-                                        @foreach($category->children as $subCategory)
-                                            <option value="{{ $subCategory->id }}" {{ $subCategory->id == request()->input('category_id') ? 'selected' : '' }}>{{ $subCategory->name }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-5">
-                            <select name="city_id" id="" class="form-control">
-                                @foreach($provinces as $province)
-                                    <optgroup label="{{ $province->name }}">
-                                        @foreach($province->cities as $city)
-                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary btn-block">Filter</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
 
         @if($users->count())
             @foreach($users as $user)

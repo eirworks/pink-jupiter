@@ -19,3 +19,8 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 @stack('headers')
+
+<meta name="api_cities" content="{{ route('api.cities') }}">
+<meta name="api_provinces" content="{{ route('api.provinces') }}">
+<meta name="api_categories" content="{{ route('api.categories') }}">
+<meta name="api_subcategories" content="{{ route('api.subcategories') }}">
