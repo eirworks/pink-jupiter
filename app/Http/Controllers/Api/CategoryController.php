@@ -12,9 +12,12 @@ class CategoryController extends Controller
     {
         $categories = Category::select('id', 'name')
             ->where('parent_id', 0)
-            ->orderBy('ordering', 'asc')
             ->orderBy('name', 'asc')
-            ->with(['children:id,name,parent_id'])
+            ->with(['children' => function($query) {
+                $query->select('id','name','parent_id','ordering','group_order')
+                    ->orderBy('group_order', 'asc')
+                    ->orderBy('ordering', 'asc');
+            }])
             ->get();
 
         return response()->json($categories);

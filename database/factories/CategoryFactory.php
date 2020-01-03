@@ -25,5 +25,6 @@ $factory->define(Category::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'price' => 1000,
         'ordering' => $ordering,
+        'group_order' => $faker->numberBetween(1, 9),
     ];
 });
