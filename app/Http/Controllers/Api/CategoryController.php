@@ -12,6 +12,8 @@ class CategoryController extends Controller
     {
         $categories = Category::select('id', 'name')
             ->where('parent_id', 0)
+            ->orderBy('ordering', 'asc')
+            ->orderBy('name', 'asc')
             ->with(['children:id,name,parent_id'])
             ->get();
 
