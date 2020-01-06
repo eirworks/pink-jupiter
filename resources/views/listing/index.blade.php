@@ -27,8 +27,7 @@
                                     {{ $user->city->name }}, {{ $user->city->province->name }}
                                 </div>
                                 <div>
-{{--                                    {{ strlen($user->description) > 140 ? substr($user->description, 0, 140)."..." : $user->description }}--}}
-                                    {{ $user->description }}
+                                    @include('includes.short_user_description')
                                 </div>
 
                                 @if(request()->filled('category_id'))

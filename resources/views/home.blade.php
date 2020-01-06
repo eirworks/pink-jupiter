@@ -31,7 +31,7 @@
                                         @endif
                                     </div>
                                     <div class="my-2">
-                                        {{ $user->description }}
+                                        @include('includes.short_user_description')
                                     </div>
                                     <div class="mt-2">
 
