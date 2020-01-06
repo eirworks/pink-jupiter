@@ -23,12 +23,6 @@
                                     </div>
                                     <div class="text-muted my-2">
                                         {{ $user->city->name }}, {{ $user->city->province->name }}
-                                        &nbsp;
-                                        @if($user->categories->count() > 0)
-                                            @foreach($user->categories as $category)
-                                                <span class="badge badge-primary">{{ $category->name }}</span>
-                                            @endforeach
-                                        @endif
                                     </div>
                                     <div class="my-2">
                                         @include('includes.short_user_description')

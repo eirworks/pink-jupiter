@@ -160,7 +160,7 @@ class SettingsController extends Controller
                             'grid' => 'Kolom/Grid',
                             'row' => 'Mendatar/Baris',
                         ],
-                        'default' => 'row',
+                        'default' => 'grid',
                     ],
                 ],
             ],
