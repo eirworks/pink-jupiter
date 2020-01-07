@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <search-form url="{{ route('listing.index') }}"></search-form>
+    <search-form url="{{ route('home') }}" :catid="{{ request()->input('category_id', 0) }}" :cityid="{{ request()->input('city_id',0) }}"></search-form>
 
     <div class="container">
         @if($users->count())

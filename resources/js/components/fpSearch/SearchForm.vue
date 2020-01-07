@@ -6,7 +6,7 @@
                 <form :action="url" method="get">
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <input type="search" class="form-control" v-model="form.locationQuery" placeholder="Pilih lokasi" :class="{'active-search': form.city_id > 0}" @focus="onLocationFocus">
                             <input type="hidden" class="form-control" v-model="form.city_id" name="city_id">
                         </div>
@@ -14,11 +14,7 @@
                             <input type="search" class="form-control" v-model="form.categoryQuery" placeholder="Pilih Layanan" :class="{'active-search': form.category_id > 0}" @focus="onCategoryFocus">
                             <input type="hidden" class="form-control" v-model="form.category_id" name="category_id">
                         </div>
-                        <div class="col-md-1">
-                            <button class="btn btn-block btn-primary">Cari</button>
-                        </div>
                     </div>
-
                 </form>
 
 
@@ -26,13 +22,13 @@
                 <template v-if="showLocationLists">
 
                     <div class="my-2 results" v-show="!form.locationQuery.length">
-                        <div v-for="province in provinces" class="mb-2">
+                        <div v-for="province in computedProvinces" class="mb-2">
                             <div>
                                 <strong>{{ province.name }}</strong>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 my-1" v-for="city in province.cities">
-                                    <a href="javascript:" @click="selectLocation(city)">{{ city.name }}</a>
+                                    <a :href="city.url">{{ city.name }}</a>
                                 </div>
                             </div>
                         </div>
@@ -40,8 +36,8 @@
 
                     <div class="my-2 results">
                         <div class="row">
-                            <div class="col-md-3 my-1" v-for="item in results.cities">
-                                <a href="javascript:" @click="selectLocation(item)">{{ item.name }}</a>
+                            <div class="col-md-3 my-1" v-for="city in results.cities">
+                                <a :href="city.url">{{ city.name }}</a>
                             </div>
                         </div>
                     </div>
@@ -49,13 +45,13 @@
 
                 <template v-if="showCategoryLists">
                     <div class="my-2 results" v-show="!form.categoryQuery.length">
-                        <div v-for="category in categories" class="mb-2">
+                        <div v-for="category in computedCategories" class="mb-2">
                             <div>
                                 <strong>{{ category.name }}</strong>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 my-1" v-for="subcategory in category.children">
-                                    <a href="javascript:" @click="selectCategory(subcategory)">{{ subcategory.name }}</a>
+                                    <a :href="category.url">{{ subcategory.name }}</a>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +60,7 @@
                     <div class="my-2 results">
                         <div class="row">
                             <div class="col-md-3 my-1" v-for="item in results.categories">
-                                <a href="javascript:" @click="selectCategory(item)">{{ item.name }}</a>
+                                <a :href="item.url">{{ item.name }}</a>
                             </div>
                         </div>
                     </div>
@@ -122,6 +118,29 @@
                 showLocationLists: false,
                 showCategoryLists: false,
             }
+        },
+        computed: {
+            computedProvinces() {
+                this.provinces.forEach((province) => {
+                    province.cities.forEach((city) => {
+                        let searchParams = new URLSearchParams(window.location.search);
+                        searchParams.set("city_id", city.id);
+                        city.url = window.location.origin + window.location.pathname + "?" + searchParams.toString();
+                    })
+                });
+
+                return this.provinces;
+            },
+
+            computedCategories() {
+                this.categories.forEach((category) => {
+                    let searchParams = new URLSearchParams(window.location.search);
+                    searchParams.set("category_id", category.id);
+                    category.url = window.location.origin + window.location.pathname + "?" + searchParams.toString();
+                });
+
+                return this.categories;
+            },
         },
 
         mounted() {
@@ -232,14 +251,29 @@
 
         watch: {
             'form.locationQuery': function() {
-                this.results.cities = this.cities.filter((city) => {
-                    return city.name.toLowerCase().includes(this.form.locationQuery.toLowerCase());
+                this.results.cities = this.cities
+                    .filter((city) => {
+                        return city.name.toLowerCase().includes(this.form.locationQuery.toLowerCase());
+                    });
+
+                this.results.cities.forEach((city) => {
+                    let searchParams = new URLSearchParams(window.location.search);
+                    searchParams.set("city_id", city.id);
+                    city.url = window.location.origin + window.location.pathname + "?" + searchParams.toString();
                 })
+
+
             },
 
             'form.categoryQuery': function() {
                 this.results.categories = this.subcategories.filter((subcategory) => {
                     return subcategory.name.toLowerCase().includes(this.form.categoryQuery.toLowerCase());
+                });
+
+                this.results.categories.forEach((category) => {
+                    let searchParams = new URLSearchParams(window.location.search);
+                    searchParams.set("category_id", category.id);
+                    category.url = window.location.origin + window.location.pathname + "?" + searchParams.toString();
                 })
             },
         }
