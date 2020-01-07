@@ -13,8 +13,6 @@ class ListingController extends Controller
 {
     public function index(Request $request)
     {
-        $fee = setting('contact_fee', 0);
-
         $users = User::where('city_id', $request->input('city_id'))
             ->where('type', User::TYPE_PARTNER)
             ->whereHas('categories', function($query) use($request) {

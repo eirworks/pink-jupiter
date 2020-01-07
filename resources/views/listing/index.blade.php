@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <search-form url="{{ route('listing.index') }}" :cityid="{{ request()->input('city_id') }}" :catid="{{ request()->input('category_id') }}"></search-form>
-    <div class="container">
+    <search-form url="{{ route('listing.index') }}" :cityid="{{ request()->input('city_id', 0) }}" :catid="{{ request()->input('category_id', 0) }}"></search-form>
 
+    <div class="container">
         @if($users->count())
             @foreach($users as $user)
                 <div class="card my-3">

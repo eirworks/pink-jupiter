@@ -39,6 +39,9 @@ Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
     Route::get('/{user}/{type}/{category?}', "ListingController@contact")->name('contact');
 });
 
+Route::get('categories', "CategoryListingController@index")->name('listing.categories.index');
+Route::get('category/{category}/{slug}', "CategoryListingController@show")->name('listing.categories.show');
+
 Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function() {
     Route::get('/', "DepositController@create")->name('create');
     Route::post('/', "DepositController@store")->name('store');

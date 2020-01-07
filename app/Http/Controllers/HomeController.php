@@ -48,9 +48,13 @@ class HomeController extends Controller
         });
 
         $users = User::orderBy('id', 'desc')
-            ->where('city_id', $request->input('city_id'))
-            ->whereHas('categories', function($query) use($request) {
-                $query->where('category_id', $request->input('category_id'));
+            ->when($request->filled('city_id'), function ($query) {
+                $query->where('city_id', $request->input('city_id'));
+            })
+            ->when($request->filled('city_id'), function ($query) {
+                $query->whereHas('categories', function($query) use($request) {
+                    $query->where('category_id', $request->input('category_id'));
+                });
             })
             ->where('type', User::TYPE_PARTNER)
             ->where('activated', true)
