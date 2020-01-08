@@ -1,0 +1,10 @@
+main.site-main {
+    margin-top: 4.5rem;
+    min-height: 1000px;
+    & {
+        @include media-breakpoint-down(sm) {
+            min-height: 400px
+        }
+    }
+}
+
