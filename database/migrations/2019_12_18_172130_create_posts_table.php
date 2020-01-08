@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('content');
+            $table->json('data');
             $table->dateTimeTz('published_at')->nullable()->default(null)->index();
             $table->timestamps();
             $table->boolean('page')->default(false)->index();

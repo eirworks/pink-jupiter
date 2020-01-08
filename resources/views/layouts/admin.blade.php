@@ -7,7 +7,7 @@
 <div id="app">
     @include('layouts.partials.admin_navbar')
 
-    <main style="margin-top: 4.5rem">
+    <main style="margin: 4.5rem 0">
         @include('includes.error_message')
         @yield('content')
     </main>

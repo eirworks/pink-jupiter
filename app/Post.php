@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
 
+    protected $casts = [
+        'data' => 'array',
+    ];
+
     public static function specialPages()
     {
         return [

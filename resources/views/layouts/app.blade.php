@@ -2,6 +2,9 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('layouts.partials._head')
+    <meta name="description" content="@yield('seo_description', setting('seo_description', ''))">
+    <meta name="keywords" content="@yield('seo_keywords', setting('seo_keywords', ''))">
+    @stack('og')
 </head>
 <body>
     <div id="app">

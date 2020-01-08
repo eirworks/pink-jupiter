@@ -12,6 +12,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'slug' => \Illuminate\Support\Str::slug($faker->words(3, true)),
         'content' => $faker->realText(),
+        'data' => [],
         'published_at' => now()->subHour()->toDateTimeString(),
     ];
 });

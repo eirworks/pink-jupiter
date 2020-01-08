@@ -69,6 +69,7 @@ class PostController extends Controller
             $post->published_at = now()->toDateTimeString();
         }
 
+        $post->data = $request->input('data');
         $post->save();
 
         return redirect()->route('admin.posts.index')
@@ -105,6 +106,7 @@ class PostController extends Controller
             $post->published_at = now()->toDateTimeString();
         }
 
+        $post->data = $request->input('data');
         $post->save();
 
         return redirect()->route('admin.posts.index')

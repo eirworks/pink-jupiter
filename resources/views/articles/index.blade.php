@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('seo_description'){{ collect($post->data)->get('seo_description') }}@endsection
+@section('seo_keywords', collect($post->data)->get('seo_keywords'))
+
+@push('og')
+    <meta property="og:title" content="{{ collect($post->data)->get('seo_og:title', $post->title) }}">
+    <meta property="og:description" content="{{ collect($post->data)->get('seo_og:description', '') }}">
+@endpush
+
 @section('title')
     @isset($post)
         @if($post->page)

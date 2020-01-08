@@ -4,6 +4,15 @@
     {{ $post->id ? 'Edit '.$post->title : 'Tulis '.(request()->has('page') ? 'Halaman' : 'Posting') }}
 @endsection
 
+@php
+$seoItems = [
+    'seo_description' => 'Meta: Deskripsi',
+    'seo_keywords' => 'Meta: Kata kunci/keywords',
+    'seo_og:title' => 'Open Graph: Judul, biarkan kosong akan diisi oleh judul postingan/halaman',
+    'seo_og:description' => 'Open Graph: Deskripsi',
+];
+@endphp
+
 @section('content')
     <div class="container my-3">
         <ul class="breadcrumb">
@@ -33,6 +42,17 @@
                             <div class="form-group">
                                 <input type="text" value="{{ $post->slug }}" name="slug" class="form-control" placeholder="URL">
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-3">
+                        <div class="card-header">SEO</div>
+                        <div class="card-body">
+                            @foreach($seoItems as $seo => $seoInfo)
+                                <div class="form-group">
+                                    <input type="text" value="{{ collect($post->data)->get($seo) }}" name="data[{{ $seo }}]" class="form-control" placeholder="{{ $seoInfo }}">
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

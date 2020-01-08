@@ -7,4 +7,3 @@
 @section('content')
     .container
 @endsection
-

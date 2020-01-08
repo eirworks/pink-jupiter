@@ -165,6 +165,25 @@ class SettingsController extends Controller
                 ],
             ],
 
+            [
+                'name' => "SEO",
+                'id' => 'seo',
+                'settings' => [
+                    [
+                        'name' => 'Deskripsi Situs default',
+                        'key' => 'seo_description',
+                        'type' => 'text',
+                        'default' => "",
+                    ],
+                    [
+                        'name' => 'Keyword Situs default',
+                        'key' => 'seo_keywords',
+                        'type' => 'text',
+                        'default' => "",
+                    ],
+                ],
+            ],
+
 //            [
 //                'name' => "Halaman Depan",
 //                'id' => 'frontend',
