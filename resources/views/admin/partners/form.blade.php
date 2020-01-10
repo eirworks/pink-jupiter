@@ -22,6 +22,7 @@
                     @csrf
 
                     <div class="form-group">
+                        <label>Nama Lengkap</label>
                         <input type="text" class="form-control" name="name" value="{{ $user->name }}" placeholder="Nama Mitra">
                     </div>
 
@@ -30,6 +31,7 @@
                     @enderror
 
                     <div class="form-group">
+                        <label>Email</label>
                         <input type="email" class="form-control" name="email" value="{{ $user->email }}" placeholder="Email Mitra">
                     </div>
 
@@ -38,6 +40,7 @@
                     @enderror
 
                     <div class="form-group">
+                        <label>Kontak utama</label>
                         <input type="tel" class="form-control" name="contact" value="{{ $user->contact }}" placeholder="Kontak utama">
                     </div>
 
@@ -46,22 +49,25 @@
                     @enderror
 
                     <div class="form-group">
+                        <label>Whatsapp</label>
                         <input type="tel" class="form-control" name="contact_whatsapp" value="{{ $user->contact_whatsapp }}" placeholder="Whatsapp">
                     </div>
 
                     @error('contact_whatsapp')
-                    <div class="text-danger my-2">Kontak harus diisi!</div>
+                    <div class="text-danger my-2">Kontak Whatsapp harus diisi!</div>
                     @enderror
 
                     <div class="form-group">
+                        <label>Telegram</label>
                         <input type="tel" class="form-control" name="contact_telegram" value="{{ $user->contact_telegram }}" placeholder="Telegram">
                     </div>
 
                     @error('contact_telegram')
-                    <div class="text-danger my-2">Kontak harus diisi!</div>
+                    <div class="text-danger my-2">Kontak Telegram harus diisi!</div>
                     @enderror
 
                     <div class="form-group">
+                        <label>Kata Sandi</label>
                         <input type="password" class="form-control" name="password" value="" placeholder="Kata Sandi">
                     </div>
 
@@ -87,28 +93,34 @@
                     @enderror
 
                     <div class="form-group">
+                        <label>Biodata/Keterangan</label>
                         <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Bio, Keterangan, atau deskripsi layanan">{{ $user->description }}</textarea>
                     </div>
 
                     <div class="form-group">
+                        <label>Alamat Lengkap</label>
                         <textarea name="address" id="address" cols="30" rows="10" class="form-control" placeholder="Alamat">{{ $user->address }}</textarea>
                     </div>
 
                     <div class="form-group">
                         @if($user->image)
-                            <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->image) }}" alt="Logo/Foto {{ $user->name }}"></div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->image) }}" alt="Logo/Foto {{ $user->name }}"></div>
+                                </div>
+                            </div>
                         @endif
                         <label>Logo/Foto Diri</label>
                         <input type="file" name="image" class="form-control-file">
                     </div>
 
-                    <div class="form-group">
-                        @if($user->id_card_image)
-                            <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->id_card_image) }}" alt="Foto KTP {{ $user->name }}"></div>
-                        @endif
-                        <label for="id_card_image">Foto KTP</label>
-                        <input id="id_card_image" type="file" name="id_card_image" class="form-control-file">
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        @if($user->id_card_image)--}}
+{{--                            <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->id_card_image) }}" alt="Foto KTP {{ $user->name }}"></div>--}}
+{{--                        @endif--}}
+{{--                        <label for="id_card_image">Foto KTP</label>--}}
+{{--                        <input id="id_card_image" type="file" name="id_card_image" class="form-control-file">--}}
+{{--                    </div>--}}
 
                     <p>
                         Pilih layanan yang anda sediakan:
@@ -139,7 +151,7 @@
 
                     @endforeach
 
-                    <div class=" text-center">
+                    <div class=" text-center my-3">
                         <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
                     </div>
                 </form>
