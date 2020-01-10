@@ -23,7 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => \Illuminate\Support\Facades\Hash::make("123456"),
         'remember_token' => Str::random(10),
-        'city_id' => $faker->numberBetween(1, 40),
+        'city_id' => 1100 + $faker->numberBetween(1, 9),
         'balance' => 0,
         'contact' => $faker->e164PhoneNumber,
         'contact_telegram' => $faker->userName,
