@@ -8,8 +8,8 @@ return [
     'password_help' => "Biarkan kosong jika tidak ingin mengganti kata sandi.",
     'contact' => "No HP",
     'pick_city' => "Pilih kota",
-    'contact_whatsapp' => "No. HP Whatsapp",
-    'contact_telegram' => "Nama Pengguna Telegram",
+    'contact_whatsapp' => "No. Whatsapp",
+    'contact_telegram' => "Username Telegram",
 
     'validation_fail' => ":key harus diisi!",
     'email_validation_fail' => "Email harus diisi dan alamat email harus benar!",

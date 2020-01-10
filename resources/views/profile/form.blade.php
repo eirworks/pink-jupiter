@@ -77,112 +77,141 @@
                     </div>
 
                     @if($user->type == \App\User::TYPE_PARTNER)
-                        <div class="form-group">
-                            <label>{{ __('profile.pick_city') }}</label>
-                            <select name="city_id" id="city_id" class="form-control">
-                                <option value="">Pilih Kota</option>
-                                @foreach($cities as $city)
-                                    <optgroup label="{{ $city->name }}">
-                                        @foreach($city->cities as $c)
-                                            <option value="{{ $c->id }}" {{ $c->id == $user->city_id ? 'selected' : '' }}>{{ $c->name }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        @error('city_id')
-                        <div class="text-danger my-2">Kota harus dipilih!</div>
-                        @enderror
 
                         <div class="form-group">
-                            <label>{{ __('profile.contact') }}</label>
-                            <input type="tel" class="form-control" name="contact" value="{{ $user->contact }}" placeholder="No HP/Whatsapp">
-                        </div>
-
-                        @error('contact')
-                        <div class="text-danger my-2">Kontak harus diisi!</div>
-                        @enderror
-
-                        <div class="form-group">
-                            <label for="">{{ __('profile.contact_whatsapp') }}</label>
-                            <input type="tel" class="form-control" name="contact_whatsapp" value="{{ $user->contact_whatsapp }}" placeholder="Whatsapp">
-                        </div>
-
-                        @error('contact_whatsapp')
-                        <div class="text-danger my-2">Nomor telepon Whatsapp harus diisi!</div>
-                        @enderror
-
-                        <div class="form-group">
-                            <label for="">{{ __('profile.contact_telegram') }} (Opsional)</label>
-                            <input type="text" class="form-control" name="contact_telegram" value="{{ $user->contact_telegram }}" placeholder="Telegram">
-                        </div>
-
-                        <div class="form-group">
-                            <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Bio, Keterangan, atau deskripsi layanan">{{ $user->description }}</textarea>
-                        </div>
-
-                        <div class="form-group">
+                            <label>Alamat Lengkap</label>
                             <textarea name="address" id="address" cols="30" rows="10" class="form-control" placeholder="Alamat">{{ $user->address }}</textarea>
                         </div>
 
+{{--                        <div class="form-group">--}}
+{{--                            <label>{{ __('profile.pick_city') }}</label>--}}
+{{--                            <select name="city_id" id="city_id" class="form-control">--}}
+{{--                                <option value="">Pilih Kota</option>--}}
+{{--                                @foreach($cities as $city)--}}
+{{--                                    <optgroup label="{{ $city->name }}">--}}
+{{--                                        @foreach($city->cities as $c)--}}
+{{--                                            <option value="{{ $c->id }}" {{ $c->id == $user->city_id ? 'selected' : '' }}>{{ $c->name }}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </optgroup>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+
+{{--                        @error('city_id')--}}
+{{--                        <div class="text-danger my-2">Kota harus dipilih!</div>--}}
+{{--                        @enderror--}}
+
+                        <hr>
+                        <h3>Informasi Bisnis</h3>
+
                         <div class="form-group">
-                            <label>Kecamatan</label>
-                            <input type="text" class="form-control" name="district" value="{{ $user->district }}">
+                            <label for="">Nama Bisnis (Opsional)</label>
+                            <input type="text" class="form-control" name="business_name" value="{{ $user->business_name }}" placeholder="Nama bisnis anda atau nama anda">
                         </div>
 
                         <div class="form-group">
-                            <label>Kelurahan</label>
-                            <input type="text" class="form-control" name="village" value="{{ $user->village }}">
+                            <label>Deskripsikan Bisnis Anda</label>
+                            <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Bio, Keterangan, atau deskripsi layanan">{{ $user->description }}</textarea>
                         </div>
 
-                        <div class="form-group">
-                            @if($user->image)
-                                <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->image) }}" alt="Logo/Foto {{ $user->name }}"></div>
-                            @endif
-                            <label>Logo/Foto Diri</label>
-                            <input type="file" name="image" class="form-control-file">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{ __('profile.contact') }}</label>
+                                    <input type="tel" class="form-control" name="contact" value="{{ $user->contact }}" placeholder="No HP/Whatsapp">
+                                </div>
+
+                                @error('contact')
+                                <div class="text-danger my-2">Kontak harus diisi!</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">{{ __('profile.contact_whatsapp') }}</label>
+                                    <input type="tel" class="form-control" name="contact_whatsapp" value="{{ $user->contact_whatsapp }}" placeholder="Whatsapp">
+                                </div>
+
+                                @error('contact_whatsapp')
+                                <div class="text-danger my-2">Nomor telepon Whatsapp harus diisi!</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">{{ __('profile.contact_telegram') }} (Opsional)</label>
+                                    <input type="text" class="form-control" name="contact_telegram" value="{{ $user->contact_telegram }}" placeholder="Telegram">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            @if($user->id_card_image)
-                                <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->id_card_image) }}" alt="Foto KTP {{ $user->name }}"></div>
-                            @endif
-                            <label for="id_card_image">Foto KTP</label>
-                            <input id="id_card_image" type="file" name="id_card_image" class="form-control-file">
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label>Kecamatan</label>--}}
+{{--                            <input type="text" class="form-control" name="district" value="{{ $user->district }}">--}}
+{{--                        </div>--}}
 
-                        <p>
-                            Pilih layanan yang anda sediakan:
-                        </p>
+{{--                        <div class="form-group">--}}
+{{--                            <label>Kelurahan</label>--}}
+{{--                            <input type="text" class="form-control" name="village" value="{{ $user->village }}">--}}
+{{--                        </div>--}}
 
-                        @error('categories')
-                        <div class="alert alert-danger">Mohon pilih paling tidak satu layanan</div>
-                        @enderror
-
-                        @foreach($categories as $category)
-                            <div class="mb-2 mt-3"><strong>{{ $category->name }}</strong></div>
-
-                            @if($category->children->count() > 0)
-                                @foreach($category->children->chunk(3) as $childChunk)
-                                    <div class="row">
-                                        @foreach($childChunk as $child)
-                                            <div class="col-md-4">
-                                                <div class="form-check">
-                                                    <input id="category-{{ $child->id }}" type="checkbox" class="form-check-input" name="categories[]" {{ in_array($child->id, $user->category_ids) ? 'checked' : '' }} value="{{ $child->id }}">
-                                                    <label for="category-{{ $child->id }}" class="form-check-label">{{ $child->name }}</label>
-                                                </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Logo/Foto</label>
+                                    @if($user->image)
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->image) }}" alt="Logo/Foto {{ $user->name }}"></div>
                                             </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            @endif
+                                        </div>
+                                    @endif
+                                    <input type="file" name="image" class="form-control-file">
+                                </div>
+                            </div>
 
-                        @endforeach
+{{--                            <div class="col-md-6">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    @if($user->id_card_image)--}}
+{{--                                        <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->id_card_image) }}" alt="Foto KTP {{ $user->name }}"></div>--}}
+{{--                                    @endif--}}
+{{--                                    <label for="id_card_image">Foto KTP</label>--}}
+{{--                                    <input id="id_card_image" type="file" name="id_card_image" class="form-control-file">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+                        </div>
+
+{{--                        <p>--}}
+{{--                            Pilih layanan yang anda sediakan:--}}
+{{--                        </p>--}}
+
+{{--                        @error('categories')--}}
+{{--                        <div class="alert alert-danger">Mohon pilih paling tidak satu layanan</div>--}}
+{{--                        @enderror--}}
+
+{{--                        @foreach($categories as $category)--}}
+{{--                            <div class="mb-2 mt-3"><strong>{{ $category->name }}</strong></div>--}}
+
+{{--                            @if($category->children->count() > 0)--}}
+{{--                                @foreach($category->children->chunk(3) as $childChunk)--}}
+{{--                                    <div class="row">--}}
+{{--                                        @foreach($childChunk as $child)--}}
+{{--                                            <div class="col-md-4">--}}
+{{--                                                <div class="form-check">--}}
+{{--                                                    <input id="category-{{ $child->id }}" type="checkbox" class="form-check-input" name="categories[]" {{ in_array($child->id, $user->category_ids) ? 'checked' : '' }} value="{{ $child->id }}">--}}
+{{--                                                    <label for="category-{{ $child->id }}" class="form-check-label">{{ $child->name }}</label>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        @endforeach--}}
+{{--                                    </div>--}}
+{{--                                @endforeach--}}
+{{--                            @endif--}}
+
+{{--                        @endforeach--}}
                     @endif
 
                     <div class=" text-center">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Simpan</button>
                     </div>
                 </form>
             </div>

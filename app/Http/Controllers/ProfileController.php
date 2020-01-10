@@ -44,15 +44,15 @@ class ProfileController extends Controller
             'contact' => 'required',
             'contact_whatsapp' => 'required',
             'city_id' => 'min:1',
-            'categories' => 'required',
+//            'categories' => 'required',
         ];
 
         if ($user->type == User::TYPE_PARTNER)
         {
             $partnerOnlyRules = [
                 'address' => 'required',
-                'district' => 'required',
-                'village' => 'required',
+//                'district' => 'required',
+//                'village' => 'required',
             ];
 
             $rules = array_merge($rules, $partnerOnlyRules);
@@ -96,7 +96,7 @@ class ProfileController extends Controller
         {
             $user->password = Hash::make($request->input('password'));
         }
-        $user->city_id = $request->input('city_id');
+//        $user->city_id = $request->input('city_id');
         if ($user->type == User::TYPE_PARTNER)
         {
 
@@ -105,8 +105,8 @@ class ProfileController extends Controller
             $user->contact_telegram = $request->input('contact_telegram');
             $user->description = $request->input('description');
             $user->address = $request->input('address');
-            $user->district = $request->input('district');
-            $user->village = $request->input('village');
+//            $user->district = $request->input('district');
+//            $user->village = $request->input('village');
 
         }
 
@@ -118,10 +118,10 @@ class ProfileController extends Controller
         }
 
         // sync categories
-        if ($user->type == User::TYPE_PARTNER)
-        {
-            $user->categories()->sync($this->syncData($request));
-        }
+//        if ($user->type == User::TYPE_PARTNER)
+//        {
+//            $user->categories()->sync($this->syncData($request));
+//        }
 
         return $user;
     }
@@ -129,7 +129,10 @@ class ProfileController extends Controller
     private function storeImage(User $user, Request $request)
     {
 
-        $imageKeys = ['image', 'id_card_image'];
+        $imageKeys = [
+            'image',
+//            'id_card_image'
+        ];
         \Log::debug('Image keys',['keys' => $imageKeys]);
         $addImage = false;
 

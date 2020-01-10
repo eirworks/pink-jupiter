@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'business_name' => $faker->company,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => \Illuminate\Support\Facades\Hash::make("123456"),
