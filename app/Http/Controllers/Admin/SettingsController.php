@@ -92,17 +92,17 @@ class SettingsController extends Controller
                 'name' => "Situs",
                 'id' => 'site',
                 'settings' => [
+//                    [
+//                        'name' => 'Fee per kontak',
+//                        'key' => self::SETTING_CONTACT_FEE,
+//                        'type' => 'number',
+//                        'default' => 0,
+//                    ],
                     [
-                        'name' => 'Fee per kontak',
-                        'key' => self::SETTING_CONTACT_FEE,
+                        'name' => 'Iklan Per Mitra',
+                        'key' => 'ads_per_user',
                         'type' => 'number',
-                        'default' => 0,
-                    ],
-                    [
-                        'name' => 'Minimum Top Up',
-                        'key' => self::SETTING_MIN_DEPOSIT,
-                        'type' => 'number',
-                        'default' => 0,
+                        'default' => 10,
                     ],
                     [
                         'name' => 'Tag SEO untuk halaman listing',
@@ -152,16 +152,16 @@ class SettingsController extends Controller
                         'type' => 'string',
                         'default' => "",
                     ],
-                    [
-                        'name' => 'Tampilan Default Listing',
-                        'key' => 'default_listing_ui',
-                        'type' => 'options',
-                        'options' => [
-                            'grid' => 'Kolom/Grid',
-                            'row' => 'Mendatar/Baris',
-                        ],
-                        'default' => 'grid',
-                    ],
+//                    [
+//                        'name' => 'Tampilan Default Listing',
+//                        'key' => 'default_listing_ui',
+//                        'type' => 'options',
+//                        'options' => [
+//                            'grid' => 'Kolom/Grid',
+//                            'row' => 'Mendatar/Baris',
+//                        ],
+//                        'default' => 'grid',
+//                    ],
                 ],
             ],
 
@@ -180,6 +180,18 @@ class SettingsController extends Controller
                         'key' => 'seo_keywords',
                         'type' => 'text',
                         'default' => "",
+                    ],
+                ],
+            ],
+            [
+                'name' => "Pembayaran",
+                'id' => 'billing',
+                'settings' => [
+                    [
+                        'name' => 'Minimum Top Up',
+                        'key' => self::SETTING_MIN_DEPOSIT,
+                        'type' => 'number',
+                        'default' => 0,
                     ],
                 ],
             ],
