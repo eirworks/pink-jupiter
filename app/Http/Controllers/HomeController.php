@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\City;
 use App\Province;
+use App\Service;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -29,15 +30,6 @@ class HomeController extends Controller
     {
         $provinces = Province::get();
 
-        if ($request->filled('province_id'))
-        {
-            $cities = City::where('province_id', $request->input('province_id'))
-                ->get();
-        }
-        else {
-            $cities = [];
-        }
-
         $categories = Category::where('parent_id', 0)->with(['children'])->get();
 
         $subCategories = Category::where('parent_id', '>', 0)->get()->map(function($subCat) {
@@ -47,19 +39,18 @@ class HomeController extends Controller
             ];
         });
 
-        $users = User::orderBy('id', 'desc')
-            ->when($request->filled('city_id'), function ($query) {
+        $ads = Service::orderBy('id', 'desc')
+            ->when($request->filled('city_id'), function ($query) use($request) {
                 $query->where('city_id', $request->input('city_id'));
             })
-            ->when($request->filled('city_id'), function ($query) {
-                $query->whereHas('categories', function($query) use($request) {
-                    $query->where('category_id', $request->input('category_id'));
-                });
+            ->when($request->filled('category_id'), function ($query) use($request) {
+                $query->where('category_id', $request->input('category_id'));
             })
-            ->where('type', User::TYPE_PARTNER)
+            ->whereHas('user', function($query) {
+                $query->where('balance', '>', 0);
+            })
             ->where('activated', true)
-            ->where('verified', true)
-            ->where('balance', '>', 0)
+            ->with(['user', 'city', 'city.province'])
             ->paginate();
 
         $cities = City::get();
@@ -69,7 +60,7 @@ class HomeController extends Controller
             'cities' => $cities,
             'categories' => $categories,
             'subCategoriesJson' => json_encode($subCategories),
-            'users' => $users,
+            'ads' => $ads,
             'citiesJson' => json_encode($cities->map(function($city) {
                 return [
                     'id' => $city->id,

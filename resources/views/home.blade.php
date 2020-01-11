@@ -14,70 +14,38 @@
             </div>
         @endisset
 
-        @if($users->count())
-            @if(setting('default_listing_ui', 'row') == 'row')
-                @foreach($users as $user)
+        @if($ads->count())
+            @foreach($ads as $ad)
+                <a href="{{ route('listing.show', [$ad->user_id, 'i' => $ad->id]) }}" class="d-block text-decoration-none">
                     <div class="card my-3">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-2 d-none d-md-block text-center">
-                                    @if($user->image)
-                                        <img src="{{ \Storage::disk('public')->url($user->image) }}" alt="{{ $user->name }}" class="img-thumbnail img-fluid profile-image">
+                                <div class="col-md-2 col-4 text-center">
+                                    @if($ad->image)
+                                        <img src="{{ \Storage::disk('public')->url($ad->image) }}" alt="{{ $ad->name }}" class="img-thumbnail img-fluid">
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <div class="mb-1">
-                                        <a href="{{ route('listing.show', [$user]) }}" class="btn btn-link mx-0 px-0">
-                                            <strong>{{ $user->name }}</strong>
-                                        </a>
+                                <div class="col-md-10 col-8">
+                                    <div>
+                                        #{{ $loop->index + 1 }}
+                                        <strong>{{ $ad->name }}</strong>
                                     </div>
-                                    <div class="text-muted my-2">
-                                        {{ $user->city->name }}, {{ $user->city->province->name }}
+                                    <div class="text-muted">
+                                        {{ $ad->city->name }}, {{ $ad->city->province->name }}
                                     </div>
-                                    <div class="my-2">
-                                        @include('includes.short_user_description')
-                                    </div>
-                                    <div class="mt-2">
 
+                                    <div>
+                                        @include('includes.price_format', ['number' => $ad->price])
                                     </div>
+
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                @endforeach
-            @else
-                @foreach($users->chunk(4) as $userChunk)
-                    <div class="row">
-                        @foreach($userChunk as $user)
-                            <div class="col-md-3 col-6 px-1 px-md-2">
-                                <div class="card my-3 p-2">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            @if($user->image)
-                                                <img src="{{ \Storage::disk('public')->url($user->image) }}" alt="{{ $user->name }}" class="img-thumbnail img-fluid">
-                                            @endif
-                                        </div>
-                                        <div class="d-block">
-                                            <div class="my-1 text-center">
-                                                <a href="{{ route('listing.show', [$user]) }}" class="btn btn-link mx-0 px-0">
-                                                    <strong>{{ $user->name }}</strong>
-                                                </a>
-                                            </div>
-                                            <div class="text-muted text-sm-center">
-                                                <small>
-                                                    {{ $user->city->name }}, {{ $user->city->province->name }}
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach
-            @endif
-            {!! $users->links() !!}
+                </a>
+            @endforeach
+            {!! $ads->links() !!}
         @else
             <div class="text-center text-muted">
                 Tidak dapat menemukan hasil apapun.

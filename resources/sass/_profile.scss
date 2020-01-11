@@ -2,7 +2,7 @@ $profile-image-size: 120px;
 img.profile-image {
     width: $profile-image-size;
     height: $profile-image-size;
-    border-radius: $profile-image-size/2;
+    //border-radius: $profile-image-size/2;
 
     &.profile-main-image {
         background-color: white;
