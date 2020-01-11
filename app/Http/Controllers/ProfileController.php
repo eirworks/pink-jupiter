@@ -40,7 +40,6 @@ class ProfileController extends Controller
 
         $rules = [
             'name' => 'required',
-            'email' => 'required|email',
             'contact' => 'required',
             'contact_whatsapp' => 'required',
             'city_id' => 'min:1',
@@ -91,7 +90,6 @@ class ProfileController extends Controller
     private function save(User $user, Request $request)
     {
         $user->name = $request->input('name');
-        $user->email = $request->input('email');
         if ($request->filled('password'))
         {
             $user->password = Hash::make($request->input('password'));

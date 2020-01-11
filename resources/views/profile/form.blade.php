@@ -61,12 +61,8 @@
 
                     <div class="form-group">
                         <label for="">{{ __('profile.email') }}</label>
-                        <input type="email" class="form-control" name="email" value="{{ $user->email }}" placeholder="Email Mitra">
+                        <input disabled type="email" class="form-control" name="email" value="{{ $user->email }}" placeholder="Email Mitra">
                     </div>
-
-                    @error('email')
-                    <div class="text-danger my-2">{{ __('profile.email_validation_fail') }}</div>
-                    @enderror
 
                     <div class="form-group">
                         <label for="">{{ __('profile.password') }}</label>
