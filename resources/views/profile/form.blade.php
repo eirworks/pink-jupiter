@@ -12,9 +12,12 @@
 
                 @if($user->image)
                     <div class="text-center">
-                        <img src="{{ asset('storage/'.$user->image) }}" alt="{{ $user->name }}" class="img-thumbnail">
+                        <img src="{{ asset('storage/'.$user->image) }}" alt="{{ $user->name }}" class="img-thumbnail" style="width: 200px; height: 200px;">
                     </div>
                 @endif
+                <p class="text-center">
+                    <a href="{{ route('listing.show', [$user]) }}">Lihat Profil</a>
+                </p>
 
                 <dl>
                     <dt>Tipe Akun</dt>
