@@ -57,7 +57,7 @@ class SetupCities extends Command
     {
         $this->setProvinces();
         $this->setRegencies();
-        $this->setDistricts();
+//        $this->setDistricts();
     }
 
     private function setProvinces()
@@ -72,7 +72,7 @@ class SetupCities extends Command
 
             $provinces[] = [
                 'id' => $line[0],
-                'name' => $line[1],
+                'name' => ucwords(strtolower($line[1])),
             ];
         }
 
@@ -101,10 +101,27 @@ class SetupCities extends Command
         {
             $line = fgetcsv($file);
 
+            $name = (strtolower($line[2]));
+            $regency = false;
+
+            if (str_contains(strtolower($name), 'kabupaten '))
+            {
+                $name = str_replace('kabupaten ', '', $name)." kab.";
+                $regency = true;
+            }
+
+            if (str_contains(strtolower($name), 'kota '))
+            {
+                $name = str_replace('kota ', '', $name)." kota";
+
+                $regency = false;
+            }
+
             $items[] = [
                 'id' => $line[0],
                 'province_id' => $line[1],
-                'name' => $line[2],
+                'name' => ucwords($name),
+                'regency' => $regency,
             ];
         }
 
@@ -137,7 +154,7 @@ class SetupCities extends Command
             $items[] = [
                 'id' => $line[0],
                 'city_id' => $line[1],
-                'name' => $line[2],
+                'name' => ucwords(strtolower($line[2])),
             ];
         }
 
