@@ -22,26 +22,12 @@
                     <b>Kecamatan</b>: {{ $user->district }}, <b>Kelurahan</b>: {{ $user->village }}
                 </div>
 
-                <div class="mb-3">Tentang Kami: {{ $user->description }}</div>
+                <div class="mb-3">{{ $user->description }}</div>
 
-{{--                <div class="mb-2">Views: {{ $user->visitors }}</div>--}}
-
-                <h4>
-                    Layanan
-                </h4>
-                <ul class="list-unstyled">
-                    @foreach($user->categories as $category)
-                        <li class="mb-2">
-                            <div><strong>{{ $category->name }}</strong></div>
-                            <div class="btn-group my-2">
-                                <a class="btn btn-outline-primary" href="{{ route('listing.contact', [$user, 'wa', $category->id]) }}" target="_blank">Whatsapp</a>
-                                @if($user->contact_telegram)
-                                    <a class="btn btn-outline-primary" href="{{ route('listing.contact', [$user, 'tg', $category->id]) }}" target="_blank">Telegram</a>
-                                @endif
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                <dl>
+                    <dt>Tanggal bergabung</dt>
+                    <dd>{{ \Carbon\Carbon::parse($user->created_at)->format("j M Y") }}</dd>
+                </dl>
             </div>
         </div>
     </div>
