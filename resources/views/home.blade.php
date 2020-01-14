@@ -24,14 +24,15 @@
                                     @if($ad->image)
                                         <img src="{{ \Storage::disk('public')->url($ad->image) }}" alt="{{ $ad->name }}" class="img-thumbnail img-fluid">
                                     @endif
+                                    <div style="font-size: 1.4rem">#{{ $loop->index + 1 }}</div>
                                 </div>
                                 <div class="col-md-10 col-8">
                                     <div>
-                                        #{{ $loop->index + 1 }}
                                         <strong>{{ $ad->name }}</strong>
                                     </div>
                                     <div class="text-muted">
-                                        {{ $ad->city->name }}, {{ $ad->city->province->name }}
+                                        {{ $ad->city->name }},
+                                        {{ $ad->city->province->name }}
                                     </div>
 
                                     <div>

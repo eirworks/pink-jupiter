@@ -6,6 +6,7 @@ use App\City;
 use App\District;
 use App\Province;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class SetupCities extends Command
 {
@@ -57,7 +58,7 @@ class SetupCities extends Command
     {
         $this->setProvinces();
         $this->setRegencies();
-//        $this->setDistricts();
+        $this->setDistricts();
     }
 
     private function setProvinces()
@@ -89,6 +90,8 @@ class SetupCities extends Command
                 'name' => $province['name'],
             ]);
         }
+
+        $this->info("Provinces added!");
     }
 
     private function setRegencies()
@@ -101,12 +104,17 @@ class SetupCities extends Command
         {
             $line = fgetcsv($file);
 
+            if (is_null($line[0]))
+            {
+                continue;
+            }
+
             $name = (strtolower($line[2]));
             $regency = false;
 
             if (str_contains(strtolower($name), 'kabupaten '))
             {
-                $name = str_replace('kabupaten ', '', $name)." kab.";
+                $name = str_replace('kabupaten ', '', $name);
                 $regency = true;
             }
 
@@ -121,24 +129,15 @@ class SetupCities extends Command
                 'id' => $line[0],
                 'province_id' => $line[1],
                 'name' => ucwords($name),
-                'regency' => $regency,
+//                'regency' => $regency,
             ];
         }
 
         fclose($file);
 
-        foreach($items as $item)
-        {
-            if (is_null($item['id']))
-            {
-                continue;
-            }
-            City::create([
-                'id' => $item['id'],
-                'name' => $item['name'],
-                'province_id' => $item['province_id'],
-            ]);
-        }
+        DB::table('cities')->insert($items);
+
+        $this->info("cities added!");
     }
 
     private function setDistricts()
@@ -151,6 +150,11 @@ class SetupCities extends Command
         {
             $line = fgetcsv($file);
 
+            if (is_null($line[0]))
+            {
+                continue;
+            }
+
             $items[] = [
                 'id' => $line[0],
                 'city_id' => $line[1],
@@ -160,18 +164,9 @@ class SetupCities extends Command
 
         fclose($file);
 
-        foreach($items as $item)
-        {
-            if (is_null($item['id']))
-            {
-                continue;
-            }
-            District::create([
-                'id' => $item['id'],
-                'name' => $item['name'],
-                'city_id' => $item['city_id'],
-            ]);
-        }
+        DB::table('districts')->insert($items);
+
+        $this->info("Districts added!");
     }
 
     private function legacy()

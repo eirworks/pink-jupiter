@@ -50,7 +50,7 @@ class HomeController extends Controller
                 $query->where('balance', '>', 0);
             })
             ->where('activated', true)
-            ->with(['user', 'city', 'city.province'])
+            ->with(['user', 'district', 'district.city', 'district.city.province'])
             ->paginate();
 
         $cities = City::get();

@@ -37,6 +37,12 @@ $(document).ready(() => {
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('search-form', require('./components/fpSearch/SearchForm.vue').default);
+Vue.component('select-category', require('./components/SelectCategory.vue').default);
+Vue.component('select-city', require('./components/SelectCity.vue').default);
+
+import vSelect from 'vue-select'
+Vue.component('v-select', vSelect);
+import 'vue-select/dist/vue-select.css';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

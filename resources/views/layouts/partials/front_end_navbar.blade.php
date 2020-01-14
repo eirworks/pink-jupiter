@@ -40,6 +40,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('auth.edit_profile') }}</a>
                                 @if(auth()->user()->type == \App\User::TYPE_PARTNER)
+                                    <a class="dropdown-item" href="{{ route('partner.services.index') }}">Kelola Iklan</a>
                                     <a class="dropdown-item" href="{{ route('transactions.index') }}">{{ __('profile.balance') }}</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"

@@ -17,6 +17,7 @@ class CreateServicesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->index();
             $table->bigInteger('city_id')->index();
+            $table->bigInteger('district_id')->index();
             $table->bigInteger('category_id')->index();
             $table->string('name');
             $table->string('image');

@@ -38,9 +38,16 @@ class HomeController extends Controller
         return [
             [
                 'name' => "Mitra",
-                'hint' => "Kelola Mitra termasuk Mitra yang masih pending",
+                'hint' => "Kelola Mitra",
                 'url' => route('admin.partners.index'),
                 'icon' => asset('images/icons/account-group.png'),
+                'auth' => true,
+            ],
+            [
+                'name' => "Iklan",
+                'hint' => "Kelola iklan mitra",
+                'url' => route('admin.services.index'),
+                'icon' => asset('images/icons/file-presentation-box.png'),
                 'auth' => true,
             ],
             [

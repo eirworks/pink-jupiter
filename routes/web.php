@@ -18,6 +18,19 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['namespace' => 'Partner', 'prefix' => 'partner', 'as' => 'partner.'], function() {
     Route::get('register', "RegisterController@register")->name('register');
     Route::post('register', "RegisterController@store")->name('register.submit');
+
+    Route::group(['middleware' => 'auth'], function() {
+
+        // Partner's Service CRUD
+        Route::group(['prefix' => 'services', 'as' => 'services.'], function() {
+            Route::get('/', 'ServiceController@index')->name('index');
+            Route::get('/new', 'ServiceController@create')->name('new');
+            Route::post('/new', 'ServiceController@store')->name('store');
+            Route::get('/edit/{service}', 'ServiceController@edit')->name('edit');
+            Route::post('/edit/{service}', 'ServiceController@update')->name('update');
+            Route::delete('/delete/{service}', 'ServiceController@destroy')->name('destroy');
+        });
+    });
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function() {
@@ -134,6 +147,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::put('/{post}', "PostController@update")->name('update');
         Route::put('/{post}/toggle-publish', "PostController@togglePublish")->name('publish');
         Route::delete('/{post}', "PostController@destroy")->name('delete');
+    });
+
+    Route::group(['prefix' => 'services', 'as' => 'services.'], function() {
+        Route::get('/', 'ServiceController@index')->name('index');
+        Route::get('/edit/{service}', 'ServiceController@edit')->name('edit');
+        Route::post('/edit/{service}', 'ServiceController@update')->name('update');
+        Route::delete('/delete/{service}', 'ServiceController@destroy')->name('destroy');
     });
 });
 
