@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Http\Controllers\Admin\SettingsController;
 use App\Province;
+use App\Service;
 use App\User;
 use App\UserTransaction;
 use Illuminate\Http\Request;
@@ -34,18 +34,32 @@ class ListingController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function show(Service $service)
     {
-        $user->load('city:id,name,province_id');
-        $user->load('city.province:id,name');
-        $user->load('categories');
+        $service->load([
+            'user',
+            'city:id,name,province_id',
+            'city.province:id,name',
+            'category',
+        ]);
 
-        $user->visitors = $user->visitors+1;
-        $user->save();
+        $seoKeywords = $this->keywordBuilder($service);
 
         return view('listing.show', [
-            'user' => $user,
+            'service' => $service,
+            'keywords' => $seoKeywords,
+            'description' => $service->description,
         ]);
+    }
+
+    private function keywordBuilder(Service $service)
+    {
+        $keywords = [];
+
+        $keywords[] = $service->category->name;
+        $keywords[] = $service->category->name." di ".$service->city->name;
+
+        return implode(', ', $keywords);
     }
 
     public function contact(User $user, $type, Category $category)

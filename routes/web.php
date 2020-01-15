@@ -48,7 +48,7 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.'], function() {
 
 Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
     Route::get('/', "ListingController@index")->name('index');
-    Route::get('/{user}', "ListingController@show")->name('show');
+    Route::get('/{service}', "ListingController@show")->name('show');
     Route::get('/{user}/{type}/{category?}', "ListingController@contact")->name('contact');
 });
 

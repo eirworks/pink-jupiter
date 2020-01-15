@@ -28,4 +28,9 @@ class Category extends Model
     {
         return $this->belongsToMany(User::class, 'category_user');
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 }

@@ -14,4 +14,9 @@ class City extends Model
     {
         return $this->belongsTo(Province::class);
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 }

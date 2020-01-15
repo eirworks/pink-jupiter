@@ -11,6 +11,10 @@ class Service extends Model
         'activated' => 'boolean'
     ];
 
+    protected $with = [
+        'user',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
