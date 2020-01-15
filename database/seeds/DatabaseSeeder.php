@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Artisan::call('cities:setup');
         // $this->call(UsersTableSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
