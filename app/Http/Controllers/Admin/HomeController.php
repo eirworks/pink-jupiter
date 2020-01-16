@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Click;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\AuthIsAdmin;
+use App\Service;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -17,8 +19,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $stats = [
-            'visitors' => User::sum('visitors'),
+            'visitors' => Click::whereDate('created_at', now()->toDateString())->count(),
             'users' => User::partner()->count(),
+            'ads' => Service::where('activated', true)->count(),
         ];
 
         return view('admin.home', [

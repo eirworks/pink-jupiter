@@ -19,7 +19,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div><span class="text-muted">Visitor</span></div>
+                        <div><span class="text-muted">Klik Hari ini</span></div>
                         <div style="font-size: 2rem">{{ $stats['visitors'] }}</div>
                     </div>
                 </div>
@@ -29,6 +29,14 @@
                     <div class="card-body">
                         <div><span class="text-muted">Mitra Aktif</span></div>
                         <div style="font-size: 2rem">{{ $stats['users'] }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div><span class="text-muted">Iklan Aktif</span></div>
+                        <div style="font-size: 2rem">{{ $stats['ads'] }}</div>
                     </div>
                 </div>
             </div>
