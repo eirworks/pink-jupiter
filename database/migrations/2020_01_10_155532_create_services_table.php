@@ -25,6 +25,7 @@ class CreateServicesTable extends Migration
             $table->boolean('activated')->default(false)->index();
             $table->text('description');
             $table->json('data');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->index(['city_id', 'category_id', 'activated'], 'services_search_idx');

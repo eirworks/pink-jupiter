@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Click;
+use App\Http\Middleware\ClickSession;
 use App\Province;
 use App\Service;
 use App\User;
@@ -90,8 +92,31 @@ class ListingController extends Controller
 
         if ($service->user->balance >= $fee)
         {
-            $service->user->balance = $service->user->balance - $fee;
-            UserTransaction::executeTransaction($service->user_id, $fee * -1, "Pembayaran", UserTransaction::TYPE_FEE);
+            // get current session
+            $session = session('tsocks');
+
+            // count if this session clicked this lately?
+            $clicksLately = Click::where('session', $session)->where('service_id', $service->id)
+                ->where('created_at', '>', now()->subHours(6))
+                ->count();
+
+            if ($clicksLately == 0)
+            {
+                $service->user->balance = $service->user->balance - $fee;
+                UserTransaction::executeTransaction($service->user_id, $fee * -1, "Pembayaran", UserTransaction::TYPE_FEE);
+
+                Click::create([
+                    'service_id' => $service->id,
+                    'session' => $session,
+                    'fee' => $fee,
+                    'user_id' => auth()->id(),
+                    'data' => [
+                        'ip_address' => \request()->ip(),
+                        'agent' => \request()->userAgent(),
+                    ]
+                ]);
+            }
+
 
             $userContent = $validTypes[$type]['content'];
             $uri = $validTypes[$type]['uri'];

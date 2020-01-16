@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Service extends Model
 {
+    use SoftDeletes;
+
     protected $casts = [
         'data' => 'array',
         'activated' => 'boolean'
@@ -33,5 +36,10 @@ class Service extends Model
     public function district()
     {
         return $this->belongsTo(District::class);
+    }
+
+    public function clicks()
+    {
+        return $this->hasMany(Click::class);
     }
 }

@@ -11,9 +11,11 @@
 |
 */
 
+use App\Http\Middleware\ClickSession;
+
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware([ClickSession::class]);
 
 Route::group(['namespace' => 'Partner', 'prefix' => 'partner', 'as' => 'partner.'], function() {
     Route::get('register', "RegisterController@register")->name('register');
@@ -46,8 +48,8 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.'], function() {
     Route::get('/{slug}/{post}', 'ArticleController@show')->name('show');
 });
 
-Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
-    Route::get('/', "ListingController@index")->name('index');
+Route::group(['prefix' => 'listing', 'as' => 'listing.', 'middleware' => ClickSession::class], function() {
+    Route::get('/', "ListingController@index")->name('index'); // not used
     Route::get('/{service}', "ListingController@show")->name('show');
     Route::get('/{service}/contact/{type}', "ListingController@contact")->name('contact');
 });

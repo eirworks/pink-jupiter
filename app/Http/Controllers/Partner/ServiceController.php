@@ -12,6 +12,7 @@ class ServiceController extends Controller
     {
         $services = auth()->user()->services()
             ->orderBy('id', 'desc')
+            ->withCount(['clicks'])
             ->paginate();
 
         return view('partner.services.index', [
@@ -40,6 +41,10 @@ class ServiceController extends Controller
     public function edit(Request $request, Service $service)
     {
         $service->load(['category']);
+
+        $service->loadCount([
+            'clicks'
+        ]);
 
         return view('partner.services.form', [
             'service' => $service,

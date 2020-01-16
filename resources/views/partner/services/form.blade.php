@@ -13,6 +13,11 @@
 
         <h2 class="my-2">@yield('title')</h2>
 
+        @if($service->id)
+            @include('partner.services.ads_insight')
+            @include('listing.item', ['ad' => $service])
+        @endif
+
         <div class="card">
             <div class="card-body">
                 <form action="{{ $service->id ? route('partner.services.update', [$service]) : route('partner.services.store') }}" method="post" enctype="multipart/form-data">

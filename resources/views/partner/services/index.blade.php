@@ -25,6 +25,7 @@
             <tr>
                 <th>ID</th>
                 <th>Judul</th>
+                <th>Klik Unik</th>
                 <th>Aktif?</th>
                 <th>&nbsp;</th>
             </tr>
@@ -36,6 +37,7 @@
                     <td>
                         <a href="{{ route('partner.services.edit', [$service]) }}">{{ $service->name }}</a>
                     </td>
+                    <td>{{ $service->clicks_count }}</td>
                     <td>{{ $service->activated ? 'Aktif' : 'Tidak Aktif' }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
