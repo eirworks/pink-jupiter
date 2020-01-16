@@ -40,12 +40,6 @@ Vue.component('search-form', require('./components/fpSearch/SearchForm.vue').def
 Vue.component('select-category', require('./components/SelectCategory.vue').default);
 Vue.component('select-city', require('./components/SelectCity.vue').default);
 
-import Vue from 'vue';
-import VueKonva from 'vue-konva'
-
-Vue.use(VueKonva);
-Vue.component('phone-number', require('./components/PhoneNumber.vue').default);
-
 import vSelect from 'vue-select'
 Vue.component('v-select', vSelect);
 import 'vue-select/dist/vue-select.css';
