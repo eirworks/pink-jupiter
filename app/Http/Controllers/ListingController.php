@@ -62,11 +62,23 @@ class ListingController extends Controller
         return implode(', ', $keywords);
     }
 
-    public function contact(User $user, $type, Category $category)
+    public function contact(Service $service, $type)
     {
+        $service->load('user');
+
         $validTypes = [
-            'wa' => "https://wa.me/",
-            'tg' => "https://t.me/",
+            'wa' => [
+                'uri' => "https://wa.me/",
+                'content' => 'contact_whatsapp',
+            ],
+            'tg' => [
+                'uri' => "https://t.me/",
+                'content' => 'contact_telegram',
+            ],
+            'phone' => [
+                'uri' => "tel:",
+                'content' => 'contact'
+            ],
         ];
 
         if (!in_array($type, array_keys($validTypes)))
@@ -74,16 +86,20 @@ class ListingController extends Controller
             return route('home', ['error' => 11])->with('danger', "Informasi kontak tidak diketahui");
         }
 
-        $fee = $category->price;
+        $fee = $service->category->price;
 
-        if ($user->balance >= $fee)
+        if ($service->user->balance >= $fee)
         {
-            $user->balance = $user->balance - $fee;
-            UserTransaction::executeTransaction($user->id, $fee * -1, "Pembayaran", UserTransaction::TYPE_FEE);
-            return redirect($validTypes[$type].$user->contact_whatsapp);
+            $service->user->balance = $service->user->balance - $fee;
+            UserTransaction::executeTransaction($service->user_id, $fee * -1, "Pembayaran", UserTransaction::TYPE_FEE);
+
+            $userContent = $validTypes[$type]['content'];
+            $uri = $validTypes[$type]['uri'];
+
+            return redirect($uri.$service->user->$userContent);
         }
         else {
-            return redirect()->route('listing.show', [$user])
+            return redirect()->route('listing.show', [$service->user])
                 ->with('danger', "Tidak dapat menghubungi mitra saat ini");
         }
     }

@@ -1,0 +1,13 @@
+.footer-btn-group {
+    @extend .btn-group;
+
+    position: sticky;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    background-color: white;
+    border-top: 1px solid #bbb;
+    width: 100%;
+    padding: 10px;
+}

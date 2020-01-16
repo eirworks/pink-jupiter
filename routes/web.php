@@ -49,7 +49,7 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.'], function() {
 Route::group(['prefix' => 'listing', 'as' => 'listing.'], function() {
     Route::get('/', "ListingController@index")->name('index');
     Route::get('/{service}', "ListingController@show")->name('show');
-    Route::get('/{user}/{type}/{category?}', "ListingController@contact")->name('contact');
+    Route::get('/{service}/contact/{type}', "ListingController@contact")->name('contact');
 });
 
 Route::get('categories', "CategoryListingController@index")->name('listing.categories.index');
