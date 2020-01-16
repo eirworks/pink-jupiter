@@ -21,6 +21,7 @@ class ServiceController extends Controller
     public function edit(Request $request, Service $service)
     {
         $service->load(['category']);
+        $service->loadCount(['clicks']);
 
         return view('admin.services.form', [
             'service' => $service,
