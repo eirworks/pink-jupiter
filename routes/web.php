@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Middleware\AuthIsAdmin;
 use App\Http\Middleware\ClickSession;
 
 Auth::routes();
@@ -84,8 +85,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::post('login', "LoginController@submitLogin")->name('login.submit');
     });
 
-    Route::resource('categories', "CategoryController");
-
     Route::group(['prefix' => 'provinces', 'as' => 'provinces.'], function() {
         Route::get('/', "ProvinceController@index")->name('all');
         Route::get('/new', "ProvinceController@create")->name('create');
@@ -156,6 +155,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::get('/edit/{service}', 'ServiceController@edit')->name('edit');
         Route::post('/edit/{service}', 'ServiceController@update')->name('update');
         Route::delete('/delete/{service}', 'ServiceController@destroy')->name('destroy');
+    });
+
+    Route::group(['middleware' => AuthIsAdmin::class], function() {
+
+        Route::get('categories/upload', "CategoryUploadController@index")->name('categories.upload');
+        Route::post('categories/upload', "CategoryUploadController@store")->name('categories.upload.store');
+
+        Route::resource('categories', "CategoryController");
+
     });
 });
 
