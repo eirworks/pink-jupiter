@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryUploadController extends Controller
@@ -33,6 +35,31 @@ class CategoryUploadController extends Controller
 
         return redirect()->route('admin.categories.upload')
             ->with('error', "File tidak valid!");
+    }
+
+    public function download()
+    {
+        $fileContent = "";
+
+        $categories = Category::get();
+
+        foreach($categories as $category)
+        {
+            $fileContent .= implode(",", [
+                $category->id,
+                $category->parent_id,
+                $category->name,
+                $category->ordering,
+                $category->group_order,
+                $category->price,
+            ])."\n";
+        }
+
+        $filename = 'jasago_category.csv';
+
+        Storage::put($filename, $fileContent);
+
+        return Storage::download($filename);
     }
 
     private function storeFile($filename)

@@ -160,6 +160,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::group(['middleware' => AuthIsAdmin::class], function() {
 
         Route::get('categories/upload', "CategoryUploadController@index")->name('categories.upload');
+        Route::get('categories/download', "CategoryUploadController@download")->name('categories.download');
         Route::post('categories/upload', "CategoryUploadController@store")->name('categories.upload.store');
 
         Route::resource('categories', "CategoryController");
