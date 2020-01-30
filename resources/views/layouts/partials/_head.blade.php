@@ -17,6 +17,7 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ asset('css/jasago.css') }}" rel="stylesheet">
 
 @stack('headers')
 
