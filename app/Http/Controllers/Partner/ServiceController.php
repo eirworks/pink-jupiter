@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Partner;
 
 use App\Http\Controllers\Controller;
-use App\Service;
+use App\Ad;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $services = auth()->user()->services()
+        $services = auth()->user()->ads()
             ->orderBy('id', 'desc')
             ->withCount(['clicks'])
             ->paginate();
@@ -22,7 +22,7 @@ class ServiceController extends Controller
 
     public function create(Request $request)
     {
-        $services = auth()->user()->services()->count();
+        $services = auth()->user()->ads()->count();
 
         if($services > setting('ads_per_user', 10))
         {
@@ -31,14 +31,14 @@ class ServiceController extends Controller
         }
 
 
-        $service = new Service();
+        $service = new Ad();
 
         return view('partner.services.form', [
             'service' => $service,
         ]);
     }
 
-    public function edit(Request $request, Service $service)
+    public function edit(Request $request, Ad $service)
     {
         $service->load(['category']);
 
@@ -53,7 +53,7 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        $service = new Service();
+        $service = new Ad();
 
         $service->name = $request->input('name');
         $service->description = $request->input('description');
@@ -71,7 +71,7 @@ class ServiceController extends Controller
         return redirect()->route('partner.services.index')->with('success', "Iklan telah disimpan");
     }
 
-    public function update(Request $request, Service $service)
+    public function update(Request $request, Ad $service)
     {
         $service->name = $request->input('name');
         $service->description = $request->input('description');
@@ -89,7 +89,7 @@ class ServiceController extends Controller
         return redirect()->route('partner.services.index')->with('success', "Iklan telah disimpan");
     }
 
-    private function saveImage(Request $request, Service $service)
+    private function saveImage(Request $request, Ad $service)
     {
         if ($request->hasFile('image'))
         {
@@ -113,7 +113,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function destroy(Service $service)
+    public function destroy(Ad $service)
     {
         $service->delete();
 

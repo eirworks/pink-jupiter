@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Service;
+use App\Ad;
 use Faker\Generator as Faker;
 
-$factory->define(Service::class, function (Faker $faker) {
+$factory->define(Ad::class, function (Faker $faker) {
     $cityIds = \App\City::take(10)->pluck('id');
     $districtIds = \App\District::take(10)->pluck('id');
     $categoryIds = \App\Category::where('parent_id', 0)->take(10)->pluck('id');

@@ -14,8 +14,8 @@ class Click extends Model
         'service_id', 'session','data', 'fee', 'user_id'
     ];
 
-    public function service()
+    public function ad()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Ad::class);
     }
 }

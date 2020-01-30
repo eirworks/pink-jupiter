@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Service;
+use App\Ad;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $services = Service::orderBy('id', 'desc')
+        $services = Ad::orderBy('id', 'desc')
             ->paginate();
 
         return view('admin.services.index', [
@@ -18,7 +18,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function edit(Request $request, Service $service)
+    public function edit(Request $request, Ad $service)
     {
         $service->load(['category']);
         $service->loadCount(['clicks']);
@@ -28,7 +28,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function update(Request $request, Service $service)
+    public function update(Request $request, Ad $service)
     {
         $service->name = $request->input('name');
         $service->description = $request->input('description');
@@ -46,7 +46,7 @@ class ServiceController extends Controller
         return redirect()->route('admin.services.index')->with('success', "Iklan telah disimpan");
     }
 
-    private function saveImage(Request $request, Service $service)
+    private function saveImage(Request $request, Ad $service)
     {
         if ($request->hasFile('image'))
         {
@@ -70,7 +70,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function destroy(Service $service)
+    public function destroy(Ad $service)
     {
         $service->delete();
 

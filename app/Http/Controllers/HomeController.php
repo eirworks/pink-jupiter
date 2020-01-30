@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\City;
 use App\Province;
-use App\Service;
+use App\Ad;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -39,7 +39,7 @@ class HomeController extends Controller
             ];
         });
 
-        $ads = Service::orderBy('id', 'desc')
+        $ads = Ad::orderBy('id', 'desc')
             ->when($request->filled('city_id'), function ($query) use($request) {
                 $query->where('city_id', $request->input('city_id'));
             })

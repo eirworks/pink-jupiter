@@ -29,8 +29,8 @@ class Category extends Model
         return $this->belongsToMany(User::class, 'category_user');
     }
 
-    public function services()
+    public function ads()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Ad::class);
     }
 }

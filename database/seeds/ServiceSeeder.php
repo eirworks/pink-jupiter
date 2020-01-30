@@ -11,9 +11,9 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        \App\Service::truncate();
+        \App\Ad::truncate();
 
-        factory(\App\Service::class, 30)->create([
+        factory(\App\Ad::class, 30)->create([
             'user_id' => 2,
         ]);
     }

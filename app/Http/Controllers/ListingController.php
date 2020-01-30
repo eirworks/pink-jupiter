@@ -6,7 +6,7 @@ use App\Category;
 use App\Click;
 use App\Http\Middleware\ClickSession;
 use App\Province;
-use App\Service;
+use App\Ad;
 use App\User;
 use App\UserTransaction;
 use Illuminate\Http\Request;
@@ -36,7 +36,7 @@ class ListingController extends Controller
         ]);
     }
 
-    public function show(Service $service)
+    public function show(Ad $service)
     {
         $service->load([
             'user',
@@ -54,7 +54,7 @@ class ListingController extends Controller
         ]);
     }
 
-    private function keywordBuilder(Service $service)
+    private function keywordBuilder(Ad $service)
     {
         $keywords = [];
 
@@ -64,7 +64,7 @@ class ListingController extends Controller
         return implode(', ', $keywords);
     }
 
-    public function contact(Service $service, $type)
+    public function contact(Ad $service, $type)
     {
         $service->load('user');
 
