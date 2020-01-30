@@ -14,9 +14,13 @@
         @endisset
 
         @if($ads->count())
-            @foreach($ads as $ad)
-                @include('listing.item')
-            @endforeach
+            <div class="row">
+                @foreach($ads as $ad)
+                    <div class="col-md-4 col-6">
+                        @include('listing.item')
+                    </div>
+                @endforeach
+            </div>
             {!! $ads->links() !!}
         @else
             <div class="text-center text-muted">
