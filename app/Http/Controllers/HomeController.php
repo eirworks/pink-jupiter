@@ -40,11 +40,14 @@ class HomeController extends Controller
         });
 
         $ads = Ad::orderBy('id', 'desc')
-            ->when($request->filled('city_id'), function ($query) use($request) {
+            ->when($request->filled('city_id') && $request->input('city_id') > 0, function ($query) use($request) {
                 $query->where('city_id', $request->input('city_id'));
             })
             ->when($request->filled('category_id'), function ($query) use($request) {
                 $query->where('category_id', $request->input('category_id'));
+            })
+            ->when($request->filled('q'), function($query) use($request) {
+                $query->search($request->input('q'));
             })
             ->whereHas('user', function($query) {
                 $query->where('balance', '>', 0);

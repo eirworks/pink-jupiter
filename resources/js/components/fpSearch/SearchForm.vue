@@ -6,13 +6,15 @@
                 <form :action="url" method="get">
 
                     <div class="row">
+                        <div class="col-md-6">
+                            <input type="search" name="q" class="form-control" v-model="form.searchQuery" placeholder="Cari layanan">
+                        </div>
                         <div class="col-md-4">
                             <input type="search" class="form-control" v-model="form.locationQuery" placeholder="Pilih lokasi" :class="{'active-search': form.city_id > 0}" @focus="onLocationFocus">
                             <input type="hidden" class="form-control" v-model="form.city_id" name="city_id">
                         </div>
-                        <div class="col-md-8">
-                            <input type="search" class="form-control" v-model="form.categoryQuery" placeholder="Pilih Layanan" :class="{'active-search': form.category_id > 0}" @focus="onCategoryFocus">
-                            <input type="hidden" class="form-control" v-model="form.category_id" name="category_id">
+                        <div class="col-md-2">
+                            <button class="btn btn-primary btn-block" type="submit">Cari</button>
                         </div>
                     </div>
                 </form>
@@ -95,6 +97,10 @@
                 type: Number,
                 default: 0
             },
+            q: {
+                type: String,
+                default: ""
+            },
         },
         data() {
             return {
@@ -104,6 +110,7 @@
 
                     locationQuery: "",
                     categoryQuery: "",
+                    searchQuery: "",
                 },
 
                 results: {
@@ -153,6 +160,8 @@
             this.getCities().then(() => {
                 this.initializeValues(true);
             });
+
+            this.form.searchQuery = this.q;
         },
 
         methods: {

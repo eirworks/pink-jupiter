@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateServicesTable extends Migration
@@ -30,6 +31,8 @@ class CreateServicesTable extends Migration
 
             $table->index(['city_id', 'category_id', 'activated'], 'services_search_idx');
         });
+
+        DB::statement("ALTER TABLE ads ADD FULLTEXT name_fulltext_index (name, description)");
     }
 
     /**

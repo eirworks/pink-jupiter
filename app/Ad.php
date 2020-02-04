@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Search\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ad extends Model
 {
     use SoftDeletes;
+    use Searchable;
 
     protected $casts = [
         'data' => 'array',
@@ -16,6 +18,10 @@ class Ad extends Model
 
     protected $with = [
         'user',
+    ];
+
+    protected $searchable = [
+        'name', 'description'
     ];
 
     public function user()

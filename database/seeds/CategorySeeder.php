@@ -1,6 +1,8 @@
 <?php
 
+use App\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -11,38 +13,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        \App\Category::truncate();
-        \Illuminate\Support\Facades\DB::table('category_user')->truncate();
+        Category::truncate();
+        DB::table('category_user')->truncate();
 
-        $cats = factory(\App\Category::class, 10)->create()->each(function($cat) {
-            factory(\App\Category::class, 60)->create([
-                'parent_id' => $cat->id,
-            ]);
-        });
-
-        $users = \App\User::get();
-        if ($users)
-        {
-            $users->each(function($user) use($cats) {
-                $user->categories()->sync([
-                    11 => [
-                        'price' => 50000,
-                        'description' => "My Service 1",
-                    ],
-                    12 => [
-                        'price' => 10000,
-                        'description' => "My Service 2",
-                    ],
-                    13 => [
-                        'price' => 10000,
-                        'description' => "My Service 3",
-                    ],
-                    14 => [
-                        'price' => 10000,
-                        'description' => "My Service 4",
-                    ],
-                ]);
-            });
-        }
+        factory(Category::class, 10)->create();
     }
 }

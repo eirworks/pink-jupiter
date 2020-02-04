@@ -10,8 +10,8 @@ $factory->define(Ad::class, function (Faker $faker) {
     $districtIds = \App\District::take(10)->pluck('id');
     $categoryIds = \App\Category::where('parent_id', 0)->take(10)->pluck('id');
     return [
-        'name' => ucwords($faker->sentence),
-        'description' => $faker->text,
+        'name' => ucwords($faker->randomElement(['Service', 'Servis'])." ".$faker->randomElement(['tv', 'radio', 'ac', 'kulkas', 'stereo', 'pompa', 'mobil'])),
+        'description' => $faker->realText(),
         'user_id' => 1,
         'city_id' => $faker->randomElement($cityIds),
         'district_id' => $faker->randomElement($districtIds),
