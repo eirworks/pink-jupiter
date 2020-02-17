@@ -12,7 +12,6 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a href="{{ route('articles.index') }}" class="nav-link">Artikel</a></li>
-                    <li class="nav-item"><a href="{{ route('listing.categories.index') }}" class="nav-link">Layanan</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
