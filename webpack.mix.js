@@ -12,9 +12,4 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/hpsearch.js', 'public/js')
-    // .js('node_modules/summernote/dist/summernote.js', 'public/js')
-    // .styles([
-    //     'node_modules/summernote/dist/summernote.css'
-    // ], 'public/css')
    .sass('resources/sass/app.scss', 'public/css');

@@ -6,12 +6,8 @@
                 <form :action="url" method="get">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <input type="search" name="q" class="form-control" v-model="form.searchQuery" placeholder="Cari layanan">
-                        </div>
-                        <div class="col-md-4">
-                            <input type="search" class="form-control" v-model="form.locationQuery" placeholder="Pilih lokasi" :class="{'active-search': form.city_id > 0}" @focus="onLocationFocus">
-                            <input type="hidden" class="form-control" v-model="form.city_id" name="city_id">
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-primary btn-block" type="submit">Cari</button>
