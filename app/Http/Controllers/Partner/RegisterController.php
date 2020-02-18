@@ -28,6 +28,8 @@ class RegisterController extends Controller
             'city_id' => 'required',
             'contact' => 'required',
             'contact_whatsapp' => 'required',
+            'district' => 'required',
+            'village' => 'required',
         ]);
 
         $user = new User();

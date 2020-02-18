@@ -14,6 +14,7 @@
                     </div>
                     <div class="card-body">
                         <form action="{{ route('partner.register.submit') }}" method="post">
+                            @include('includes.form_errors')
                             @csrf
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
@@ -37,17 +38,27 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Alamat Lengkap</label>
                                 <textarea name="address" id="address" cols="30" rows="2"
                                           class="form-control" placeholder="Alamat lengkap"></textarea>
                             </div>
 
                             <hr>
+
                             <h3>Info Bisnis</h3>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="business_name" placeholder="Nama Bisnis">
+                            </div>
 
                             <div class="form-group">
                                 <textarea name="description" id="description" cols="30" rows="4"
                                           class="form-control" placeholder="Info tentang bisnis/usaha anda"></textarea>
                             </div>
+
+                            <hr>
+
+                            <h3>Informasi Tempat Tinggal</h3>
 
                             <div class="form-group">
                                 <label for="city_id">Pilih Kota</label>
