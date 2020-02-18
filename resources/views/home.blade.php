@@ -16,7 +16,7 @@
         @if($ads->count())
             <div class="row">
                 @foreach($ads as $ad)
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-3 col-6">
                         @include('listing.item')
                     </div>
                 @endforeach
