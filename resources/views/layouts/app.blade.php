@@ -18,16 +18,27 @@
         <footer class="site-footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-6">
                         <div class="mb-3">&copy; {{ env('APP_NAME') }}</div>
+
+                        <ul class="list-unstyled">
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('partner.register') }}">Daftar</a></li>
+                        </ul>
                     </div>
-                    <div class="col-md-3">
-                        @php $pages = \App\Post::pages()->get(); @endphp
-                        @foreach($pages as $page)
-                            <ul class="list-unstyled">
+                    <div class="col-md-3 col-6">
+                        <ul class="list-unstyled">
+                            <a href="{{ route('articles.index') }}">Artikel</a>
+                            @php $pages = \App\Post::pages()->get(); @endphp
+                            @foreach($pages as $page)
                                 <li><a href="{{ route('page', ['slug' => $page->slug]) }}">{{ $page->name }}</a></li>
-                            </ul>
-                        @endforeach
+                            @endforeach
+                            <li><a href="{{ route('page', ['slug' => 'tentang']) }}">Tentang</a></li>
+                            <li><a href="{{ route('page', ['slug' => 'panduan']) }}">Panduan</a></li>
+                            <li><a href="{{ route('page', ['slug' => 'tips']) }}">Tips</a></li>
+                            <li><a href="{{ route('page', ['slug' => 'hubungi-kami']) }}">Hubungi Kami</a></li>
+                            <li><a href="{{ route('page', ['slug' => 'syarat']) }}">Syarat &amp; Ketentuan</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
