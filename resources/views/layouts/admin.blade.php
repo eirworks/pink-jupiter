@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @include('layouts.partials._head')
+    @include('layouts.partials._head', ['skip_custom_css' => true])
 </head>
 <body>
 <div id="app">

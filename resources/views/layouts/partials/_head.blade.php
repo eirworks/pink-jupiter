@@ -17,7 +17,9 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link href="{{ asset('jasago.css') }}" rel="stylesheet">
+@if(!isset($skip_custom_css))
+<link href="{{ asset('css/jasago.css') }}" rel="stylesheet">
+@endif
 
 @stack('headers')
 
