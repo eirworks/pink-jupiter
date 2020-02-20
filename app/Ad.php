@@ -46,6 +46,6 @@ class Ad extends Model
 
     public function clicks()
     {
-        return $this->hasMany(Click::class);
+        return $this->hasMany(Click::class, 'service_id');
     }
 }
