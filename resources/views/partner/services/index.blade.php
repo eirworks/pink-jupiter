@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Kelola Iklan
+    Kelola Iklan Anda
 @endsection
 
 @section('content')

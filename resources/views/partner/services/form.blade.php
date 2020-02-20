@@ -38,7 +38,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Pilih Lokasi</label>
-                                <select-city :city-id="{{ $service->city_id }}"></select-city>
+                                <select-city :city-id="{{ $service->id ? $service->city_id : 0 }}"></select-city>
                                 @if($service->id)
                                     <div class="my-2">Kota dipilih: <strong>{{ $service->city->name }}</strong></div>
                                 @endif
@@ -47,7 +47,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Pilih Kategori</label>
-                                <select-category :category-id="{{ $service->category_id }}"></select-category>
+                                <select-category :category-id="{{ $service->id ? $service->category_id : 0 }}"></select-category>
                                 @if($service->id)
                                     <div class="my-2">Pilihan saat ini: <strong>{{ $service->category->name }}</strong></div>
                                 @endif
