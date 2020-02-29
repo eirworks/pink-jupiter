@@ -47,7 +47,7 @@ class HomeController extends Controller
                 $query->where('category_id', $request->input('category_id'));
             })
             ->when($request->filled('q'), function($query) use($request) {
-                $query->search($request->input('q'));
+                $query->where('name', 'like', '%'.$request->input('q').'%');
             })
             ->whereHas('user', function($query) {
                 $query->where('balance', '>', 0);
