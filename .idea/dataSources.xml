@@ -16,5 +16,14 @@
         <property name="serverTimezone" value="Asia/Jakarta" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="jasago1@localhost" uuid="930c2560-6a81-47f8-960c-43d608de3602">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/jasago1</jdbc-url>
+      <driver-properties>
+        <property name="serverTimezone" value="Asia/Jakarta" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>
