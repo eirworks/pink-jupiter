@@ -57,7 +57,8 @@ class ServiceController extends Controller
 
         $service->name = $request->input('name');
         $service->description = $request->input('description');
-        $service->district_id = $request->input('district_id');
+        $service->city_id = $request->input('city_id');
+        $service->district_id = 0;
         $service->category_id = $request->input('category_id');
         $service->price = $request->input('price');
         $service->activated = $request->input('activated');
