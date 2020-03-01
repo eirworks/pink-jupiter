@@ -40,7 +40,7 @@ class ServiceController extends Controller
 
     public function edit(Request $request, Ad $service)
     {
-        $service->load(['category']);
+        $service->load(['category', 'city']);
 
         $service->loadCount([
             'clicks'
@@ -63,6 +63,7 @@ class ServiceController extends Controller
         $service->price = $request->input('price');
         $service->activated = $request->input('activated');
         $service->data = [];
+        $service->user_id = auth()->id();
         $service->image = '';
 
         $service->save();
@@ -76,7 +77,8 @@ class ServiceController extends Controller
     {
         $service->name = $request->input('name');
         $service->description = $request->input('description');
-        $service->district_id = $request->input('district_id', 1);
+        $service->city_id = $request->input('city_id');
+        $service->district_id = 0;
         $service->category_id = $request->input('category_id');
         $service->price = $request->input('price');
         $service->activated = $request->input('activated', false);

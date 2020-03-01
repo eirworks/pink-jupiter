@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-select :options="cities" label="name" placeholder="Ketik atau pilih kota" />
+        <v-select :options="cities" label="name" placeholder="Ketik atau pilih kota" @input="changeValue"/>
         <input type="hidden" name="city_id" v-model="form.city" />
     </div>
 </template>
@@ -45,6 +45,10 @@
                         })
                 })
             },
+
+            changeValue(val) {
+                this.form.city = val.id;
+            }
         }
     }
 </script>

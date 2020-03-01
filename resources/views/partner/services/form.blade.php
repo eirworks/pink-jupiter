@@ -63,7 +63,7 @@
                     <div class="form-check form-check-inline my-3">
                         <div>
                             <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="activated" {{ $service->activated ? 'checked' : '' }}>
+                                <input type="checkbox" class="form-check-input" name="activated" value="1" {{ $service->activated ? 'checked' : '' }}>
                                 Aktifkan iklan ini?
                             </label>
                         </div>
