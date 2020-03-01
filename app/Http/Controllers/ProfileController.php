@@ -100,7 +100,7 @@ class ProfileController extends Controller
 
             $user->contact = $request->input('contact');
             $user->contact_whatsapp = $request->input('contact_whatsapp');
-            $user->contact_telegram = '@';
+            $user->contact_telegram = $request->input('contact_telegram');
             $user->description = $request->input('description');
             $user->address = $request->input('address');
 //            $user->district = $request->input('district');
