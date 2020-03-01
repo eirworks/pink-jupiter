@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-select :options="subcategories" label="name" placeholder="Ketik atau pilih kategori layanan iklan" @input="onInput" />
+        <v-select :options="categories" label="name" placeholder="Ketik atau pilih kategori layanan iklan" @input="onInput" />
         <input type="hidden" name="category_id" v-model="form.category" />
     </div>
 </template>
@@ -9,12 +9,14 @@
     import axios from "axios";
 
     const subcategoriesUrl = document.querySelector('meta[name=api_subcategories]').getAttribute('content');
+    const categoriesUrl = document.querySelector('meta[name=api_categories]').getAttribute('content');
 
     export default {
         name: "SelectCategory",
 
         data() {
             return {
+                categories: [],
                 subcategories: [],
 
                 form: {
@@ -31,7 +33,7 @@
         },
 
         mounted() {
-            this.getSubcategories();
+            this.getCategories();
             this.form.category = this.categoryId;
         },
 
