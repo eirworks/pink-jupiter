@@ -4,10 +4,16 @@ namespace App\Http\Controllers\Partner;
 
 use App\Http\Controllers\Controller;
 use App\Ad;
+use App\Http\Middleware\AdOwnership;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(AdOwnership::class)->only(['edit', 'update', 'destroy']);
+    }
+
     public function index(Request $request)
     {
         $services = auth()->user()->ads()

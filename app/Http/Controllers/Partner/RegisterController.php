@@ -58,6 +58,6 @@ class RegisterController extends Controller
         auth()->login($user);
 
         return redirect()->route('home')
-            ->with('success', 'Pendaftaran berhasil dilakukan!');
+            ->with('success', 'Pendaftaran berhasil! Anda bisa membuat iklan melalui menu kelola iklan.');
     }
 }
