@@ -40,7 +40,7 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->type = User::TYPE_PARTNER;
         $user->balance = 0;
-        $user->activated = false;
+        $user->activated = true;
         $user->contact = $request->input('contact');
         $user->contact_whatsapp = $request->input('contact_whatsapp');
         $user->contact_telegram = "";
@@ -54,6 +54,8 @@ class RegisterController extends Controller
         $user->image = '';
         $user->data = [];
         $user->save();
+
+        auth()->login($user);
 
         return redirect()->route('home')
             ->with('success', 'Pendaftaran berhasil dilakukan!');
