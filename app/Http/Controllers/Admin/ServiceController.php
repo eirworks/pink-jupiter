@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Ad;
+use App\Http\Requests\AdRequest;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -28,7 +29,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function update(Request $request, Ad $service)
+    public function update(AdRequest $request, Ad $service)
     {
         $service->name = $request->input('name');
         $service->description = $request->input('description');

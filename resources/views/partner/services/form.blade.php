@@ -18,6 +18,8 @@
             @include('listing.item', ['ad' => $service])
         @endif
 
+        @include('includes.form_errors')
+
         <div class="card">
             <div class="card-body">
                 <form action="{{ $service->id ? route('partner.services.update', [$service]) : route('partner.services.store') }}" method="post" enctype="multipart/form-data">

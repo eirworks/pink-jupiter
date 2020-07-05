@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Partner;
 use App\Http\Controllers\Controller;
 use App\Ad;
 use App\Http\Middleware\AdOwnership;
+use App\Http\Requests\AdRequest;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -57,7 +58,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(AdRequest $request)
     {
         $service = new Ad();
 
@@ -79,7 +80,7 @@ class ServiceController extends Controller
         return redirect()->route('partner.services.index')->with('success', "Iklan telah disimpan");
     }
 
-    public function update(Request $request, Ad $service)
+    public function update(AdRequest $request, Ad $service)
     {
         $service->name = $request->input('name');
         $service->description = $request->input('description');

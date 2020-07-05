@@ -30,7 +30,7 @@
                         {{ $service->name }}
                         <div class="small">
                             <strong>Oleh</strong>: {{ $service->user->name }}
-                            <strong>Kota</strong>: {{ $service->city->name }}, {{ $service->city->province->name }}
+                            @include('admin.includes.city_info')
                         </div>
                     </td>
                     <td>{{ $service->activated ? 'Aktif' : 'Tidak Aktif' }}</td>

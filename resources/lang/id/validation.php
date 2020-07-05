@@ -135,6 +135,9 @@ return [
         ],
     ],
 
+    'city_required' => 'Mohon pilih kota!',
+    'category_required' => 'Mohon pilih kategori!',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -152,10 +155,12 @@ return [
         'email' => "Alamat Email",
         'password' => "Kata Sandi",
         'city_id' => "Kota",
+        'category_id' => "Kategori",
         'contact' => "No HP",
         'contact_whatsapp' => "Whatsapp",
         'district' => "Kecamatan/Distrik",
         'village' => "Kelurahan/Desa",
+        'price' => "Harga",
     ],
 
 ];
