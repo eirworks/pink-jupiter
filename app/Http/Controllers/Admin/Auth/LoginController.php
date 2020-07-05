@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -21,6 +22,13 @@ class LoginController extends Controller
         if (!$loginAttempt)
         {
             return redirect()->route('admin.login')->with(['error' => __('auth.failed')]);
+        }
+
+        if (auth()->user()->type != User::TYPE_ADMIN)
+        {
+            auth()->logout();
+
+            return redirect()->route('login');
         }
 
         return redirect()->route('home');

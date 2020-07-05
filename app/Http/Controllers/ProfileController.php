@@ -7,6 +7,7 @@ use App\Province;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Waavi\Sanitizer\Sanitizer;
 
 class ProfileController extends Controller
 {
@@ -57,7 +58,15 @@ class ProfileController extends Controller
             $rules = array_merge($rules, $partnerOnlyRules);
         }
 
-        $request->validate($rules);
+        $this->validate($request, $rules);
+
+        $sanitizer = new Sanitizer($request->all(), [
+            'contact' => 'digit|trim',
+            'contact_whatsapp' => 'digit|trim',
+        ]);
+        $sanitizedRequests = $sanitizer->sanitize();
+
+        $request->merge($sanitizedRequests);
 
         $this->save($user, $request);
 

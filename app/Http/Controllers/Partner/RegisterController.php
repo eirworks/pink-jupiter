@@ -8,6 +8,7 @@ use App\Province;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Waavi\Sanitizer\Sanitizer;
 
 class RegisterController extends Controller
 {
@@ -20,7 +21,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required',
             'business_name' => 'required',
             'email' => 'required|email',
@@ -32,6 +33,12 @@ class RegisterController extends Controller
             'village' => 'required',
         ]);
 
+        $sanitizer = new Sanitizer($request->all(), [
+            'contact' => 'digit|trim',
+            'contact_whatsapp' => 'digit|trim',
+        ]);
+        $sanitizedRequests = $sanitizer->sanitize();
+
         $user = new User();
 
         $user->name = $request->input('name');
@@ -41,8 +48,8 @@ class RegisterController extends Controller
         $user->type = User::TYPE_PARTNER;
         $user->balance = 0;
         $user->activated = true;
-        $user->contact = $request->input('contact');
-        $user->contact_whatsapp = $request->input('contact_whatsapp');
+        $user->contact = $sanitizedRequests['contact'];
+        $user->contact_whatsapp = $sanitizedRequests['contact_whatsapp'];
         $user->contact_telegram = "";
         $user->address = $request->input('address');
         $user->description = $request->input('description');

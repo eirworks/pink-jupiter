@@ -14,11 +14,17 @@
 use App\Http\Middleware\AuthIsAdmin;
 use App\Http\Middleware\ClickSession;
 
-Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home')->middleware([ClickSession::class]);
+Route::post('logout', "LogoutController@logout")->name('logout');
 
 Route::group(['namespace' => 'Partner', 'prefix' => 'partner', 'as' => 'partner.'], function() {
+
+    // TODO wrap login and register with some guest only middleware
+
+    Route::get('login', "LoginController@index")->name('login');
+    Route::post('login', "LoginController@store")->name('login.store');
+
     Route::get('register', "RegisterController@register")->name('register');
     Route::post('register', "RegisterController@store")->name('register.submit');
 

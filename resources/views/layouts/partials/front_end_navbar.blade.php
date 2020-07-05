@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.name', 'MM3000') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -11,16 +11,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a href="{{ route('articles.index') }}" class="nav-link">Artikel</a></li>
+                    <li class="nav-item"><a href="{{ route('articles.index') }}" class="nav-link">{{ __('pages.articles') }}</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
-                        <li class="nav-item"><a href="{{ route('partner.register') }}" class="nav-link">Jadi Mitra</a></li>
+                        <li class="nav-item"><a href="{{ route('partner.register') }}" class="nav-link">{{ __('auth.partner.register') }}</a></li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('partner.login') }}">{{ __('Login') }}</a>
                         </li>
                         {{--                            @if (Route::has('register'))--}}
                         {{--                                <li class="nav-item">--}}
@@ -39,7 +39,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('auth.edit_profile') }}</a>
                                 @if(auth()->user()->type == \App\User::TYPE_PARTNER)
-                                    <a class="dropdown-item" href="{{ route('partner.services.index') }}">Kelola Iklan</a>
+                                    <a class="dropdown-item" href="{{ route('partner.services.index') }}">{{ __('ads.ads_title') }}</a>
                                     <a class="dropdown-item" href="{{ route('transactions.index') }}">{{ __('profile.balance') }}</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -48,7 +48,7 @@
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>

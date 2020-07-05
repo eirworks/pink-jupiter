@@ -19,7 +19,7 @@ class AuthIsAdmin
 
         if (!(auth()->check() && auth()->user()->type == User::TYPE_ADMIN))
         {
-            return redirect()->route('home')
+            return redirect()->route('admin.login')
                 ->with(['error' => __('auth.no_admin_authorization')]);
         }
 

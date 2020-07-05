@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -18,12 +19,13 @@ class UserSeeder extends Seeder
             'email' => 'dev@cc.cc',
             'superadmin' => true,
             'admin_manager' => true,
-            'password' => \Illuminate\Support\Facades\Hash::make('dev'),
+            'password' => Hash::make('dev'),
         ]);
         $partner = factory(\App\User::class)->state('partner')->create([
             'name' => "Developer (Partner)",
             'email' => 'user1@cc.cc',
-            'password' => \Illuminate\Support\Facades\Hash::make('dev'),
+            'contact' => '081',
+            'password' => Hash::make('dev'),
         ]);
         $partner->transactions()->createMany(
             array_merge(
