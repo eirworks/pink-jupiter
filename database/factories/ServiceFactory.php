@@ -3,14 +3,19 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Ad;
+use App\Faker\FakeCategory;
 use Faker\Generator as Faker;
 
 $factory->define(Ad::class, function (Faker $faker) {
+
+    $faker->addProvider(new FakeCategory($faker));
+
     $cityIds = \App\City::take(10)->pluck('id');
     $districtIds = \App\District::take(10)->pluck('id');
-    $categoryIds = \App\Category::where('parent_id', 0)->take(10)->pluck('id');
+    $categoryIds = \App\Category::where('parent_id', 0)->where('type', \App\Category::TYPE_SERVICE)->pluck('id');
+
     return [
-        'name' => ucwords($faker->randomElement(['Service', 'Servis'])." ".$faker->randomElement(['tv', 'radio', 'ac', 'kulkas', 'stereo', 'pompa', 'mobil'])),
+        'name' => $faker->serviceCategories(),
         'description' => $faker->realText(),
         'user_id' => 1,
         'city_id' => $faker->randomElement($cityIds),
@@ -20,5 +25,14 @@ $factory->define(Ad::class, function (Faker $faker) {
         'price' => 250000,
         'activated' => true,
         'data' => [],
+    ];
+});
+
+$factory->state(Ad::class, 'shop', function(Faker $faker) {
+    $categoryIds = \App\Category::where('parent_id', 0)->where('type', \App\Category::TYPE_SHOP)->pluck('id');
+
+    return [
+        'name' => $faker->shoppingCategories(),
+        'category_id' => $faker->randomElement($categoryIds),
     ];
 });

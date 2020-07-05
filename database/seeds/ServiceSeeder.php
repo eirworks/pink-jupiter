@@ -13,7 +13,10 @@ class ServiceSeeder extends Seeder
     {
         \App\Ad::truncate();
 
-        factory(\App\Ad::class, 30)->create([
+        factory(\App\Ad::class, 5)->create([
+            'user_id' => 2,
+        ]);
+        factory(\App\Ad::class, 5)->state('shop')->create([
             'user_id' => 2,
         ]);
     }

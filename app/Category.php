@@ -6,10 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    const TYPE_SERVICE = 'service';
+    const TYPE_SHOP = 'shop';
+
     // scope
     public function scopeParents($query)
     {
         return $query->where('parent_id', 0);
+    }
+
+    public static function categories()
+    {
+        return [
+            self::TYPE_SERVICE => __('ads.type_service'),
+            self::TYPE_SHOP => __('ads.type_shop'),
+        ];
+    }
+
+    public function getTypeNameAttribute()
+    {
+        $cats = collect(self::categories());
+        return $cats->get($this->type, self::TYPE_SERVICE);
     }
 
     // relationships

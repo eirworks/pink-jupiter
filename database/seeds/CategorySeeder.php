@@ -17,5 +17,6 @@ class CategorySeeder extends Seeder
         DB::table('category_user')->truncate();
 
         factory(Category::class, 10)->create();
+        factory(Category::class, 10)->state('shop')->create();
     }
 }

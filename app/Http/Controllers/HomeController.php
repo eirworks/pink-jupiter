@@ -28,26 +28,29 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $provinces = Province::get();
+        return view('home', $this->getData($request));
+    }
 
-        $categories = Category::where('parent_id', 0)->with(['children'])->get();
+    public function shops(Request $request) {
+        return view('home', $this->getData($request, Category::TYPE_SHOP));
 
-        $subCategories = Category::where('parent_id', '>', 0)->get()->map(function($subCat) {
-            return [
-                'name' => $subCat->name,
-                'url' => route('listing.index', ['category_id' => $subCat->id]),
-            ];
-        });
+    }
+
+    private function getData(Request $request, $type = Category::TYPE_SERVICE) {
+
+        $provinces = Province::with(['cities'])->get();
+
+        $categories = Category::where('parent_id', 0)->where('type', $type)->with(['children'])->get();
 
         $ads = Ad::orderBy('id', 'desc')
-            ->when($request->filled('city_id') && $request->input('city_id') > 0, function ($query) use($request) {
+            ->whereHas('category', function($query) use ($type){
+                $query->where('type', $type);
+            })
+            ->when($request->filled('city_id'), function ($query) use($request) {
                 $query->where('city_id', $request->input('city_id'));
             })
             ->when($request->filled('category_id'), function ($query) use($request) {
                 $query->where('category_id', $request->input('category_id'));
-            })
-            ->when($request->filled('q'), function($query) use($request) {
-                $query->where('name', 'like', '%'.$request->input('q').'%');
             })
             ->whereHas('user', function($query) {
                 $query->where('balance', '>', 0);
@@ -56,20 +59,11 @@ class HomeController extends Controller
             ->with(['user', 'district', 'district.city', 'district.city.province'])
             ->paginate();
 
-        $cities = City::get();
-
-        return view('home', [
+        return [
             'provinces' => $provinces,
-            'cities' => $cities,
             'categories' => $categories,
-            'subCategoriesJson' => json_encode($subCategories),
             'ads' => $ads,
-            'citiesJson' => json_encode($cities->map(function($city) {
-                return [
-                    'id' => $city->id,
-                    'name' => $city->name,
-                ];
-            }))
-        ]);
+            'type' => Category::categories()[$type],
+        ];
     }
 }

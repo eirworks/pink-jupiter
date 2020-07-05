@@ -3,22 +3,16 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Category;
+use App\Faker\FakeCategory;
 use Faker\Generator as Faker;
 
 $factory->define(Category::class, function (Faker $faker) {
-    $serviceNames = [
-        'Servis', 'Reparasi', "Sewa", "Tutoring", "Perbaikan", "Pembuatan",
-    ];
-    $serviceObjects = [
-        'TV', 'Radio', 'Kulkas', 'AC', 'Mobil', 'Motor', 'Mesin Pabrik', 'Senjata',
-        'LCD', 'Buku', "Perangko", "Koleksi", "Majalah", "Matahari", "Kartu Kredit", "Kereta Api",
-        "Pesawat Terbang", 'Jembatan', 'Jalan Raya', 'Rel',
-    ];
+    $faker->addProvider(new FakeCategory($faker));
 
     $ordering = $faker->randomNumber(2);
 
     return [
-        'name' => $faker->randomElement($serviceNames)." ".$faker->randomElement($serviceObjects)." ".$faker->randomNumber(4).' ('.$ordering.')',
+        'name' => $faker->serviceCategories(),
         'slug' => \Illuminate\Support\Str::slug(implode(" ",$faker->words)),
         'image' => '',
         'parent_id' => 0,
@@ -26,5 +20,15 @@ $factory->define(Category::class, function (Faker $faker) {
         'price' => 1000,
         'ordering' => $ordering,
         'group_order' => $faker->numberBetween(1, 9),
+        'type' => Category::TYPE_SERVICE,
+    ];
+});
+
+$factory->state(Category::class, 'shop', function(Faker $faker) {
+    $faker->addProvider(new FakeCategory($faker));
+
+    return [
+        'name' => $faker->shoppingCategories(),
+        'type' => Category::TYPE_SHOP,
     ];
 });

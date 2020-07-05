@@ -16,6 +16,8 @@ use App\Http\Middleware\ClickSession;
 
 
 Route::get('/', 'HomeController@index')->name('home')->middleware([ClickSession::class]);
+Route::get('/jualbeli', 'HomeController@shops')->name('shops')->middleware([ClickSession::class]);
+
 Route::post('logout', "LogoutController@logout")->name('logout');
 
 Route::group(['namespace' => 'Partner', 'prefix' => 'partner', 'as' => 'partner.'], function() {

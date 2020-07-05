@@ -25,7 +25,9 @@ class ListingController extends Controller
 //            ->where('balance', '>=', 0)
             ->paginate();
 
-        $categories = Category::where('parent_id', 0)->with(['children'])->get();
+        $categories = Category::where('parent_id', 0)
+            ->with(['children'])
+            ->get();
 
         $provinces = Province::with(['cities'])->get();
 
