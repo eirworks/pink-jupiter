@@ -11,7 +11,6 @@
 
         <div class="my-2">
             <a href="{{ route('admin.categories.create', ['parent_id' => $parent ? $parent->id : null]) }}" class="btn btn-primary">Tambah Kategori</a>
-            <a href="{{ route('admin.categories.download') }}" class="mx-2">Unduh Kategori</a>
         </div>
 
         <div class="card">
