@@ -114,43 +114,6 @@
                         <input type="file" name="image" class="form-control-file">
                     </div>
 
-{{--                    <div class="form-group">--}}
-{{--                        @if($user->id_card_image)--}}
-{{--                            <div class="my-1"><img class="img-fluid img-thumbnail" src="{{ asset('storage/'.$user->id_card_image) }}" alt="Foto KTP {{ $user->name }}"></div>--}}
-{{--                        @endif--}}
-{{--                        <label for="id_card_image">Foto KTP</label>--}}
-{{--                        <input id="id_card_image" type="file" name="id_card_image" class="form-control-file">--}}
-{{--                    </div>--}}
-
-                    <p>
-                        Pilih layanan yang anda sediakan:
-                    </p>
-                    @error('categories')
-                    <div class="alert alert-danger">Mohon pilih paling tidak satu layanan</div>
-                    @enderror
-
-                    @foreach($categories as $category)
-                        <div class="mt-3 mb-2">
-                            <strong>{{ $category->name }}</strong>
-                        </div>
-
-                        @if($category->children->count() > 0)
-                            @foreach($category->children->chunk(3) as $childChunk)
-                                <div class="row">
-                                    @foreach($childChunk as $child)
-                                        <div class="col-md-4">
-                                            <div class="form-check">
-                                                <input id="category-{{ $child->id }}" type="checkbox" class="form-check-input" name="categories[]" {{ in_array($child->id, $user->category_ids) ? 'checked' : '' }} value="{{ $child->id }}">
-                                                <label for="category-{{ $child->id }}" class="form-check-label">{{ $child->name }}</label>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        @endif
-
-                    @endforeach
-
                     <div class=" text-center my-3">
                         <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
                     </div>

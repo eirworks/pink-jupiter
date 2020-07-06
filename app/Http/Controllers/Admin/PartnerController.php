@@ -130,12 +130,6 @@ class PartnerController extends Controller
 
         $this->saveImage($user, $request);
 
-        // sync categories
-        if ($user->type == User::TYPE_PARTNER)
-        {
-            $user->categories()->sync($this->syncData($request));
-        }
-
         return $user;
     }
 
