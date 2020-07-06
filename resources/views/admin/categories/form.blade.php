@@ -59,6 +59,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Tipe</label>
+                                <select name="type" id="type" class="form-control">
+                                    @foreach(\App\Category::categories() as $key => $name)
+                                        <option value="{{ $key }}" {{ $key == $category->type ? 'selected' : '' }}>{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Info (opsional)</label>
                                 <textarea type="text" placeholder="Deskripsi" name="description" class="form-control" rows="5">{{ $category->description }}</textarea>
                             </div>

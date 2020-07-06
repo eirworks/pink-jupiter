@@ -30,9 +30,7 @@
                                 <th>Urutan</th>
                             @endif
                             <th>Nama Kategori</th>
-                            @if(!request()->filled('parent_id'))
-                            <th>Subkategori</th>
-                            @endif
+                            <th>Jenis</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
@@ -51,19 +49,7 @@
                                     </div>
                                     @endif
                                 </td>
-                                @if(!request()->filled('parent_id'))
-                                    <td>
-                                        @if($category->parent_id > 0)
-                                            -
-                                        @else
-                                            @if($category->children_count > 0)
-                                            <a href="{{ route('admin.categories.index', ['parent_id' => $category->id]) }}">{{ $category->children_count }}</a>
-                                            @else
-                                                {{ $category->children_count }}
-                                            @endif
-                                        @endif
-                                    </td>
-                                @endif
+                                <td>{{ $category->type_name }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,9 +57,6 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="{{ route('admin.categories.edit', [$category]) }}">Edit</a>
-                                            @if($category->parent_id == 0)
-                                            <a class="dropdown-item" href="{{ route('admin.categories.index', ['parent_id' => $category->id]) }}">Subkategori</a>
-                                            @endif
                                             <a class="dropdown-item" href="javascript:" onclick="$('#delete-cat-{{ $category->id }}').submit()">Hapus</a>
                                         </div>
                                     </div>
