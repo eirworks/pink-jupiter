@@ -43,9 +43,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'contact' => 'required',
             'password' => 'required',
-            'city_id' => 'min:1',
         ]);
 
         $user = new User();
@@ -67,8 +65,6 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'contact' => 'required',
-            'city_id' => 'min:1',
         ]);
 
         $this->save($user, $request);
