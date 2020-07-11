@@ -138,7 +138,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
             Route::get('/new', "AdminController@create")->name('create');
             Route::post('/new', "AdminController@store")->name('store');
             Route::get('/{user}/edit', "AdminController@edit")->name('edit');
-            Route::post('/{user}/edit', "AdminController@update")->name('update');
+            Route::put('/{user}/edit', "AdminController@update")->name('update');
             Route::delete('/{user}/delete', "AdminController@destroy")->name('delete');
         });
 

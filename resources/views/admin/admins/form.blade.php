@@ -19,7 +19,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ $user->id ? route('admin.admin.update', [$user]) : route('admin.admin.store') }}">
+                        <form action="{{ $user->id ? route('admin.admin.update', [$user]) : route('admin.admin.store') }}" method="post">
                             @csrf
                             @if($user->id) @method('put') @endif
 
