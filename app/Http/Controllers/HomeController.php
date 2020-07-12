@@ -33,7 +33,10 @@ class HomeController extends Controller
 
     public function shops(Request $request) {
         return view('home', $this->getData($request, Category::TYPE_SHOP));
+    }
 
+    public function tools(Request $request) {
+        return view('home', $this->getData($request, Category::TYPE_TOOLS));
     }
 
     private function getData(Request $request, $type = Category::TYPE_SERVICE) {

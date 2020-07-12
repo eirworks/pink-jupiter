@@ -8,6 +8,7 @@ class Category extends Model
 {
     const TYPE_SERVICE = 'service';
     const TYPE_SHOP = 'shop';
+    const TYPE_TOOLS = 'tools';
 
     // scope
     public function scopeParents($query)
@@ -20,6 +21,7 @@ class Category extends Model
         return [
             self::TYPE_SERVICE => __('ads.type_service'),
             self::TYPE_SHOP => __('ads.type_shop'),
+            self::TYPE_TOOLS => __('ads.type_tools'),
         ];
     }
 
