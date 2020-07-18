@@ -24,7 +24,6 @@
 
 @section('content')
     <div class="container my-3">
-        <h2 class="text-center mb-5">@yield('title')</h2>
 
         <div class="row">
             <div class="col-md-9">
