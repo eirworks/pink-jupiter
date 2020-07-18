@@ -45,7 +45,7 @@ class HomeController extends Controller
 
         $categories = Category::where('parent_id', 0)->where('type', $type)->with(['children'])->get();
 
-        $ads = Ad::orderBy('id', 'desc')
+        $ads = Ad::orderBy('name', 'asc')
             ->whereHas('category', function($query) use ($type){
                 $query->where('type', $type);
             })
