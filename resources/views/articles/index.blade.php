@@ -31,7 +31,7 @@
                     @if($posts->count() > 0)
                         @foreach($posts as $post)
                             <div class="post">
-                                <div class="post-title">
+                                <div class="post-title" style="margin: 15px 0">
                                     @include('includes.article_link')
                                 </div>
                                 <div class="post-excerpt">
